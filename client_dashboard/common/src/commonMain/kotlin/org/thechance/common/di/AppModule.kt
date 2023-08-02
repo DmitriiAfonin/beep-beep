@@ -6,7 +6,7 @@ import org.koin.dsl.KoinAppDeclaration
 import org.koin.dsl.module
 
 fun appModule() = module {
-    factory { FirstScreenModel() }
+    factory { params -> FirstScreenModel(id = params.get()) }
 }
 
 fun initKoin(appDeclaration: KoinAppDeclaration = {}) = startKoin {

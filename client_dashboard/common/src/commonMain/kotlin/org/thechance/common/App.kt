@@ -29,7 +29,7 @@ import org.thechance.common.ui.screen.first.FirstScreen
 @Composable
 fun App() {
     initKoin()
-    TabNavigator(FirstScreen) {
+    TabNavigator(FirstScreen(404)) {
         Scaffold(
             bottomBar = { BottomBar() }
         ) { paddingValues ->
@@ -55,7 +55,7 @@ fun App() {
 @Composable
 fun BottomBar() {
     BottomNavigation {
-        TabNavigationItem(FirstScreen)
+        TabNavigationItem(FirstScreen(404))
         TabNavigationItem(SecondScreen("Favorites"))
         TabNavigationItem(ThirdScreen)
     }
