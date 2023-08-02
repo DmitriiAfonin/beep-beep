@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.multiplatform)
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlinKsp)
 }
 
 group = "org.thechance"
@@ -20,6 +21,20 @@ kotlin {
                 api(libs.compose.runtime)
                 api(libs.compose.foundation)
                 api(libs.compose.material)
+
+                implementation(libs.voyager.navigator)
+                implementation(libs.voyager.bottomSheetNavigator)
+                implementation(libs.voyager.tabNavigator)
+                implementation(libs.voyager.transitions)
+                implementation(libs.voyager.androidx)
+                implementation(libs.voyager.koin)
+
+                implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
+                implementation(libs.koin.ksp)
+//                ksp(libs.koin.compiler)
+
+                implementation(libs.compose.material)
             }
         }
         val desktopMain by getting {
