@@ -22,11 +22,14 @@ import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
 import cafe.adriel.voyager.navigator.tab.Tab
 import cafe.adriel.voyager.navigator.tab.TabOptions
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.thechance.common.ui.composable.NextAndPreviousButtons
 import org.thechance.common.ui.screen.SecondScreen
 
 
-data class FirstScreen(val screenModel: FirstScreenModel) : Tab {
+object FirstScreen : Tab, KoinComponent {
+    private val screenModel: FirstScreenModel by inject()
     override val options: TabOptions
         @Composable
         get() {

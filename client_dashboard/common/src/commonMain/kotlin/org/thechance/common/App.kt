@@ -18,14 +18,13 @@ import org.thechance.common.di.initKoin
 import org.thechance.common.ui.screen.SecondScreen
 import org.thechance.common.ui.screen.ThirdScreen
 import org.thechance.common.ui.screen.first.FirstScreen
-import org.thechance.common.ui.screen.first.FirstScreenModel
 
 @Composable
 fun App() {
-    val firstScreenModel: FirstScreenModel = initKoin().koin.get()
-    TabNavigator(FirstScreen(firstScreenModel)) {
+    initKoin()
+    TabNavigator(FirstScreen) {
         Scaffold(
-            bottomBar = { BottomBar(firstScreenModel) }
+            bottomBar = { BottomBar() }
         ) { paddingValues ->
             Box(modifier = Modifier.padding(paddingValues)) {
                 CurrentTab()
@@ -35,9 +34,9 @@ fun App() {
 }
 
 @Composable
-fun BottomBar(firstScreenModel: FirstScreenModel) {
+fun BottomBar() {
     BottomNavigation {
-        TabNavigationItem(FirstScreen(firstScreenModel))
+        TabNavigationItem(FirstScreen)
         TabNavigationItem(SecondScreen("Favorites"))
         TabNavigationItem(ThirdScreen)
     }
