@@ -1,21 +1,11 @@
 package org.thechance.service_restaurant.utils
 
-import kotlinx.serialization.Serializable
+data class MultiErrorException(val errorCodes: List<Int>) : Throwable()
 
-object IdNotValid : Throwable("1000")
+sealed class ErrorCodes(val code: Int)
 
-object NotFoundException : Throwable("1001")
-object DeleteCategoryException : Throwable("1001")
-class GeneralException : Throwable()
-
-data class MultiErrorException(val errorCodes: List<Error>) : Throwable()
-
-@Serializable
-data class Error(
-    val errorMessage: String,
-    val errorCode: Int,
-)
-
-sealed class ErrorCodes(val code: Int) {
-    object MissingProperties : ErrorCodes(1002)
-}
+object IdNotValid : ErrorCodes(1000)
+class GeneralException : ErrorCodes(1009)
+object NotFoundException : ErrorCodes(1002)
+object DeleteCategoryException : ErrorCodes(1003)
+object MissingProperties  : ErrorCodes(1004)

@@ -2,8 +2,6 @@ package org.thechance.service_restaurant.usecase.category
 
 import org.koin.core.annotation.Single
 import org.thechance.service_restaurant.data.gateway.CategoryGateway
-import org.thechance.service_restaurant.utils.DeleteCategoryException
-import org.thechance.service_restaurant.data.gateway.RestaurantGateway
 
 @Single
 class DeleteCategoryUseCasesImp(
@@ -12,6 +10,6 @@ class DeleteCategoryUseCasesImp(
     override suspend fun invoke(categoryId: String): Boolean {
         return if (categoryGateway.deleteCategory(categoryId)){
             true
-        }else throw DeleteCategoryException
+        }else throw Throwable("Not Found")
     }
 }
