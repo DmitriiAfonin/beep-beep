@@ -10,6 +10,8 @@ kotlin {
         val androidMain by getting {
             dependencies {
                 implementation(project(":client_end_user:shared"))
+                implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
             }
         }
     }

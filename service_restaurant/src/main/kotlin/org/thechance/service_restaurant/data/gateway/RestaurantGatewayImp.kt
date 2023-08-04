@@ -64,11 +64,12 @@ class RestaurantGatewayImp(private val container: DataBaseContainer) : Restauran
     }
 
     override suspend fun updateRestaurant(restaurant: Restaurant): Boolean {
-        return restaurantCollection.updateOneById(
-            id = ObjectId(restaurant.id),
-            update = restaurant.toCollection(),
-            updateOnlyNotNullProperties = true
-        ).isSuccessfullyUpdated()
+        return restaurantCollection.aggregate<RestaurantCollection>()
+//        return restaurantCollection.updateOneById(
+//            id = ObjectId(restaurant.id),
+//            update = restaurant.toCollection(),
+//            updateOnlyNotNullProperties = true
+//        ).isSuccessfullyUpdated()
     }
 
     override suspend fun deleteRestaurant(restaurantId: String): Boolean {

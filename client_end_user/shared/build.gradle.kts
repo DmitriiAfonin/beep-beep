@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.kotlin.native.cocoapods)
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.compose)
+//    alias(libs.plugins.kotlinKsp)
+
 }
 
 kotlin {
@@ -35,13 +37,35 @@ kotlin {
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material)
                 implementation(libs.compose.components.resources)
+                // Navigator
+                implementation(libs.voyager.navigator)
+
+                // BottomSheetNavigator
+                implementation(libs.voyager.bottomSheetNavigator)
+
+                // TabNavigator
+                implementation(libs.voyager.tabNavigator)
+
+                // Transitions
+                implementation(libs.voyager.transitions)
+
+                // Koin integration
+                implementation(libs.voyager.koin)
+                implementation(libs.koin.core)
+                implementation(libs.koin.annotations)
+//                implementation(libs.koin.ksp)
+
             }
         }
+
+
         val androidMain by getting {
             dependencies {
                 api(libs.androidx.activity.compose)
                 api(libs.androidx.appcompat)
                 api(libs.androidx.core.ktx)
+                api(libs.koin.android)
+
             }
         }
         val iosX64Main by getting
