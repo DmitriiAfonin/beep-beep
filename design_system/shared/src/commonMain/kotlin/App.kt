@@ -16,6 +16,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import org.jetbrains.compose.resources.ExperimentalResourceApi
 import org.jetbrains.compose.resources.painterResource
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 
 @OptIn(ExperimentalResourceApi::class)
 @Composable
@@ -28,7 +32,8 @@ fun DesignApp() {
                 greetingText = "Hello, ${getPlatformName()}"
                 showImage = !showImage
             }) {
-                Text(greetingText)
+                Text(greetingText, fontFamily =  FontFamily(fontResources("font/borel_regular.ttf", FontWeight.Normal, FontStyle.Normal)))
+
             }
             AnimatedVisibility(showImage) {
                 Image(
@@ -39,5 +44,13 @@ fun DesignApp() {
         }
     }
 }
+
+
+@Composable
+expect fun fontResources(
+    font: String,
+    weight: FontWeight,
+    style: FontStyle
+): Font
 
 expect fun getPlatformName(): String
