@@ -13,10 +13,10 @@ private fun CustomTypography() = Typography(
     defaultFontFamily = FontFamily(
 //        fontResources("roboto_regular.ttf", FontWeight.Normal, FontStyle.Normal),
 //        fontResources("roboto_medium.ttf", FontWeight.Medium, FontStyle.Normal),
-        fontResources("font/borel_regular.ttf", FontWeight.Normal, FontStyle.Normal),
+        fontResources("borel_regular.ttf", FontWeight.Normal, FontStyle.Normal),
     ),
     h1 = TextStyle(
-        fontFamily = FontFamily(fontResources("font/borel_regular.ttf", FontWeight.Normal, FontStyle.Normal))
+        fontFamily = FontFamily(fontResources("borel_regular.ttf", FontWeight.Normal, FontStyle.Normal))
     )
 )
 
