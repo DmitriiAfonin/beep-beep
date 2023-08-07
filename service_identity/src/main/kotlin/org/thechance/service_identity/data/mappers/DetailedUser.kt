@@ -24,10 +24,10 @@ fun List<DetailedUserCollection>.toEntity(wallet: Wallet): List<User> {
 
 fun DetailedUserDto.toEntity(wallet: Wallet): User {
     return User(
-        id = id,
-        fullName = fullName,
-        username = username,
-        password = password,
+        id = id?: "",
+        fullName = fullName?: "",
+        username = username?: "",
+        password = password?: "",
         email = "",
         wallet = wallet,
         addresses = addresses,

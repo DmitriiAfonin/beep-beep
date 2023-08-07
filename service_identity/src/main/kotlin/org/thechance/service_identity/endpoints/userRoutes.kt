@@ -6,12 +6,11 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
-import org.thechance.service_identity.api.model.request.UpdateUserRequest
+import org.thechance.service_identity.api.model.UserDto
 import org.thechance.service_identity.data.mappers.toDto
 import org.thechance.service_identity.data.mappers.toEntity
 import org.thechance.service_identity.domain.entity.MissingParameterException
 import org.thechance.service_identity.domain.usecases.useraccount.UserAccountUseCase
-import org.thechance.service_identity.endpoints.model.request.CreateUserRequest
 import org.thechance.service_identity.endpoints.validation.INVALID_REQUEST_PARAMETER
 
 fun Route.userRoutes() {
@@ -33,14 +32,14 @@ fun Route.userRoutes() {
         }
 
         post {
-            val user = call.receive<CreateUserRequest>()
+            val user = call.receive<UserDto>()
             val result = userAccountUseCase.createUser(user.toEntity())
             call.respond(HttpStatusCode.Created, result)
         }
 
         put("/{id}") {
             val id = call.parameters["id"] ?: throw MissingParameterException(INVALID_REQUEST_PARAMETER)
-            val userDto = call.receive<UpdateUserRequest>()
+            val userDto = call.receive<UserDto>()
             val result = userAccountUseCase.updateUser(id, userDto.toEntity())
             call.respond(HttpStatusCode.OK, result)
         }

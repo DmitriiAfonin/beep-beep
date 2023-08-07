@@ -2,34 +2,30 @@ package org.thechance.service_identity.data.mappers
 
 import org.bson.types.ObjectId
 import org.thechance.service_identity.api.model.UserDto
-import org.thechance.service_identity.api.model.WalletDto
-import org.thechance.service_identity.api.model.request.UpdateUserRequest
 import org.thechance.service_identity.data.collection.UserCollection
 import org.thechance.service_identity.data.collection.UserDetailsCollection
 import org.thechance.service_identity.domain.entity.User
 import org.thechance.service_identity.domain.entity.Wallet
-import org.thechance.service_identity.endpoints.model.DetailedUserDto
-import org.thechance.service_identity.endpoints.model.request.CreateUserRequest
 
-fun UserCollection.toEntity(wallet: Wallet = Wallet("", "", 0.0)): User {
+fun UserCollection.toEntity(): User {
     return User(
         id = id.toHexString(),
         fullName = fullName,
         username = username,
         password = password,
         email = "",
-        wallet = wallet
+        wallet = Wallet("", "", 0.0)
     )
 }
 
-fun UserDto.toEntity(wallet: Wallet): User {
+fun UserDto.toEntity(): User {
     return User(
-        id = id,
-        fullName = fullName,
-        username = username,
-        password = password,
-        email = "",
-        wallet = wallet
+        id = id ?: "",
+        fullName = fullName ?: "",
+        username = username ?: "",
+        password = password ?: "",
+        email = email ?: "",
+        wallet = wallet!!.toEntity()
     )
 }
 
@@ -44,18 +40,6 @@ fun User.toDto(): UserDto {
 
 fun List<User>.toDto(): List<UserDto> {
     return map { it.toDto() }
-}
-
-fun User.toDetailedDto(walletDto: WalletDto): DetailedUserDto {
-    return DetailedUserDto(
-        id = id,
-        fullName = fullName,
-        username = username,
-        password = password,
-        wallet = walletDto,
-        addresses = addresses,
-        permissions = permissions
-    )
 }
 
 fun User.toCollection(): UserCollection {
@@ -76,24 +60,3 @@ fun User.toDetailsCollection(userId: String): UserDetailsCollection {
     )
 }
 
-fun CreateUserRequest.toEntity(wallet: Wallet = Wallet("", "", 0.0)): User {
-    return User(
-        id = "",
-        fullName = fullName,
-        username = username,
-        password = password,
-        email = "",
-        wallet = wallet
-    )
-}
-
-fun UpdateUserRequest.toEntity(wallet: Wallet = Wallet("", "", 0.0)): User {
-    return User(
-        id = "",
-        fullName = fullName,
-        username = username,
-        password = password,
-        email = "",
-        wallet = wallet
-    )
-}
