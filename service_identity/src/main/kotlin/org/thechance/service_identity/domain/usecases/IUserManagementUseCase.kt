@@ -1,8 +1,8 @@
 package org.thechance.service_identity.domain.usecases
 
 import org.koin.core.annotation.Single
-import org.thechance.service_identity.domain.entity.UserManagement
 import org.thechance.service_identity.domain.entity.Permission
+import org.thechance.service_identity.domain.entity.UserManagement
 import org.thechance.service_identity.domain.gateway.IDataBaseGateway
 
 interface IUserManagementUseCase {
@@ -17,7 +17,7 @@ interface IUserManagementUseCase {
 
 }
 
-@Single
+@Single(binds = [IUserManagementUseCase::class])
 class UserManagementUseCase(private val dataBaseGateway: IDataBaseGateway) : IUserManagementUseCase {
 
     override suspend fun addPermissionToUser(userId: String, permissionId: Int): Boolean {

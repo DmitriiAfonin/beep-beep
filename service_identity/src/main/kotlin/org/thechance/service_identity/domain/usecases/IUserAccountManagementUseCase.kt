@@ -29,7 +29,7 @@ interface IUserAccountManagementUseCase {
 
 }
 
-@Single
+@Single(binds = [IUserAccountManagementUseCase::class])
 class UserAccountManagementUseCase(
     private val dataBaseGateway: IDataBaseGateway,
     private val walletBalanceValidationUseCase: IWalletBalanceValidationUseCase,

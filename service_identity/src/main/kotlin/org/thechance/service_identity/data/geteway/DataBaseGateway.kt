@@ -23,7 +23,7 @@ import org.thechance.service_identity.domain.gateway.IDataBaseGateway
 import org.thechance.service_identity.domain.util.NOT_FOUND
 import org.thechance.service_identity.domain.util.USER_ALREADY_EXISTS
 
-@Single
+@Single(binds = [IDataBaseGateway::class])
 class DataBaseGateway(dataBaseContainer: DataBaseContainer) :
     IDataBaseGateway {
 

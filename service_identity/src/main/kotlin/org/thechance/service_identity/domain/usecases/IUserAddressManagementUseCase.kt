@@ -21,7 +21,7 @@ interface IUserAddressManagementUseCase {
 
 }
 
-@Single
+@Single(binds = [IUserAddressManagementUseCase::class])
 class UserAddressManagementUseCase(
     private val dataBaseGateway: IDataBaseGateway,
     private val validateAddress: IAddressValidationUseCase

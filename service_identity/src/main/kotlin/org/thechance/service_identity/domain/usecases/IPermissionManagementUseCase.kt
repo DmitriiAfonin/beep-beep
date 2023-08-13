@@ -20,7 +20,7 @@ interface IPermissionManagementUseCase {
 
 }
 
-@Single
+@Single(binds = [IPermissionManagementUseCase::class])
 class PermissionManagementUseCase(
     private val dataBaseGateway: IDataBaseGateway
 ) : IPermissionManagementUseCase {

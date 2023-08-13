@@ -25,7 +25,7 @@ interface IUserInfoValidationUseCase {
     fun validateEmail(email: String): Boolean
 }
 
-@Single
+@Single(binds = [IUserInfoValidationUseCase::class])
 class UserInfoValidationUseCase() : IUserInfoValidationUseCase {
 
     override fun validateUserInformation(user: CreateUserRequest) {

@@ -15,7 +15,7 @@ interface IAddressValidationUseCase {
     fun validateUpdateAddressRequest(address: UpdateAddressRequest)
 }
 
-@Single
+@Single(binds = [IAddressValidationUseCase::class])
 class AddressValidationUseCase : IAddressValidationUseCase {
 
     override fun validateCreateAddressRequest(address: CreateAddressRequest) {

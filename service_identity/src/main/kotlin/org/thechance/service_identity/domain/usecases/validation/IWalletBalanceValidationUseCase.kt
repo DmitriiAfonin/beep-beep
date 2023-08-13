@@ -15,7 +15,7 @@ interface IWalletBalanceValidationUseCase {
 
 }
 
-@Single
+@Single(binds = [IWalletBalanceValidationUseCase::class])
 class WalletBalanceValidationUseCase : IWalletBalanceValidationUseCase {
 
     override fun validateWalletBalance(amount: Double) {
