@@ -2,10 +2,10 @@ package org.thechance.api_gateway.data.gateway
 
 import io.ktor.client.*
 import io.ktor.client.call.*
+import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.util.*
 import org.koin.core.annotation.Single
-import org.thechance.api_gateway.data.model.APIS
 import org.thechance.api_gateway.data.model.APIS
 import org.thechance.api_gateway.data.model.Taxi
 import org.thechance.api_gateway.data.model.Trip
@@ -15,9 +15,8 @@ import org.thechance.api_gateway.domain.gateway.IApiGateway
 @Single(binds = [IApiGateway::class])
 class ApiGateway(
     private val client: HttpClient,
-    private val clientAttributes: Attributes
+    private val attributes: Attributes
 ) : IApiGateway {
-class ApiGateway(private val client: HttpClient, private val attributes: Attributes): IApiGateway {
 
     // region restaurant
 
@@ -28,10 +27,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun addTaxi(taxi: Taxi) =
         tryToExecute<Taxi>(
             api = APIS.TAXI_API,
-            urlString = "/taxi",
         ) {
-            post(it) {
-                contentType(ContentType.Application.Json)
+            post {
+                url("/taxi")
                 setBody(taxi)
             }
         }
@@ -39,9 +37,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun getTaxis(page: Int, limit: Int): List<Taxi> =
         tryToExecute<List<Taxi>>(
             api = APIS.TAXI_API,
-            urlString = "/taxi",
         ) {
-            get(it) {
+            get {
+                url("/taxi")
                 parameter("page", page)
                 parameter("limit", limit)
             }
@@ -50,14 +48,20 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun getTaxiById(taxiId: String): Taxi =
         tryToExecute<Taxi>(
             api = APIS.TAXI_API,
-            urlString = "/taxi/${taxiId}",
-        ) { get(it) }
+        ) {
+            get {
+                url("/taxi/${taxiId}")
+            }
+        }
 
     override suspend fun deleteTaxi(taxiId: String): Taxi =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/taxi/${taxiId}",
-        ) { delete(it) }
+        ) {
+            delete {
+                url("/taxi/${taxiId}")
+            }
+        }
 
 
     // endregion : taxi
@@ -66,9 +70,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun addTrip(trip: Trip): Trip =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip"
         ) {
-            post(it) {
+            post {
+                url("/trip")
                 setBody(trip)
             }
         }
@@ -76,18 +80,19 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun getTripById(tripId: String): Trip? =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/${tripId}"
         ) {
-            get(it)
+            get {
+                url("/trip/${tripId}")
+            }
         }
 
 
     override suspend fun getAllTrips(page: Int, limit: Int): List<Trip> =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip"
         ) {
-            get(it) {
+            get {
+                url("/trip")
                 parameter("page", page)
                 parameter("limit", limit)
             }
@@ -96,9 +101,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun getDriverTripsHistory(driverId: String, page: Int, limit: Int): List<Trip> =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/driver/${driverId}"
         ) {
-            get(it) {
+            get {
+                url("/trip/driver/${driverId}")
                 parameter("page", page)
                 parameter("limit", limit)
             }
@@ -107,9 +112,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun getClientTripsHistory(clientId: String, page: Int, limit: Int): List<Trip> =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/driver/${clientId}"
         ) {
-            get(it) {
+            get {
+                url("/trip/driver/${clientId}")
                 parameter("page", page)
                 parameter("limit", limit)
             }
@@ -118,29 +123,30 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun deleteTrip(tripId: String): Trip? =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/${tripId}"
         ) {
-            delete(it)
+            delete {
+                url("/trip/${tripId}")
+            }
         }
 
     override suspend fun approveTrip(tripId: String, taxiId: String, driverId: String): Trip? =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/${tripId}/approve"
         ) {
-            put(it) {
+            put {
+                url("/trip/${tripId}/approve")
                 parameter("tripId", tripId)
                 parameter("driverId", driverId)
                 parameter("taxiId", taxiId)
             }
         }
 
-    override suspend fun finishTrip(tripId: String, driverId: String): Trip?=
+    override suspend fun finishTrip(tripId: String, driverId: String): Trip? =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/${tripId}/finish"
         ) {
-            put(it) {
+            put {
+                url("/trip/${tripId}/finish")
                 parameter("tripId", tripId)
                 parameter("driverId", driverId)
             }
@@ -149,9 +155,9 @@ class ApiGateway(private val client: HttpClient, private val attributes: Attribu
     override suspend fun rateTrip(tripId: String, rate: Double): Trip? =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/${tripId}/finish"
         ) {
-            put(it) {
+            put {
+                url("/trip/${tripId}/finish")
                 parameter("tripId", tripId)
             }
         }
