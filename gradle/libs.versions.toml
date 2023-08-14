@@ -13,6 +13,11 @@ androidx-activity-compose = "1.6.1"
 androidx-appcompat = "1.6.1"
 compose-version = "1.4.3"
 
+voyager = "1.0.0-rc05"
+koinVersion = "3.4.3"
+koinKspVersion = "1.2.2"
+ksp = "1.8.21-1.0.11"
+
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activity-compose" }
@@ -27,6 +32,17 @@ compose-components-resources = { module = "org.jetbrains.compose.components:comp
 compose-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-version" }
 androidx-ui-text = { group = "androidx.compose.ui", name = "ui-text", version = "1.4.3" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version = "1.1.1" }
+voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
+voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
+voyager-tabNavigator = { module = "cafe.adriel.voyager:voyager-tab-navigator", version.ref = "voyager" }
+voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+voyager-androidx = { module = "cafe.adriel.voyager:voyager-androidx", version.ref = "voyager" }
+voyager-koin = { module = "cafe.adriel.voyager:voyager-koin", version.ref = "voyager" }
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koinVersion" }
+koin-annotations = { module = "io.insert-koin:koin-annotations", version.ref = "koinKspVersion" }
+koin-ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp" }
+koin-compiler = { module = "io.insert-koin:koin-ksp-compiler", version.ref = "koinKspVersion" }
+
 
 [plugins]
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
@@ -35,5 +51,6 @@ kotlin-native-cocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", versio
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
 android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
 jetbrains-compose = { id = "org.jetbrains.compose", version.ref = "compose-version" }
+kotlinKsp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
 

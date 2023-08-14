@@ -27,7 +27,6 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.beepbeep.designSystem.ui.composable.BpButton
 import com.beepbeep.designSystem.ui.composable.BpChip
-import com.beepbeep.designSystem.ui.composable.BpNavigationBar
 import com.beepbeep.designSystem.ui.composable.BpNavigationBarItem
 import com.beepbeep.designSystem.ui.composable.BpOutlinedButton
 import com.beepbeep.designSystem.ui.composable.BpSimpleTextField
@@ -51,7 +50,7 @@ fun DesignApp() {
             Spacer(modifier = Modifier.height(16.dp))
 //            PreviewTextField()
 //            PreviewChips()
-            BottomNavigationBarPreview()
+            //BottomNavigationBarPreview()
         }
     }
 }
@@ -181,27 +180,27 @@ fun DisabledButtonsPreview() {
     }
 }
 
-
-@Composable
-fun BottomNavigationBarPreview() {
-    var selectedItem by remember { mutableStateOf(0) }
-    val items = listOf("Overview", "Taxis", "Restaurants", "Users")
-
-    BpNavigationBar {
-        items.forEachIndexed { index, item ->
-            BpNavigationBarItem(
-                icon = { tint ->
-                    Icon(Icons.Filled.Favorite, contentDescription = item, tint = tint)
-                },
-                label = { style ->
-                    Text(item, style = style)
-                },
-                selected = selectedItem == index,
-                onClick = { selectedItem = index }
-            )
-        }
-    }
-}
+//
+//@Composable
+//fun BottomNavigationBarPreview() {
+//    var selectedItem by remember { mutableStateOf(0) }
+//    val items = listOf("Overview", "Taxis", "Restaurants", "Users")
+//
+//    BpNavigationBar {
+//        items.forEachIndexed { index, item ->
+//            BpNavigationBarItem(
+//                icon = { tint ->
+//                    Icon(Icons.Filled.Favorite, contentDescription = item, tint = tint)
+//                },
+//                label = { style ->
+//                    Text(item, style = style)
+//                },
+//                selected = selectedItem == index,
+//                onClick = { selectedItem = index }
+//            )
+//        }
+//    }
+//}
 
 
 expect fun getPlatformName(): String
