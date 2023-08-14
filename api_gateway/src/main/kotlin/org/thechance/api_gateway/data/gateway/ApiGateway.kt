@@ -2,11 +2,10 @@ package org.thechance.api_gateway.data.gateway
 
 import io.ktor.client.*
 import io.ktor.client.call.*
-import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import io.ktor.http.*
 import io.ktor.util.*
 import org.koin.core.annotation.Single
+import org.thechance.api_gateway.data.model.APIS
 import org.thechance.api_gateway.data.model.APIS
 import org.thechance.api_gateway.data.model.Taxi
 import org.thechance.api_gateway.data.model.Trip
@@ -18,6 +17,7 @@ class ApiGateway(
     private val client: HttpClient,
     private val clientAttributes: Attributes
 ) : IApiGateway {
+class ApiGateway(private val client: HttpClient, private val attributes: Attributes): IApiGateway {
 
     // region restaurant
 
@@ -170,12 +170,11 @@ class ApiGateway(
 
     private suspend inline fun <reified T> tryToExecute(
         api: APIS,
-        urlString: String,
-        method: HttpClient.(urlString: String) -> HttpResponse
+        method: HttpClient.() -> HttpResponse
     ): T {
         try {
-            clientAttributes.put(AttributeKey("API"), api.value)
-            val response = client.method(urlString)
+            attributes.put(AttributeKey("API"), api.value)
+            val response = client.method()
             return response.body<T>()
         } catch (e: Throwable) {
             throw e
