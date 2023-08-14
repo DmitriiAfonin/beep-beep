@@ -107,7 +107,7 @@ class ApiGateway(
     override suspend fun getClientTripsHistory(clientId: String, page: Int, limit: Int): List<Trip> =
         tryToExecute(
             api = APIS.TAXI_API,
-            urlString = "/trip/driver/{driverId}"
+            urlString = "/trip/driver/${clientId}"
         ) {
             get(it) {
                 parameter("page", page)
