@@ -27,7 +27,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.navigator.LocalNavigator
 import cafe.adriel.voyager.navigator.currentOrThrow
@@ -116,14 +115,16 @@ private fun LoginContent(
                     onValueChange = onUserNameChanged,
                     text = state.username,
                     label = "Username",
-                    modifier = Modifier.padding(top = Theme.dimens.space16)
+                    modifier = Modifier.padding(top = Theme.dimens.space16),
+                    hint = ""
                 )
                 BpTextField(
                     onValueChange = onPasswordChanged,
                     text = state.password,
                     label = "Password",
                     keyboardType = KeyboardType.Password,
-                    modifier = Modifier.padding(top = Theme.dimens.space16)
+                    modifier = Modifier.padding(top = Theme.dimens.space16),
+                    hint = ""
                 )
                 BpCheckBox(
                     label = "Keep me logged in",

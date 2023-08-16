@@ -22,6 +22,7 @@ import cafe.adriel.voyager.navigator.tab.TabNavigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.beepbeep.designSystem.ui.composable.BpNavigationBarItem
 import com.beepbeep.designSystem.ui.composable.BpSideBar
+import com.beepbeep.designSystem.ui.theme.BpTheme
 import org.thechance.common.di.initKoin
 import org.thechance.common.ui.screen.login.LoginScreen
 import org.thechance.common.ui.screen.main.OverviewTab
@@ -34,8 +35,10 @@ import org.thechance.common.ui.screen.main.UsersTab
 @Composable
 fun App() {
     initKoin()
-    Navigator(LoginScreen) {
-        SlideTransition(it)
+    BpTheme {
+        Navigator(LoginScreen) {
+            SlideTransition(it)
+        }
     }
 
 }
@@ -73,4 +76,10 @@ fun ColumnScope.TabNavigationItem(tab: Tab) {
         label = { Text(tab.options.title) },
         alwaysShowLabel = false,
     )
+}
+
+
+@Composable
+fun ColumnScope.ScaffoldTabNavigation() {
+
 }
