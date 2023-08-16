@@ -61,7 +61,9 @@ object HomeContent : Screen {
     @Composable
     override fun Content() {
         TabNavigator(OverviewTab) { navigator ->
-            DashboardSideBar { sideBarWidth, mainMenuIsExpanded,itemHeight ->
+            val tabNavigator = LocalTabNavigator.current
+            DashboardSideBar(currentItem = tabNavigator.current.options.index.toInt()) { sideBarWidth, mainMenuIsExpanded,itemHeight ->
+
                 ScaffoldTabNavigation(
                     tab = OverviewTab,
                     selectedIconResource = "ic_overview_fill.svg",
@@ -69,7 +71,7 @@ object HomeContent : Screen {
                     sideBarWidth = sideBarWidth,
                     mainMenuIsExpanded = mainMenuIsExpanded,
                     modifier = Modifier.onGloballyPositioned {
-                        itemHeight(it.boundsInParent().height,0)
+                        itemHeight(it.boundsInParent().height)
                     }
                 )
                 ScaffoldTabNavigation(
@@ -79,7 +81,7 @@ object HomeContent : Screen {
                     sideBarWidth = sideBarWidth,
                     mainMenuIsExpanded = mainMenuIsExpanded,
                     modifier = Modifier.onGloballyPositioned {
-                        itemHeight(it.boundsInParent().height,1)
+                        itemHeight(it.boundsInParent().height)
                     }
                 )
                 ScaffoldTabNavigation(
@@ -89,7 +91,7 @@ object HomeContent : Screen {
                     sideBarWidth = sideBarWidth,
                     mainMenuIsExpanded = mainMenuIsExpanded,
                     modifier = Modifier.onGloballyPositioned {
-                        itemHeight(it.boundsInParent().height,2)
+                        itemHeight(it.boundsInParent().height)
                     }
                 )
                 ScaffoldTabNavigation(
@@ -99,7 +101,7 @@ object HomeContent : Screen {
                     sideBarWidth = sideBarWidth,
                     mainMenuIsExpanded = mainMenuIsExpanded,
                     modifier = Modifier.onGloballyPositioned {
-                        itemHeight(it.boundsInParent().height,3)
+                        itemHeight(it.boundsInParent().height)
                     }
                 )
             }

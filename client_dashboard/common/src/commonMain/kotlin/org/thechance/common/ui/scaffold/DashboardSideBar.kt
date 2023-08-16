@@ -49,7 +49,8 @@ import org.thechance.common.ui.composables.pxToDp
 fun DashboardSideBar(
     onSwitchTheme: () -> Unit = {},
     darkTheme: Boolean = true,
-    content: @Composable ColumnScope.(sideBarWidth: Dp, mainMenuIsExpanded: Boolean, itemHeight: (itemHeight:Float,index:Int) -> Unit) -> Unit
+    currentItem:Int,
+    content: @Composable ColumnScope.(sideBarWidth: Dp, mainMenuIsExpanded: Boolean, itemHeight: (itemHeight: Float) -> Unit) -> Unit
 ) {
     val mainMenuItemHeight = remember { mutableStateOf(0f) }
     val mainMenuCurrentItem = remember { mutableStateOf(0) }
@@ -90,7 +91,7 @@ fun DashboardSideBar(
                 Spacer(
                     Modifier.height(
                         animateDpAsState(
-                            (mainMenuItemHeight.value.pxToDp() * mainMenuCurrentItem.value)
+                            (mainMenuItemHeight.value.pxToDp() * currentItem)
                         ).value
                     )
                 )
@@ -106,10 +107,11 @@ fun DashboardSideBar(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxHeight()
             ) {
-                content(sideBarWidth.value.pxToDp(), mainMenuIsExpanded.value) { itemHeight,index ->
+                content(
+                    sideBarWidth.value.pxToDp(),
+                    mainMenuIsExpanded.value
+                ) { itemHeight ->
                     mainMenuItemHeight.value = itemHeight
-                    mainMenuCurrentItem.value = index
-                    println(index)
                 }
             }
         }

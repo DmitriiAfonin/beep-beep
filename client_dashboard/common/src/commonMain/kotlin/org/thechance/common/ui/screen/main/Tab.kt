@@ -64,7 +64,7 @@ object UsersTab : Tab {
     @Composable get() {
             val title = "Users"
             val icon = rememberVectorPainter(Icons.Default.Person)
-            return remember { TabOptions(index = 2u, title = title, icon = icon) }
+            return remember { TabOptions(index = 3u, title = title, icon = icon) }
         }
 
     @Composable override fun Content() {
