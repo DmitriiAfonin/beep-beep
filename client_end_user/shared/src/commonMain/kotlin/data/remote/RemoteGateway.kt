@@ -1,8 +1,8 @@
 package data.remote
 
 import data.mapper.toEntity
-import data.remote.remoteDto.BaseResponse
-import data.remote.remoteDto.TokensResponse
+import data.remote.dto.BaseResponse
+import data.remote.dto.TokensResponse
 import domain.entity.Tokens
 import domain.gateway.IRemoteGateway
 import io.ktor.client.*
