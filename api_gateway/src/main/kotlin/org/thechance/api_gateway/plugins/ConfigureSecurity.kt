@@ -2,9 +2,11 @@ package org.thechance.api_gateway.plugins
 
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
+import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import org.thechance.api_gateway.endpoints.utils.respondWithError
 
 fun Application.configureJWTAuthentication() {
     val jwtSecret = environment.config.property("jwt.secret").getString()
@@ -27,6 +29,10 @@ fun Application.configureJWTAuthentication() {
                 } else
                     null
             }
+            challenge { _, _ ->
+                val errorMessage = listOf(mapOf(Pair(1051, "Un Authorized Access Token")))
+                respondWithError(call, HttpStatusCode.Unauthorized, errorMessage)
+            }
         }
 
         jwt("refresh-jwt") {
@@ -42,6 +48,10 @@ fun Application.configureJWTAuthentication() {
                     JWTPrincipal(credential.payload)
                 } else
                     null
+            }
+            challenge { _, _ ->
+                val errorMessage = listOf(mapOf(Pair(1051, "Un Authorized refresh Token")))
+                respondWithError(call, HttpStatusCode.Unauthorized, errorMessage)
             }
         }
     }
