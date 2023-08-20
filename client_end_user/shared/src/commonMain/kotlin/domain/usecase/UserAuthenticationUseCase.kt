@@ -1,22 +1,22 @@
 package domain.usecase
 
-import domain.entity.Tokens
+import data.remote.service.IApiService
 import domain.gateway.IRemoteGateway
 
-class UserAuthenticationUseCase (private val remoteGateway: IRemoteGateway) : IUserAuthenticationUseCase {
+class UserAuthenticationUseCase(private val remoteGateway: IRemoteGateway) : IUserAuthenticationUseCase {
 
     override suspend fun createUser(fullName: String, username: String, password: String, email: String): Boolean {
         return remoteGateway.createUser(fullName, username, password, email)
     }
 
     override suspend fun loginUser(userName: String, password: String) {
-         val tokens = remoteGateway.loginUser(userName, password)
+        val tokens = remoteGateway.loginUser(userName, password)
         //save tokens to shared Preferences
     }
 
 }
 
-interface IUserAuthenticationUseCase{
+interface IUserAuthenticationUseCase {
 
     suspend fun createUser(
         fullName: String,

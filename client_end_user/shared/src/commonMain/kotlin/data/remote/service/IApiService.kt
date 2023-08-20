@@ -1,17 +1,20 @@
-package domain.gateway
+package data.remote.service
+
 
 import domain.entity.Tokens
 
-interface IRemoteGateway {
+interface IApiService {
+
     suspend fun createUser(
         fullName: String,
         username: String,
         password: String,
         email: String
-    ): Boolean
+    ) : Boolean
 
     suspend fun loginUser(
         userName: String,
         password: String,
     ): Tokens
+
 }
