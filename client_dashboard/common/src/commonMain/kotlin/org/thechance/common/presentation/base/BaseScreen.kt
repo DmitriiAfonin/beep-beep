@@ -33,7 +33,7 @@ abstract class BaseScreen<SM, E, S, I>
     abstract fun onEffect(effect: E, navigator: Navigator)
 
     @Composable
-    abstract fun OnRender(state: S, listener: I)
+    abstract fun OnRender(state: S, interactionListener: I)
 
     @Composable
     private fun E.Listen(function: (E) -> Unit) {

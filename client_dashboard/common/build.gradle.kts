@@ -19,6 +19,7 @@ kotlin {
                 api(libs.compose.runtime)
                 api(libs.compose.foundation)
                 api(libs.compose.material3)
+                implementation (libs.apache.pdfbox)
 
                 implementation(libs.voyager.navigator)
                 implementation(libs.voyager.bottomsheet.navigator)

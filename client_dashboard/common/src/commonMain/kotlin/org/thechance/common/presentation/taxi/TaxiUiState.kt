@@ -30,6 +30,14 @@ data class TaxiUiState(
         Header("Trips", 3f),
         Header("", 1f),
     )
+
+    private val columnNames = listOf("Taxi ID", "Username", "Plate Number", "Model", "Color", "Seats","Status","Trips")
+    private val columnWidth = listOf(50f, 80f, 80f, 80f, 80f,80f,80f, 50f)
+    val reportTableHeader:Pair<List<String>, List<Float>>
+        get() = Pair(
+            columnNames,
+            columnWidth
+        )
 }
 
 data class TaxiDetailsUiState(
@@ -54,6 +62,7 @@ data class TaxiDetailsUiState(
             TaxiStatus.ONLINE -> "Online"
             TaxiStatus.ON_RIDE -> "On Ride"
         }
+
 }
 
 data class AddTaxiDialogUiState(

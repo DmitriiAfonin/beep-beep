@@ -28,8 +28,10 @@ import org.thechance.common.presentation.composables.modifier.noRipple
 import org.thechance.common.presentation.composables.table.BpPager
 import org.thechance.common.presentation.composables.table.BpTable
 import org.thechance.common.presentation.composables.table.TotalItemsIndicator
+import org.thechance.common.presentation.taxi.TaxiUiEffect.*
 
-class TaxiScreen : BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiScreenInteractionListener>() {
+class TaxiScreen :
+    BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiScreenInteractionListener>() {
 
     @Composable
     override fun Content() {
@@ -96,7 +98,12 @@ class TaxiScreen : BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiSc
                 Spacer(modifier = Modifier.weight(1f))
                 BpOutlinedButton(
                     title = "Export",
-                    onClick = { /* TODO: Export */ },
+                    onClick = {
+                        interactionListener.onExportReportClicked(
+                            title = "Taxi Details Report",
+                            header = state.tabHeader
+                        )
+                    },
                     textPadding = PaddingValues(horizontal = Theme.dimens.space24),
                 )
                 BpButton(
@@ -161,7 +168,10 @@ class TaxiScreen : BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiSc
         TitleField(text = taxi.username)
         TitleField(text = taxi.statusText, color = taxi.statusColor)
         TitleField(text = taxi.type)
-        SquareColorField(modifier = Modifier.weight(otherColumnsWeight), color = Color(taxi.color.hexadecimal))
+        SquareColorField(
+            modifier = Modifier.weight(otherColumnsWeight),
+            color = Color(taxi.color.hexadecimal)
+        )
         FlowRow(
             modifier = Modifier.weight(otherColumnsWeight),
             horizontalArrangement = Arrangement.spacedBy(Theme.dimens.space8),
@@ -187,7 +197,7 @@ class TaxiScreen : BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiSc
     }
 
     @Composable
-   private fun RowScope.TitleField(
+    private fun RowScope.TitleField(
         text: String,
         modifier: Modifier = Modifier,
         color: Color = Theme.colors.contentPrimary,

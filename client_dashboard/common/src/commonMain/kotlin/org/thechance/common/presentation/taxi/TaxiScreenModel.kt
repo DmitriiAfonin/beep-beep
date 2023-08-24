@@ -2,24 +2,35 @@ package org.thechance.common.presentation.taxi
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.thechance.common.domain.entity.CarColor
 import org.thechance.common.domain.entity.Taxi
 import org.thechance.common.domain.usecase.ICreateNewTaxiUseCase
+import org.thechance.common.domain.usecase.IExportReportToPDFUseCase
 import org.thechance.common.domain.usecase.IFindTaxiByUsernameUseCase
 import org.thechance.common.domain.usecase.IGetTaxisUseCase
 import org.thechance.common.presentation.base.BaseScreenModel
+import org.thechance.common.presentation.composables.table.Header
 import org.thechance.common.presentation.util.ErrorState
 
 class TaxiScreenModel(
     private val getTaxis: IGetTaxisUseCase,
     private val createNewTaxi: ICreateNewTaxiUseCase,
-    private val findTaxiByUsername: IFindTaxiByUsernameUseCase
+    private val findTaxiByUsername: IFindTaxiByUsernameUseCase,
+    private val exportReportToPDF: IExportReportToPDFUseCase
 ) : BaseScreenModel<TaxiUiState, TaxiUiEffect>(TaxiUiState()), TaxiScreenInteractionListener {
 
     init {
         getDummyTaxiData()
+    }
+
+    override fun onExportReportClicked(title: String, header: List<Header>) {
+        exportReportToPDF.createTaxiReport(
+           title= title,
+            state.value.taxis.toEntity(),
+            state.value.reportTableHeader.second,
+            state.value.reportTableHeader.first
+        )
     }
 
     override fun onTaxiNumberChange(number: String) {
@@ -36,7 +47,11 @@ class TaxiScreenModel(
     }
 
     private fun findTaxiByUsername(username: String) {
-        tryToExecute({ findTaxiByUsername.findTaxiByUsername(username) }, ::onFindTaxiSuccessfully, ::onError)
+        tryToExecute(
+            { findTaxiByUsername.findTaxiByUsername(username) },
+            ::onFindTaxiSuccessfully,
+            ::onError
+        )
     }
 
     private fun onFindTaxiSuccessfully(taxis: List<Taxi>) {
@@ -52,8 +67,9 @@ class TaxiScreenModel(
     }
 
     override fun onCancelCreateTaxiClicked() {
-        updateState {  it.copy(isAddNewTaxiDialogVisible = false) }
+        updateState { it.copy(isAddNewTaxiDialogVisible = false) }
     }
+
 
     override fun onTaxiPlateNumberChange(number: String) {
         updateState {
@@ -68,7 +84,7 @@ class TaxiScreenModel(
     }
 
     override fun onCarModelChanged(model: String) {
-        updateState {  it.copy(addNewTaxiDialogUiState = it.addNewTaxiDialogUiState.copy(carModel = model)) }
+        updateState { it.copy(addNewTaxiDialogUiState = it.addNewTaxiDialogUiState.copy(carModel = model)) }
     }
 
     override fun onCarColorSelected(color: CarColor) {
@@ -78,18 +94,18 @@ class TaxiScreenModel(
     }
 
     override fun onSeatSelected(seats: Int) {
-        updateState {  it.copy(addNewTaxiDialogUiState = it.addNewTaxiDialogUiState.copy(seats = seats)) }
+        updateState { it.copy(addNewTaxiDialogUiState = it.addNewTaxiDialogUiState.copy(seats = seats)) }
     }
 
     override fun onCreateTaxiClicked() {
         coroutineScope.launch(Dispatchers.IO) {
             createNewTaxi.createTaxi(mutableState.value.addNewTaxiDialogUiState.toEntity())
         }
-        updateState {  it.copy(isAddNewTaxiDialogVisible = false) }
+        updateState { it.copy(isAddNewTaxiDialogVisible = false) }
     }
 
     override fun onAddNewTaxiClicked() {
-        updateState {  it.copy(isAddNewTaxiDialogVisible = true) }
+        updateState { it.copy(isAddNewTaxiDialogVisible = true) }
     }
 
 }

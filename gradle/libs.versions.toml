@@ -25,6 +25,7 @@ google-gson-version = "2.10.1"
 serialization_version = "1.6.0-RC"
 ktor-logging-version = "1.5.0"
 coroutine-version = "1.7.1"
+pdfbox-version= "2.0.26"
 
 [libraries]
 androidx-core-ktx = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
@@ -35,6 +36,7 @@ compose-foundation = { module = "org.jetbrains.compose.foundation:foundation", v
 compose-material3 = { module = "org.jetbrains.compose.material3:material3", version.ref = "compose-version" }
 compose-materialIcons = { module = "org.jetbrains.compose.material:material-icons-extended", version.ref = "compose-version" }
 
+apache-pdfbox = { module = "org.apache.pdfbox:pdfbox", version.ref = "pdfbox-version" }
 
 compose-components-resources = { module = "org.jetbrains.compose.components:components-resources", version.ref = "compose-version" }
 compose-preview = { module = "org.jetbrains.compose.ui:ui-tooling-preview", version.ref = "compose-version" }
