@@ -28,7 +28,6 @@ fun Meal.toMealUIState(): MealUIState {
         description = description,
         price = "$price",
         imageUrl = imageUrl,
-        selectedCuisines = cuisines.toCuisineUIState(true)
     )
 }
 

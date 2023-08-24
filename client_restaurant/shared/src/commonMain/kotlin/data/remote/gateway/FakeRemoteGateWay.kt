@@ -369,7 +369,6 @@ class FakeRemoteGateWay : IRemoteGateWay {
 
 
     private val cuisines = listOf(
-        CuisineDto(id = "e5b1a329-6f3a-4d63-bb7f-895f1e1c2f9a", name = "All",),
         CuisineDto(id = "ba9b9700-6d24-434b-8d67-daf9e45e1063", name = "Main Course"),
         CuisineDto(id = "6ab493b4-4b8d-410a-a13e-780346243f3a", name = "Keto"),
         CuisineDto(id = "ba9b9700-6d24-434b-8d67-daf9e45e1065", name = "Pizza"),

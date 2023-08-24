@@ -1,5 +1,6 @@
 package presentation.meals.state
 
+
 data class MealsScreenUIState(
     val cuisine: List<CuisineUIState> = emptyList(),
     val meals: List<MealUIState> = emptyList(),

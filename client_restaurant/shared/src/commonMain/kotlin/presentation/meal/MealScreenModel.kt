@@ -3,25 +3,33 @@ package presentation.meal
 import cafe.adriel.voyager.core.model.coroutineScope
 import domain.entity.Cuisine
 import domain.entity.Meal
-import domain.usecase.IGetCuisineUseCase
 import domain.usecase.IManageMealUseCase
+import domain.usecase.IMangeCousinUseCase
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.component.inject
 import presentation.base.BaseScreenModel
 import presentation.base.ErrorState
 
 class MealScreenModel(private val mealId: String?) :
-    BaseScreenModel<MealUIState, MealScreenUIEffect>(MealUIState()), MealScreenInteractionListener {
+    BaseScreenModel<MealScreenUIState, MealScreenUIEffect>(MealScreenUIState()),
+    MealScreenInteractionListener {
 
     override val viewModelScope: CoroutineScope
         get() = coroutineScope
 
     private val manageMeal: IManageMealUseCase by inject()
-    private val cuisines: IGetCuisineUseCase by inject()
+    private val cuisines: IMangeCousinUseCase by inject()
 
     init {
-        tryToExecute({ cuisines.getCuisines() }, ::onGetCuisinesSuccess, ::onAddMealError)
+        getCuisines()
+        getMeal()
+    }
 
+    private fun getCuisines() {
+        tryToExecute({ cuisines.getCuisine() }, ::onGetCuisinesSuccess, ::onGetCuisinesError)
+    }
+
+    private fun getMeal() {
         mealId?.let {
             tryToExecute({ manageMeal.getMeal(mealId) }, ::onGetMealSuccess, ::onAddMealError)
         }
@@ -29,33 +37,29 @@ class MealScreenModel(private val mealId: String?) :
 
     private fun onGetCuisinesSuccess(cuisines: List<Cuisine>) {
         updateState { state ->
-            val selectedCuisineIds = state.selectedCuisines.map { it.id }
-            val updatedCuisines = cuisines.toCuisineUIState().map { cuisine ->
-                cuisine.copy(isSelected = cuisine.id in selectedCuisineIds)
-            }
-            state.copy(cuisines = updatedCuisines)
+            state.copy(cuisines = cuisines.toCuisineUIState())
         }
     }
 
     override fun onAddMeal() {
         tryToExecute(
-            { manageMeal.addMeal(state.value.toMealEntity()) },
+            { manageMeal.addMeal(state.value.meal.toMealEntity()) },
             ::onMealAddedSuccessfully,
             ::onAddMealError
         )
     }
 
     override fun onCuisineClick() {
-        updateState { state ->
-            val selectedCuisineIds = state.selectedCuisines.map { it.id }
-            val cuisines = state.cuisines.map {
-                if (it.id in selectedCuisineIds) {
-                    it.copy(isSelected = true)
-                }
-                it
-            }
-            state.copy(cuisines = cuisines)
-        }
+//        updateState { state ->
+//            val selectedCuisineIds = state.selectedCuisines.map { it.id }
+//            val cuisines = state.cuisines.map {
+//                if (it.id in selectedCuisineIds) {
+//                    it.copy(isSelected = true)
+//                }
+//                it
+//            }
+//            state.copy(cuisines = cuisines)
+//        }
     }
 
     private fun onMealAddedSuccessfully(result: Boolean) {
@@ -64,18 +68,28 @@ class MealScreenModel(private val mealId: String?) :
 
 
     private fun onGetMealSuccess(meal: Meal) {
-        updateState { meal.toMealUIState() }
-        updateState { it.copy(isAddEnable = it.isValid()) }
+        val mealCuisines = state.value.cuisines.filter { it.id in meal.cuisines.map { it.id } }
+        val cuisines = state.value.cuisines
+        updateState {
+            it.copy(
+                meal = meal.toMealUIState().copy(selectedCuisines = mealCuisines),
+                cuisines = cuisines,
+                isAddEnable = it.meal.isValid()
+            )
+        }
     }
 
     private fun onAddMealError(error: ErrorState) {
-        TODO("Not yet implemented")
+        println("MEAL SCREEN ${error}")
     }
 
+    private fun onGetCuisinesError(error: ErrorState) {
+        println("MEAL SCREEN ${error}")
+    }
 
     override fun onSaveCuisineClick() {
-        updateState { it.copy(selectedCuisines = it.cuisines.filter { it.isSelected }) }
-        updateState { it.copy(isAddEnable = it.isValid()) }
+//        updateState { it.copy(selectedCuisines = it.cuisines.filter { it.isSelected }) }
+//        updateState { it.copy(isAddEnable = it.isValid()) }
     }
 
     override fun onCuisineSelected(id: String) {
@@ -92,7 +106,7 @@ class MealScreenModel(private val mealId: String?) :
     }
 
     override fun onImagePicked(image: ByteArray) {
-        updateState { it.copy(image = image) }
+        updateState { it.copy(meal = it.meal.copy(image = image)) }
     }
 
     override fun onClickBack() {
@@ -100,18 +114,20 @@ class MealScreenModel(private val mealId: String?) :
     }
 
     override fun onNameChange(name: String) {
-        updateState { it.copy(name = name) }
-        updateState { it.copy(isAddEnable = it.isValid()) }
+        updateState { it.copy(meal = it.meal.copy(name = name), isAddEnable = it.meal.isValid()) }
     }
 
     override fun onDescriptionChange(description: String) {
-        updateState { it.copy(description = description) }
-        updateState { it.copy(isAddEnable = it.isValid()) }
+        updateState {
+            it.copy(
+                meal = it.meal.copy(description = description),
+                isAddEnable = it.meal.isValid()
+            )
+        }
 
     }
 
     override fun onPriceChange(price: String) {
-        updateState { it.copy(price = price) }
-        updateState { it.copy(isAddEnable = it.isValid()) }
+        updateState { it.copy(meal = it.meal.copy(price = price), isAddEnable = it.meal.isValid()) }
     }
 }

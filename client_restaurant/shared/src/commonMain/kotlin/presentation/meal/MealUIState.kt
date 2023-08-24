@@ -1,5 +1,13 @@
 package presentation.meal
 
+data class MealScreenUIState(
+    val loading: Boolean = false,
+    val error: String = "",
+    val meal: MealUIState = MealUIState(),
+    val cuisines: List<CuisineUIState> = emptyList(),
+    val isAddEnable: Boolean = false
+)
+
 data class MealUIState(
     val id: String = "",
     val name: String = "",
@@ -9,9 +17,7 @@ data class MealUIState(
     val flag: String = "",
     val image: ByteArray? = null,
     val imageUrl: String = "",
-    val isAddEnable: Boolean = false,
     val selectedCuisines: List<CuisineUIState> = emptyList(),
-    val cuisines: List<CuisineUIState> = emptyList()
 )
 
 

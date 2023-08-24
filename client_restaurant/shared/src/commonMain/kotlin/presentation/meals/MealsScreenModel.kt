@@ -2,11 +2,9 @@ package presentation.meals
 
 import cafe.adriel.voyager.core.model.coroutineScope
 import domain.usecase.IMangeCousinUseCase
-
 import kotlinx.coroutines.CoroutineScope
 import org.koin.core.component.inject
 import presentation.base.BaseScreenModel
-
 import presentation.meals.state.CuisineUIState
 import presentation.meals.state.MealsScreenUIState
 import presentation.meals.state.toUIState

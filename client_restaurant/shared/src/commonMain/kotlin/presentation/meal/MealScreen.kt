@@ -53,7 +53,7 @@ import util.rememberBitmapFromBytes
 import resources.Resources
 
 class MealScreen(private val mealId: String? = null) :
-    BaseScreen<MealScreenModel, MealUIState, MealScreenUIEffect, MealScreenInteractionListener>() {
+    BaseScreen<MealScreenModel, MealScreenUIState, MealScreenUIEffect, MealScreenInteractionListener>() {
     @Composable
     override fun Content() {
         val screenModel = rememberScreenModel { MealScreenModel(mealId) }
@@ -61,7 +61,7 @@ class MealScreen(private val mealId: String? = null) :
     }
 
     @Composable
-    override fun onRender(state: MealUIState, listener: MealScreenInteractionListener) {
+    override fun onRender(state: MealScreenUIState, listener: MealScreenInteractionListener) {
         val sheetState = remember { ModalBottomSheetState() }
         Column(modifier = Modifier.fillMaxSize()) {
             BpAppBar(
@@ -101,7 +101,7 @@ class MealScreen(private val mealId: String? = null) :
     @OptIn(ExperimentalResourceApi::class, ExperimentalMaterial3Api::class)
     @Composable
     private fun MealScreenContent(
-        state: MealUIState,
+        state: MealScreenUIState,
         listener: MealScreenInteractionListener,
         sheetState: ModalBottomSheetState,
         imagePicker: ImagePicker = ImagePickerFactory(context = getPlatformContext()).createPicker(),
@@ -117,10 +117,10 @@ class MealScreen(private val mealId: String? = null) :
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
 
-            if (state.imageUrl.isEmpty()) {
+            if (state.meal.imageUrl.isEmpty()) {
                 BpCircleImage(
                     modifier = Modifier.sizeIn(minHeight = 104.dp, minWidth = 104.dp),
-                    bitmap = rememberBitmapFromBytes(state.image),
+                    bitmap = rememberBitmapFromBytes(state.meal.image),
                     placeholder = painterResource(Resources.images.galleryAdd),
                     onClick = { imagePicker.pickImage() }
                 )
@@ -128,13 +128,13 @@ class MealScreen(private val mealId: String? = null) :
                 BpCircleImage(
                     imageSize = 104.dp,
                     modifier = Modifier.sizeIn(minHeight = 104.dp, minWidth = 104.dp),
-                    painter = rememberAsyncImagePainter(state.imageUrl),
+                    painter = rememberAsyncImagePainter(state.meal.imageUrl),
                     onClick = { imagePicker.pickImage() }
                 )
             }
 
             BpTextField(
-                text = state.name,
+                text = state.meal.name,
                 onValueChange = listener::onNameChange,
                 label = Resources.strings.name,
                 keyboardType = KeyboardType.Text,
@@ -142,7 +142,7 @@ class MealScreen(private val mealId: String? = null) :
             )
 
             BpExpandableTextField(
-                text = state.description,
+                text = state.meal.description,
                 onValueChange = listener::onDescriptionChange,
                 label = Resources.strings.description,
                 keyboardType = KeyboardType.Text,
@@ -150,17 +150,17 @@ class MealScreen(private val mealId: String? = null) :
             )
 
             BpPriceField(
-                text = state.price,
+                text = state.meal.price,
                 onValueChange = listener::onPriceChange,
                 label = Resources.strings.price,
                 keyboardType = KeyboardType.Decimal,
-                currency = state.currency,
+                currency = state.meal.currency,
                 flag = painterResource(Resources.images.flag),
                 modifier = Modifier.fillMaxWidth(),
             )
 
             CuisineTextField(
-                text = state.selectedCuisines.toCuisinesString(),
+                text = state.meal.selectedCuisines.toCuisinesString(),
                 label = Resources.strings.cuisines,
                 modifier = Modifier.fillMaxWidth().noRippleEffect {
                     listener.onCuisineClick()
