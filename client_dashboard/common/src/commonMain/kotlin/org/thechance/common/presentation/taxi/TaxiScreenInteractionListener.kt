@@ -8,6 +8,7 @@ interface TaxiScreenInteractionListener : BaseInteractionListener {
 
     fun onCancelCreateTaxiClicked()
     fun onExportReportClicked(title: String, header :List<Header>)
+    fun onDismissExportReportSnackBar()
 
     fun onTaxiPlateNumberChange(number: String)
 

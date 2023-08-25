@@ -31,6 +31,11 @@ class TaxiScreenModel(
             state.value.reportTableHeader.second,
             state.value.reportTableHeader.first
         )
+        updateState { it.copy(isExportReportSuccessfully = true) }
+    }
+
+    override fun onDismissExportReportSnackBar() {
+        updateState { it.copy(isExportReportSuccessfully = false) }
     }
 
     override fun onTaxiNumberChange(number: String) {
