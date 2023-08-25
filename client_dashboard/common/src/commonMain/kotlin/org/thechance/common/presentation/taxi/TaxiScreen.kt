@@ -105,12 +105,7 @@ class TaxiScreen :
                     Spacer(modifier = Modifier.weight(1f))
                     BpOutlinedButton(
                         title = "Export",
-                        onClick = {
-                            interactionListener.onExportReportClicked(
-                                title = "Taxi Details Report",
-                                header = state.tabHeader
-                            )
-                        },
+                        onClick = interactionListener::onExportReportClicked,
                         textPadding = PaddingValues(horizontal = Theme.dimens.space24),
                     )
                     BpButton(

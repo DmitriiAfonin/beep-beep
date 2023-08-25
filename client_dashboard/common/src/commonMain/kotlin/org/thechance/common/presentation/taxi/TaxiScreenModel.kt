@@ -6,36 +6,37 @@ import kotlinx.coroutines.launch
 import org.thechance.common.domain.entity.CarColor
 import org.thechance.common.domain.entity.Taxi
 import org.thechance.common.domain.usecase.ICreateNewTaxiUseCase
-import org.thechance.common.domain.usecase.IExportReportToPDFUseCase
 import org.thechance.common.domain.usecase.IFindTaxiByUsernameUseCase
+import org.thechance.common.domain.usecase.IGetTaxiReportUseCase
 import org.thechance.common.domain.usecase.IGetTaxisUseCase
 import org.thechance.common.presentation.base.BaseScreenModel
-import org.thechance.common.presentation.composables.table.Header
 import org.thechance.common.presentation.util.ErrorState
 
 class TaxiScreenModel(
     private val getTaxis: IGetTaxisUseCase,
     private val createNewTaxi: ICreateNewTaxiUseCase,
     private val findTaxiByUsername: IFindTaxiByUsernameUseCase,
-    private val exportReportToPDF: IExportReportToPDFUseCase
+    private val getTaxiReport: IGetTaxiReportUseCase
 ) : BaseScreenModel<TaxiUiState, TaxiUiEffect>(TaxiUiState()), TaxiScreenInteractionListener {
 
     init {
         getDummyTaxiData()
     }
 
-    override fun onExportReportClicked(title: String, header: List<Header>) {
-        exportReportToPDF.createTaxiReport(
-           title= title,
-            state.value.taxis.toEntity(),
-            state.value.reportTableHeader.second,
-            state.value.reportTableHeader.first
+    override fun onExportReportClicked() {
+        tryToExecute(
+            { getTaxiReport.createTaxiReport() },
+            { onExportTaxisReportSuccessfully() },
+            ::onError
         )
-        updateState { it.copy(isExportReportSuccessfully = true) }
     }
 
     override fun onDismissExportReportSnackBar() {
         updateState { it.copy(isExportReportSuccessfully = false) }
+    }
+
+    private fun onExportTaxisReportSuccessfully() {
+        updateState { it.copy(isExportReportSuccessfully = true) }
     }
 
     override fun onTaxiNumberChange(number: String) {

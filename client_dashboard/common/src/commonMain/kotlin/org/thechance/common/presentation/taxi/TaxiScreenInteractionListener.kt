@@ -7,7 +7,7 @@ import org.thechance.common.presentation.composables.table.Header
 interface TaxiScreenInteractionListener : BaseInteractionListener {
 
     fun onCancelCreateTaxiClicked()
-    fun onExportReportClicked(title: String, header :List<Header>)
+    fun onExportReportClicked()
     fun onDismissExportReportSnackBar()
 
     fun onTaxiPlateNumberChange(number: String)
