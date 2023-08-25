@@ -1,17 +1,14 @@
 package org.thechance.common.data.remote.gateway
 
+
+import org.thechance.common.data.remote.mapper.toDto
 import org.thechance.common.data.service.IFakeService
 import org.thechance.common.data.local.gateway.LocalDataGateway
 import org.thechance.common.data.remote.mapper.toEntity
-import org.thechance.common.data.remote.model.AdminDto
-import org.thechance.common.data.remote.model.UserDto
-import org.thechance.common.data.remote.model.toEntity
-import org.thechance.common.domain.entity.AddTaxi
-import org.thechance.common.domain.entity.Admin
-import org.thechance.common.domain.entity.Restaurant
-import org.thechance.common.domain.entity.Taxi
-import org.thechance.common.domain.entity.User
+import org.thechance.common.data.remote.model.*
+import org.thechance.common.domain.entity.*
 import org.thechance.common.domain.getway.IRemoteGateway
+import java.util.*
 
 class FakeRemoteGateway(
     private val fakeService: IFakeService,
@@ -22,6 +19,9 @@ class FakeRemoteGateway(
         val taxiReportFile = fakeService.getTaxiPDFReport()
         localDataGateway.saveTaxiReport(taxiReportFile)
     }
+
+    override fun getUserData(): Admin =
+        AdminDto(fullName = "asia").toEntity()
 
     override fun getUserData(): Admin =
         AdminDto(fullName = "asia").toEntity()
@@ -102,14 +102,21 @@ class FakeRemoteGateway(
             ),
         ).toEntity()
     }
-
     override suspend fun getTaxis(): List<Taxi> {
         return fakeService.getTaxis().toEntity()
     }
 
-
-    override suspend fun createTaxi(taxi: AddTaxi) {
-
+    override suspend fun createTaxi(taxi: AddTaxi): Taxi {
+        val taxiDto =taxi.toDto()
+        taxis.add(TaxiDto(
+            id = UUID.randomUUID().toString(),
+            plateNumber = taxiDto.plateNumber,
+            color = taxiDto.color,
+            type = taxiDto.type,
+            seats = taxiDto.seats,
+            username = taxiDto.username,
+        ))
+        return taxis.last().toEntity()
     }
 
     override suspend fun findTaxiByUsername(username: String): List<Taxi> {
@@ -120,5 +127,12 @@ class FakeRemoteGateway(
         return fakeService.getRestaurant().toEntity()
     }
 
+    override suspend fun searchRestaurantsByRestaurantName(restaurantName: String): List<Restaurant> {
+        return getRestaurants().filter { it.name.startsWith(restaurantName, true) }
+    }
+
+    override suspend fun loginUser(username: String, password: String): UserTokens {
+        return UserTokens("", "")
+    }
 
 }
