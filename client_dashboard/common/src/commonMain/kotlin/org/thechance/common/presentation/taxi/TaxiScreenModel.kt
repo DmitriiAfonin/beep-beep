@@ -22,7 +22,6 @@ class TaxiScreenModel(
     init {
         getDummyTaxiData()
     }
-
     override fun onExportReportClicked() {
         tryToExecute(
             { getTaxiReport.createTaxiReport() },
@@ -39,7 +38,7 @@ class TaxiScreenModel(
         updateState { it.copy(isExportReportSuccessfully = true) }
     }
 
-    override fun onTaxiNumberChange(number: String) {
+    override fun onTaxiNumberChange(number: Int) {
         updateState { it.copy(taxiNumberInPage = number) }
     }
 

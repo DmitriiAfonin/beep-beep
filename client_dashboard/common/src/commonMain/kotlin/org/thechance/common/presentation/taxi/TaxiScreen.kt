@@ -52,7 +52,7 @@ class TaxiScreen :
 
     override fun onEffect(effect: TaxiUiEffect, navigator: Navigator) {
         when (effect) {
-            //todo add effects
+            //TODO: effects
             else -> {}
         }
     }
@@ -61,7 +61,7 @@ class TaxiScreen :
     @Composable
     override fun OnRender(
         state: TaxiUiState,
-        interactionListener: TaxiScreenInteractionListener
+        listener: TaxiScreenInteractionListener
     ) {
         var selectedTaxi by remember { mutableStateOf<String?>(null) }
         var selectedPage by remember { mutableStateOf(1) }
@@ -69,15 +69,15 @@ class TaxiScreen :
 
         AddTaxiDialog(
             modifier = Modifier,
-            onTaxiPlateNumberChange = interactionListener::onTaxiPlateNumberChange,
-            onCancelCreateTaxiClicked = interactionListener::onCancelCreateTaxiClicked,
+            onTaxiPlateNumberChange = listener::onTaxiPlateNumberChange,
+            onCancelCreateTaxiClicked = listener::onCancelCreateTaxiClicked,
             isVisible = state.isAddNewTaxiDialogVisible,
-            onDriverUserNamChange = interactionListener::onDriverUserNamChange,
-            onCarModelChange = interactionListener::onCarModelChanged,
-            onCarColorSelected = interactionListener::onCarColorSelected,
-            onSeatsSelected = interactionListener::onSeatSelected,
+            onDriverUserNamChange = listener::onDriverUserNamChange,
+            onCarModelChange = listener::onCarModelChanged,
+            onCarColorSelected = listener::onCarColorSelected,
+            onSeatsSelected = listener::onSeatSelected,
             state = state.addNewTaxiDialogUiState,
-            onCreateTaxiClicked = interactionListener::onCreateTaxiClicked
+            onCreateTaxiClicked = listener::onCreateTaxiClicked
         )
 
         Box(
@@ -94,7 +94,7 @@ class TaxiScreen :
                     BpSimpleTextField(
                         modifier = Modifier.widthIn(max = 440.dp),
                         hint = "Search for Taxis",
-                        onValueChange = interactionListener::onSearchInputChange,
+                        onValueChange = listener::onSearchInputChange,
                         text = state.searchQuery,
                         keyboardType = KeyboardType.Text,
                         trailingPainter = painterResource("ic_search.svg")
@@ -111,12 +111,12 @@ class TaxiScreen :
                     Spacer(modifier = Modifier.weight(1f))
                     BpOutlinedButton(
                         title = "Export",
-                        onClick = interactionListener::onExportReportClicked,
+                        onClick = listener::onExportReportClicked,
                         textPadding = PaddingValues(horizontal = Theme.dimens.space24),
                     )
                     BpButton(
                         title = "New Taxi",
-                        onClick = interactionListener::onAddNewTaxiClicked,
+                        onClick = listener::onAddNewTaxiClicked,
                         textPadding = PaddingValues(horizontal = Theme.dimens.space24),
                     )
                 }
@@ -127,8 +127,6 @@ class TaxiScreen :
                         key = { it.id },
                         headers = state.tabHeader,
                         modifier = Modifier.fillMaxWidth(),
-                        rowsCount = state.taxiNumberInPage.toInt(),
-                        offset = selectedPage - 1,
                         rowContent = { taxi ->
                             TaxiRow(
                                 onClickEdit = { selectedTaxi = it },
@@ -147,7 +145,7 @@ class TaxiScreen :
                         totalItems = state.taxis.size,
                         itemType = "taxi",
                         numberItemInPage = state.taxiNumberInPage,
-                        onItemPerPageChange = interactionListener::onTaxiNumberChange
+                        onItemPerPageChange = listener::onTaxiNumberChange
                     )
                     BpPager(
                         maxPages = pageCount,
@@ -164,7 +162,7 @@ class TaxiScreen :
             ) {
                 SnackBar(
                     modifier = Modifier.zIndex(3f).align(Alignment.BottomCenter),
-                    onDismiss = interactionListener::onDismissExportReportSnackBar
+                    onDismiss = listener::onDismissExportReportSnackBar
                 ) {
                     Image(
                         painter = painterResource("ic_download_mark.svg"),
@@ -183,7 +181,7 @@ class TaxiScreen :
             LaunchedEffect(state.isExportReportSuccessfully) {
                 if (state.isExportReportSuccessfully) {
                     delay(2000)
-                    interactionListener.onDismissExportReportSnackBar()
+                    listener.onDismissExportReportSnackBar()
                 }
             }
         }
@@ -271,4 +269,3 @@ class TaxiScreen :
         }
     }
 }
-

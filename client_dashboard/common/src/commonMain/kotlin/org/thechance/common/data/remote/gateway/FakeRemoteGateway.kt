@@ -6,25 +6,23 @@ import org.thechance.common.data.service.IFakeService
 import org.thechance.common.data.local.gateway.LocalDataGateway
 import org.thechance.common.data.remote.mapper.toEntity
 import org.thechance.common.data.remote.model.*
+import org.thechance.common.data.remote.model.toEntity
 import org.thechance.common.domain.entity.*
 import org.thechance.common.domain.getway.IRemoteGateway
 import java.util.*
+import kotlin.math.ceil
+
 
 class FakeRemoteGateway(
     private val fakeService: IFakeService,
     private val localDataGateway: LocalDataGateway
 ) : IRemoteGateway {
 
-    override suspend fun getPdfTaxiReport() {
-        val taxiReportFile = fakeService.getTaxiPDFReport()
-        localDataGateway.saveTaxiReport(taxiReportFile)
-    }
-
     override fun getUserData(): Admin =
-        AdminDto(fullName = "asia").toEntity()
+        AdminDto(fullName = "asia",).toEntity()
 
-    override fun getUsers(): List<User> {
-        return listOf(
+    override fun getUsers(page: Int, numberOfUsers: Int): DataWrapper<User> {
+        val users = listOf(
             UserDto(
                 id = "c4425a0e-9f0a-4df1-bcc1-6dd96322a990",
                 fullName = "mohammed sayed",
@@ -98,7 +96,29 @@ class FakeRemoteGateway(
                 )
             ),
         ).toEntity()
+        val startIndex = (page - 1) * numberOfUsers
+        val endIndex = startIndex + numberOfUsers
+        val numberOfPages = ceil(users.size / (numberOfUsers * 1.0)).toInt()
+        return try {
+            DataWrapperDto(
+                totalPages = numberOfPages,
+                result = users.subList(startIndex, endIndex.coerceAtMost(users.size)),
+                totalResult = users.size
+            ).toEntity()
+        } catch (e: Exception) {
+            DataWrapperDto(
+                totalPages = numberOfPages,
+                result = users,
+                totalResult = users.size
+            ).toEntity()
+        }
     }
+
+    override suspend fun getPdfTaxiReport() {
+        val taxiReportFile = fakeService.getTaxiPDFReport()
+        localDataGateway.saveTaxiReport(taxiReportFile)
+    }
+
     override suspend fun getTaxis(): List<Taxi> {
         return fakeService.getTaxis().toEntity()
     }

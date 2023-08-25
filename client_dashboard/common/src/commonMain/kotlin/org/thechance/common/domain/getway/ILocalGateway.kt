@@ -19,4 +19,6 @@ interface ILocalDataGateway {
 
      suspend fun shouldUserKeptLoggedIn(keepLoggedIn: Boolean)
 
+    suspend fun isUserKeptLoggedIn(): Boolean
+
 }
