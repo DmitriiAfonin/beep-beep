@@ -1,7 +1,7 @@
 package org.thechance.common.domain.usecase
 
 import org.thechance.common.domain.entity.UserTokens
-import org.thechance.common.domain.getway.ILocalGateway
+import org.thechance.common.domain.getway.ILocalDataGateway
 import org.thechance.common.domain.getway.IRemoteGateway
 
 interface ILoginUserUseCase {
@@ -17,7 +17,7 @@ interface ILoginUserUseCase {
 }
 
 class LoginUserUseCase(
-    private val localGateway: ILocalGateway,
+    private val localGateway: ILocalDataGateway,
     private val remoteGateway: IRemoteGateway
 ) : ILoginUserUseCase {
 

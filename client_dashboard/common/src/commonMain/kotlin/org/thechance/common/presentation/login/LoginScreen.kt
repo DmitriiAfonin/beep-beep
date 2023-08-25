@@ -46,6 +46,10 @@ import org.thechance.common.presentation.main.MainContainer
 
 class LoginScreen : BaseScreen<LoginScreenScreenModel, LoginUIEffect, LoginUIState, LoginScreenInteractionListener>() {
 
+    @Composable
+    override fun Content() {
+        Init(getScreenModel())
+    }
     override fun onEffect(effect: LoginUIEffect, navigator: Navigator) {
         when (effect) {
             LoginUIEffect.LoginUISuccess -> {
@@ -139,8 +143,5 @@ class LoginScreen : BaseScreen<LoginScreenScreenModel, LoginUIEffect, LoginUISta
         }
     }
 
-    @Composable
-    override fun Content() {
-        Init(getScreenModel())
-    }
+
 }

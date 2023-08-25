@@ -9,6 +9,5 @@ fun appModule() = module {
         ScreenModelModule,
         LocalStorageModule,
         NetworkModule
-        DataSourceModule,
     )
 }

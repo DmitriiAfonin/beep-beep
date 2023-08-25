@@ -14,8 +14,10 @@ import java.util.Date
 
 class FakeService : IFakeService {
 
-    override fun getRestaurant(): List<RestaurantDto> {
-        return mutableListOf<RestaurantDto>().apply {
+    val taxi = mutableListOf<TaxiDto>()
+    val restaurant = mutableListOf<RestaurantDto>()
+    override fun getRestaurants(): List<RestaurantDto> {
+        return restaurant.apply {
             addAll(
                 listOf(
                     RestaurantDto(
@@ -78,7 +80,7 @@ class FakeService : IFakeService {
     }
 
     override fun getTaxis(): List<TaxiDto> {
-        return mutableListOf<TaxiDto>().apply {
+        return taxi.apply {
             addAll(
                 listOf(
                     TaxiDto(
@@ -166,6 +168,10 @@ class FakeService : IFakeService {
         }
     }
 
+    override fun addTaxi(taxiDto: TaxiDto) {
+        taxi.add(taxiDto)
+    }
+
     override fun findTaxisByUsername(username: String): List<TaxiDto> {
         return getTaxis().filter { it.username.startsWith(username, true) }
     }
@@ -185,18 +191,17 @@ class FakeService : IFakeService {
                 "Trips"
             )
         val columnWidth = listOf(50f, 80f, 80f, 80f, 80f, 80f, 80f, 50f)
-        val taxi = getTaxis()
 
-      val file = createPDFReport(title, taxi, columnNames, columnWidth) {
+        val file = createPDFReport(title, taxi, columnNames, columnWidth) {
             listOf(
-                it.id,
+                it.id.toString(),
                 it.username,
                 it.plateNumber,
                 it.type,
                 it.color,
                 it.seats,
-                it.status,
-                it.trips
+                it.status.toString(),
+                it.trips.toString()
             )
         }
         return file
@@ -245,7 +250,7 @@ class FakeService : IFakeService {
             )
             contentStream.close()
             val pdfFilePath = "${System.getProperty("user.home")}/Downloads/$title.pdf"
-            val pdfFile= File(pdfFilePath)
+            val pdfFile = File(pdfFilePath)
             document.save(pdfFile)
             document.close()
             return pdfFile

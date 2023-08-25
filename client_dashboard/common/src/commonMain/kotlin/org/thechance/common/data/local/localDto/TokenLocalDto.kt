@@ -1,4 +1,4 @@
-package org.thechance.common.data.local.local_dto
+package org.thechance.common.data.local.localDto
 
 import io.realm.kotlin.types.RealmObject
 

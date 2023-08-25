@@ -65,6 +65,10 @@ class RemoteGateway(
         }.value?.toEntity() ?: throw Exception()
     }
 
+    override suspend fun getPdfTaxiReport() {
+        //todo get pdf
+    }
+
 
     private suspend inline fun <reified T> tryToExecute(
         method: HttpClient.() -> HttpResponse

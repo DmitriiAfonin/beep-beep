@@ -8,7 +8,11 @@ import java.io.File
 interface IFakeService {
     fun getTaxiPDFReport(): File
 
-    fun getRestaurant(): List<RestaurantDto>
+    fun getRestaurants(): List<RestaurantDto>
+
     fun getTaxis(): List<TaxiDto>
+
     fun findTaxisByUsername(username: String): List<TaxiDto>
+
+    fun addTaxi(taxiDto: TaxiDto)
 }

@@ -23,9 +23,6 @@ class FakeRemoteGateway(
     override fun getUserData(): Admin =
         AdminDto(fullName = "asia").toEntity()
 
-    override fun getUserData(): Admin =
-        AdminDto(fullName = "asia").toEntity()
-
     override fun getUsers(): List<User> {
         return listOf(
             UserDto(
@@ -108,15 +105,16 @@ class FakeRemoteGateway(
 
     override suspend fun createTaxi(taxi: AddTaxi): Taxi {
         val taxiDto =taxi.toDto()
-        taxis.add(TaxiDto(
-            id = UUID.randomUUID().toString(),
-            plateNumber = taxiDto.plateNumber,
-            color = taxiDto.color,
-            type = taxiDto.type,
-            seats = taxiDto.seats,
-            username = taxiDto.username,
-        ))
-        return taxis.last().toEntity()
+        fakeService.addTaxi(taxiDto = TaxiDto(
+                id = UUID.randomUUID().toString(),
+                plateNumber = taxiDto.plateNumber,
+                color = taxiDto.color,
+                type = taxiDto.type,
+                seats = taxiDto.seats,
+                username = taxiDto.username,
+            )
+        )
+        return taxiDto.toEntity()
     }
 
     override suspend fun findTaxiByUsername(username: String): List<Taxi> {
@@ -124,7 +122,7 @@ class FakeRemoteGateway(
     }
 
     override suspend fun getRestaurants(): List<Restaurant> {
-        return fakeService.getRestaurant().toEntity()
+        return fakeService.getRestaurants().toEntity()
     }
 
     override suspend fun searchRestaurantsByRestaurantName(restaurantName: String): List<Restaurant> {

@@ -19,6 +19,7 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import cafe.adriel.voyager.navigator.Navigator
@@ -29,12 +30,17 @@ import com.beepbeep.designSystem.ui.composable.BpSimpleTextField
 import com.beepbeep.designSystem.ui.theme.Theme
 import kotlinx.coroutines.delay
 import org.thechance.common.presentation.base.BaseScreen
+import org.thechance.common.presentation.composables.BpDropdownMenu
+import org.thechance.common.presentation.composables.BpDropdownMenuItem
 import org.thechance.common.presentation.composables.SnackBar
 import org.thechance.common.presentation.composables.modifier.noRipple
 import org.thechance.common.presentation.composables.table.BpPager
 import org.thechance.common.presentation.composables.table.BpTable
+import org.thechance.common.presentation.composables.table.Header
 import org.thechance.common.presentation.composables.table.TotalItemsIndicator
 import org.thechance.common.presentation.taxi.TaxiUiEffect.*
+import org.thechance.common.presentation.uistate.UserScreenUiState
+import org.thechance.common.presentation.users.UserScreen
 
 class TaxiScreen :
     BaseScreen<TaxiScreenModel, TaxiUiEffect, TaxiUiState, TaxiScreenInteractionListener>() {

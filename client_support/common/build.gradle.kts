@@ -10,7 +10,7 @@ group = "org.thechance"
 version = "1.0-SNAPSHOT"
 
 kotlin {
-    android()
+    androidTarget()
     jvm("desktop") {
         jvmToolchain(libs.versions.jvmToolchain.get().toInt())
     }
