@@ -1,37 +1,42 @@
 package domain.usecase
 
 import domain.entity.Restaurant
+import domain.gateway.ILocalGateWay
 import domain.gateway.IRemoteGateWay
-import presentation.base.ServerSideException
 
 interface IManageRestaurantInfoUseCase {
-    suspend fun getRestaurantInfo(restaurantId: String): Restaurant
-    suspend fun updateRestaurantInfo(restaurant: Restaurant): Restaurant
-    fun validateRestaurantInfo(restaurant: Restaurant): Boolean
-    fun validateRestaurantName(restaurantName: String): Boolean
-    fun validateRestaurantDescription(description: String): Boolean
+    suspend fun getRestaurantInfo(): Restaurant?
+    suspend fun updateRestaurantInfo(restaurant: Restaurant): Restaurant?
+
 }
 
-class ManageRestaurantInfoUseCase(private val remoteGateWay: IRemoteGateWay) :
+class ManageRestaurantInfoUseCase(
+    private val remoteGateWay: IRemoteGateWay,
+    private val localGateWay: ILocalGateWay
+) :
     IManageRestaurantInfoUseCase {
-    override suspend fun getRestaurantInfo(restaurantId: String): Restaurant {
-        return remoteGateWay.getRestaurantInfo(restaurantId) ?: throw ServerSideException()
+    override suspend fun getRestaurantInfo(): Restaurant? {
+        val restaurantId = localGateWay.getRestaurantId()
+        return remoteGateWay.getRestaurantInfo(restaurantId)
     }
 
-    override suspend fun updateRestaurantInfo(restaurant: Restaurant): Restaurant {
-        return remoteGateWay.updateRestaurantInfo(restaurant) ?: throw ServerSideException()
+    override suspend fun updateRestaurantInfo(restaurant: Restaurant): Restaurant? {
+        if (validateRestaurantInfo(restaurant)) {
+            return remoteGateWay.updateRestaurantInfo(restaurant)
+        }
+        return null
     }
 
-    override fun validateRestaurantInfo(restaurant: Restaurant): Boolean {
+    private fun validateRestaurantInfo(restaurant: Restaurant): Boolean {
         return validateRestaurantName(restaurant.name)
                 && validateRestaurantDescription(restaurant.description)
     }
 
-    override fun validateRestaurantName(restaurantName: String): Boolean {
+    private fun validateRestaurantName(restaurantName: String): Boolean {
         return restaurantName.length in 4..25
     }
 
-    override fun validateRestaurantDescription(description: String): Boolean {
+    private fun validateRestaurantDescription(description: String): Boolean {
         return description.length <= 255
     }
 }
