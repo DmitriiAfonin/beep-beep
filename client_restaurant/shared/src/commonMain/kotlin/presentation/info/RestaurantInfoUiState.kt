@@ -1,9 +1,16 @@
 package presentation.info
 
-import domain.entity.Address
+import domain.entity.Location
 import domain.entity.Restaurant
+import presentation.base.ErrorState
 
 data class RestaurantInfoUiState(
+    val restaurant: RestaurantUiState = RestaurantUiState(),
+    val isLoading: Boolean = false,
+    val error: ErrorState? = null
+)
+
+data class RestaurantUiState(
     val id: String = "",
     val ownerId: String = "",
     val ownerUsername: String = "",
@@ -15,14 +22,13 @@ data class RestaurantInfoUiState(
     val openingTime: String = "",
     val closingTime: String = "",
     val description: String = "",
-    val isLoading: Boolean = false
 )
 
-fun Restaurant.toUiState(): RestaurantInfoUiState = RestaurantInfoUiState(
+fun Restaurant.toUiState(): RestaurantUiState = RestaurantUiState(
     id = id,
     ownerId = ownerId,
     ownerUsername = ownerUsername,
-    address = "paris, 123 street",
+    address = address,
     rating = rate,
     priceLevel = priceLevel,
     restaurantName = name,
@@ -32,10 +38,11 @@ fun Restaurant.toUiState(): RestaurantInfoUiState = RestaurantInfoUiState(
     description = description
 )
 
-fun RestaurantInfoUiState.toRestaurant() = Restaurant(
+fun RestaurantUiState.toRestaurant() = Restaurant(
     id = id,
     ownerId = ownerId,
-    address = Address(0.0, 0.0),
+    address = address,
+    location = Location(0.0,0.0),
     ownerUsername = ownerUsername,
     rate = rating,
     priceLevel = priceLevel,
