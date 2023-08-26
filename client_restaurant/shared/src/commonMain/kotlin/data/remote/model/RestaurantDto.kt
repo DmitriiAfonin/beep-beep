@@ -1,5 +1,6 @@
 package data.remote.model
 
+import domain.entity.Location
 import domain.entity.Restaurant
 
 data class RestaurantDto(
@@ -13,10 +14,11 @@ data class RestaurantDto(
     val phone: String? = null,
     val openingTime: String? = null,
     val closingTime: String? = null,
-    val address: AddressDto
+    val location: LocationDto? = null,
+    val address: String? = null
 )
 
-fun List<RestaurantDto>.toEntity():List<Restaurant> = map { it.toEntity() }
+fun List<RestaurantDto>.toEntity(): List<Restaurant> = map { it.toEntity() }
 
 fun RestaurantDto.toEntity(): Restaurant {
     return Restaurant(
@@ -30,6 +32,7 @@ fun RestaurantDto.toEntity(): Restaurant {
         phone = phone ?: "",
         openingTime = openingTime ?: "",
         closingTime = closingTime ?: "",
-        address = address.toEntity()
+        location = location?.toEntity() ?: Location(0.0, 0.0),
+        address = address ?: ""
     )
 }

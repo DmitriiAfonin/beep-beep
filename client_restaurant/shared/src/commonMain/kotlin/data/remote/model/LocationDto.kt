@@ -1,14 +1,14 @@
 package data.remote.model
 
-import domain.entity.Address
+import domain.entity.Location
 
-data class AddressDto(
+data class LocationDto(
     val latitude: Double? = null,
     val longitude: Double? = null,
 )
 
-fun AddressDto.toEntity(): Address {
-    return Address(
+fun LocationDto.toEntity(): Location {
+    return Location(
         latitude = latitude ?: 0.0,
         longitude = longitude ?: 0.0
     )
