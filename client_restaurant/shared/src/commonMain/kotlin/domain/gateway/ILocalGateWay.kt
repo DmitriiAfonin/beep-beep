@@ -12,5 +12,7 @@ interface ILocalGateWay {
     suspend fun getRefreshToken(): String
     suspend fun saveKeepMeLoggedInFlag(isChecked: Boolean)
     suspend fun getKeepMeLoggedInFlag(): Boolean
+    suspend fun saveRestaurantId(restaurantId: String)
+    suspend fun getRestaurantId(): String
 
 }
