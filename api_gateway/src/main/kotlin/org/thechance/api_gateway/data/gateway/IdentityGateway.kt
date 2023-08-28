@@ -14,7 +14,7 @@ import org.thechance.api_gateway.data.model.identity.UserManagementResource
 import org.thechance.api_gateway.data.security.ITokenService
 import org.thechance.api_gateway.data.utils.ErrorHandler
 import org.thechance.api_gateway.endpoints.gateway.IIdentityGateway
-import org.thechance.api_gateway.util.APIs
+import org.thechance.api_gateway.util.API
 import java.util.*
 
 
@@ -33,7 +33,7 @@ class IdentityGateway(
         locale: Locale
     ): UserManagementResource {
         return tryToExecute<UserManagementResource>(
-            APIs.IDENTITY_API,
+            API.IDENTITY_API,
             setErrorMessage = { errorCodes ->
                 errorHandler.getLocalizedErrorMessage(errorCodes, locale)
             }
@@ -57,7 +57,7 @@ class IdentityGateway(
         locale: Locale
     ): UserTokens {
         tryToExecute<Boolean>(
-            api = APIs.IDENTITY_API,
+            api = API.IDENTITY_API,
             setErrorMessage = { errorCodes ->
                 errorHandler.getLocalizedErrorMessage(
                     errorCodes,
@@ -85,7 +85,7 @@ class IdentityGateway(
         searchTerm: String,
         locale: Locale
     ): List<UserManagementResource> {
-        return tryToExecute<List<UserManagementResource>>(APIs.IDENTITY_API) {
+        return tryToExecute<List<UserManagementResource>>(API.IDENTITY_API) {
             get("/users") {
                 parameter("page", page)
                 parameter("limit", limit)
@@ -95,7 +95,7 @@ class IdentityGateway(
     }
 
     override suspend fun getUserByUsername(username: String): UserManagementResource {
-        return tryToExecute<UserManagementResource>(APIs.IDENTITY_API) {
+        return tryToExecute<UserManagementResource>(API.IDENTITY_API) {
             get("user/get-user") {
                 parameter("username", username)
             }

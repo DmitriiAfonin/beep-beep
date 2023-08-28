@@ -7,7 +7,7 @@ import io.ktor.http.isSuccess
 import io.ktor.util.AttributeKey
 import io.ktor.util.Attributes
 import org.thechance.api_gateway.data.utils.LocalizedMessageException
-import org.thechance.api_gateway.util.APIs
+import org.thechance.api_gateway.util.API
 
 abstract class BaseGateway(
     val attributes: Attributes,
@@ -15,7 +15,7 @@ abstract class BaseGateway(
 ) {
 
     protected suspend inline fun <reified T> tryToExecute(
-        api: APIs,
+        api: API,
         setErrorMessage: (errorCodes: List<Int>) -> Map<Int, String> = { emptyMap() },
         method: HttpClient.() -> HttpResponse
     ): T {

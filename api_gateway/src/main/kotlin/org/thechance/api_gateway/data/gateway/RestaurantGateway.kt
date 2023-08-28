@@ -7,7 +7,7 @@ import org.koin.core.annotation.Single
 import org.thechance.api_gateway.data.model.restaurant.RestaurantResource
 import org.thechance.api_gateway.data.utils.ErrorHandler
 import org.thechance.api_gateway.endpoints.gateway.IRestaurantGateway
-import org.thechance.api_gateway.util.APIs
+import org.thechance.api_gateway.util.API
 
 @Single(binds = [IRestaurantGateway::class])
 class RestaurantGateway(
@@ -17,7 +17,7 @@ class RestaurantGateway(
 ) : BaseGateway(client = client, attributes = attributes), IRestaurantGateway {
 
     override suspend fun getRestaurant(restaurantId: String): RestaurantResource {
-        return tryToExecute<RestaurantResource>(APIs.RESTAURANT_API) {
+        return tryToExecute<RestaurantResource>(API.RESTAURANT_API) {
             get("restaurant/$restaurantId")
         }
     }
