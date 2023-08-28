@@ -34,11 +34,7 @@ fun Route.restaurantRoutes() {
     route("/restaurant") {
 
         get("/{id}") {
-            val restaurantId = call.parameters["id"] ?: throw MultiErrorException(
-                listOf(
-                    INVALID_REQUEST_PARAMETER
-                )
-            )
+            val restaurantId = call.parameters["id"] ?: throw MultiErrorException(listOf(INVALID_REQUEST_PARAMETER))
             val restaurant = manageRestaurantDetails.getRestaurant(restaurantId).toDetailsDto()
             call.respond(HttpStatusCode.OK, restaurant)
         }
