@@ -5,11 +5,16 @@ import org.thechance.service_restaurant.domain.entity.*
 interface IRestaurantGateway {
     //region request
     suspend fun getRestaurantPermissionRequests(): List<RestaurantPermissionRequest>
-    suspend fun createRestaurantPermissionRequest(restaurantName: String, ownerEmail: String, cause: String): RestaurantPermissionRequest
+    suspend fun createRestaurantPermissionRequest(
+        restaurantName: String,
+        ownerEmail: String,
+        cause: String
+    ): RestaurantPermissionRequest
     //endregion
 
     //region Get
     suspend fun getRestaurants(page: Int, limit: Int): List<Restaurant>
+    suspend fun getRestaurantsByOwnerId(ownerId: String): List<Restaurant>
     suspend fun getRestaurant(id: String): Restaurant?
     suspend fun getRestaurantIds(): List<String>
     suspend fun getCuisineInRestaurant(restaurantId: String): List<Cuisine>
