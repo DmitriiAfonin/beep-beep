@@ -38,7 +38,7 @@ class ApiClientModule {
                     }
 
                     APIs.RESTAURANT_API.value -> {
-                        url("http://127.0.0.2:8080")
+                        url("http://127.0.0.2:8081")
                     }
 
                     APIs.TAXI_API.value -> {

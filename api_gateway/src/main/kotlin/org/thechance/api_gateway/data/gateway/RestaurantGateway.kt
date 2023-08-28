@@ -9,6 +9,7 @@ import org.koin.core.annotation.Single
 import org.thechance.api_gateway.data.utils.ErrorHandler
 import org.thechance.api_gateway.data.utils.LocalizedMessageException
 import org.thechance.api_gateway.endpoints.gateway.IRestaurantGateway
+import org.thechance.api_gateway.endpoints.model.OwnerRestaurants
 import org.thechance.api_gateway.endpoints.model.RestaurantRequestPermission
 import org.thechance.api_gateway.util.APIs
 import java.util.*
@@ -44,7 +45,10 @@ class RestaurantGateway(
         }
     }
 
-    override suspend fun getAllRequestPermission(permissions: List<Int>, locale: Locale): List<RestaurantRequestPermission> {
+    override suspend fun getAllRequestPermission(
+        permissions: List<Int>,
+        locale: Locale
+    ): List<RestaurantRequestPermission> {
         // todo: implement check permissions logic correctly
         if (!permissions.contains(1)) {
             throw LocalizedMessageException(errorHandler.getLocalizedErrorMessage(listOf(8000), locale))
@@ -60,6 +64,17 @@ class RestaurantGateway(
             }
         ) {
             get("/restaurant-permission-request")
+        }
+    }
+
+    override suspend fun getRestaurantsByOwnerId(ownerId: String, locale: Locale): List<OwnerRestaurants> {
+        return tryToExecute(
+            api = APIs.RESTAURANT_API,
+            setErrorMessage = { errorCodes ->
+                errorHandler.getLocalizedErrorMessage(errorCodes, locale)
+            }
+        ) {
+            get("/restaurants/$ownerId")
         }
     }
 }
