@@ -62,10 +62,16 @@ class LoginScreenModel:
 
     private fun handleErrorState(error: ErrorState) {
         when (error) {
-            ErrorState.NoInternet -> {}
+            ErrorState.NoInternet -> {
+
+            }
+
             ErrorState.RequestFailed -> {}
             ErrorState.UnAuthorized -> {}
-            ErrorState.HasNoPermission -> {}
+            ErrorState.HasNoPermission -> {
+                state.value.sheetState.show()
+            }
+
             ErrorState.UnknownError -> {
                 updateState {
                     it.copy(
