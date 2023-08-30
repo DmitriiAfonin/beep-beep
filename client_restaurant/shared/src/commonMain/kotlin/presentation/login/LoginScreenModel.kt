@@ -66,7 +66,17 @@ class LoginScreenModel:
             ErrorState.RequestFailed -> {}
             ErrorState.UnAuthorized -> {}
             ErrorState.HasNoPermission -> {}
-            ErrorState.UnknownError -> {}
+            ErrorState.UnknownError -> {
+                updateState {
+                    it.copy(
+                        usernameErrorMsg = "Unknown Error",
+                        isUsernameError = true,
+                        passwordErrorMsg = "Unknown Error",
+                        isPasswordError = true,
+                    )
+                }
+            }
+
             is ErrorState.InvalidCredentials -> {
                 updateState {
                     it.copy(
@@ -115,11 +125,28 @@ class LoginScreenModel:
         }
     }
 
-    override fun onSubmitClicked() {
+    override fun onSubmitClicked(
+        restaurantName: String,
+        ownerEmail: String,
+        cause: String
+    ) {
         state.value.sheetState.dismiss()
         coroutineScope.launch {
             delayAndChangePermissionSheetState(false)
         }
+        tryToExecute(
+            { loginUserUseCase.requestPermission(restaurantName, ownerEmail, cause) },
+            { onRequestSuccess() },
+            ::onRequestFailed
+        )
+    }
+
+    private fun onRequestSuccess() {
+        // make effect or something to show a toast or snack bar
+    }
+
+    private fun onRequestFailed(error: ErrorState) {
+        handleErrorState(error)
     }
 
     override fun onCancelClicked() {

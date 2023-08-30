@@ -29,4 +29,26 @@ class RemoteIdentityGateway(client: HttpClient) : IRemoteIdentityGateway,
 
         return Pair(result.accessToken, result.refreshToken)
     }
+
+    override suspend fun requestPermission(
+        restaurantName: String,
+        ownerEmail: String,
+        cause: String
+    ): Boolean {
+        val result = tryToExecute<BaseResponse<Boolean>>() {
+            submitForm(
+                formParameters = Parameters.build {
+                    append("restaurantName", restaurantName)
+                    append("ownerEmail", ownerEmail)
+                    append("cause", cause)
+                }
+            ) {
+                url("restaurant/permission")
+                header("Accept-Language", "ar")
+                header("Country-Code", "EG")
+            }
+        }.value ?: throw Exception()
+
+        return result
+    }
 }

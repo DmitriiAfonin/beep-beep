@@ -1,7 +1,7 @@
 package domain.usecase
 
-import domain.gateway.IFakeRemoteGateway
 import domain.gateway.local.ILocalConfigurationGateway
+import domain.gateway.remote.IRemoteIdentityGateway
 
 interface ILoginUserUseCase {
 
@@ -11,10 +11,15 @@ interface ILoginUserUseCase {
         isKeepMeLoggedInChecked: Boolean
     )
 
+    suspend fun requestPermission(
+        restaurantName: String,
+        ownerEmail: String,
+        cause: String
+    ): Boolean
 }
 
 class LoginUserUseCase(
-    private val remoteGateway: IFakeRemoteGateway,
+    private val remoteGateway: IRemoteIdentityGateway,
     private val localGateWay: ILocalConfigurationGateway
 ) : ILoginUserUseCase {
 
@@ -28,5 +33,18 @@ class LoginUserUseCase(
         localGateWay.saveRefreshToken(userTokens.second)
         localGateWay.saveKeepMeLoggedInFlag(isKeepMeLoggedInChecked)
     }
+
+    override suspend fun requestPermission(
+        restaurantName: String,
+        ownerEmail: String,
+        cause: String
+    ): Boolean {
+        return remoteGateway.requestPermission(
+            restaurantName,
+            ownerEmail,
+            cause
+        )
+    }
+
 
 }
