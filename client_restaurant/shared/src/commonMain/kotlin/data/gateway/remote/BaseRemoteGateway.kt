@@ -6,10 +6,13 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.statement.HttpResponse
 import presentation.base.InternetException
+import presentation.base.InvalidCredentialsException
 import presentation.base.InvalidPasswordException
-import presentation.base.InvalidUserNameException
 import presentation.base.NoInternetException
+import presentation.base.PermissionDenied
 import presentation.base.UnknownErrorException
+import presentation.base.UserAlreadyExistException
+import presentation.base.UserNotFoundException
 
 abstract class BaseRemoteGateway(val client: HttpClient) {
 
@@ -21,24 +24,32 @@ abstract class BaseRemoteGateway(val client: HttpClient) {
         } catch (e: ClientRequestException) {
             val errorMessages = e.response.body<BaseResponse<*>>().status.errorMessages
             errorMessages?.let { throwMatchingException(it) }
-            throw UnknownErrorException()
+            throw UnknownErrorException("")
         } catch (e: InternetException) {
-            throw NoInternetException()
+            throw NoInternetException("")
         } catch (e: Exception) {
-            throw UnknownErrorException()
+            throw UnknownErrorException("")
         }
     }
 
     fun throwMatchingException(errorMessages: Map<String, String>) {
         errorMessages.let {
-            if (it.containsErrors(WRONG_PASSWORD)) {
-                throw InvalidPasswordException(it.getOrEmpty(WRONG_PASSWORD))
+            if (it.containsErrors(PASSWORD_CANNOT_BE_BLANK)) {
+                throw InvalidPasswordException(it.getOrEmpty(PASSWORD_CANNOT_BE_BLANK))
+            }
+            if (it.containsErrors(USER_ALREADY_EXIST)) {
+                throw UserAlreadyExistException(it.getOrEmpty(USER_ALREADY_EXIST))
+            }
+            if (it.containsErrors(USER_NOT_FOUND)) {
+                throw UserNotFoundException(it.getOrEmpty(USER_NOT_FOUND))
+            }
+            if (it.containsErrors(INVALID_PERMISSION)) {
+                throw PermissionDenied(it.getOrEmpty(""))
+            }
+            if (it.containsErrors(INVALID_CREDENTIALS)) {
+                throw InvalidCredentialsException(it.getOrEmpty(INVALID_CREDENTIALS))
             } else {
-                if (it.containsErrors(USER_NOT_EXIST)) {
-                    throw InvalidUserNameException(it.getOrEmpty(USER_NOT_EXIST))
-                } else {
-                    throw UnknownErrorException()
-                }
+                throw UnknownErrorException(it.getOrEmpty(""))
             }
         }
     }
@@ -49,7 +60,13 @@ abstract class BaseRemoteGateway(val client: HttpClient) {
     private fun Map<String, String>.getOrEmpty(key: String): String = get(key) ?: ""
 
     companion object {
-        const val WRONG_PASSWORD = "1013"
-        const val USER_NOT_EXIST = "1043"
+        const val USER_ALREADY_EXIST = "1002"
+        const val INVALID_USERNAME = "1003"
+        const val PASSWORD_CANNOT_BE_LESS_THAN_8_CHARACTERS = "1005"
+        const val USERNAME_CANNOT_BE_BLANK = "1006"
+        const val PASSWORD_CANNOT_BE_BLANK = "1007"
+        const val INVALID_CREDENTIALS = "1013"
+        const val USER_NOT_FOUND = "1043"
+        const val INVALID_PERMISSION = "8000"
     }
 }

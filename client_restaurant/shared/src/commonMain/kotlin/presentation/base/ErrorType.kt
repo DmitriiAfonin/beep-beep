@@ -1,20 +1,20 @@
 package presentation.base
 
-open class BpException(message: String) : Exception(message)
+open class BpException(message: String) : RuntimeException(message)
 
-//region InternetException
 open class InternetException(message: String) : BpException(message)
-class NoInternetException : InternetException("No internet connection")
-//endregion
-open class AuthorizationException : BpException("")
-class UnAuthorizedException : AuthorizationException()
-class PermissionDenied : AuthorizationException()
+class NoInternetException(message: String) : InternetException(message)
+
+open class AuthorizationException(message: String) : BpException(message)
+class UnAuthorizedException(message: String) : AuthorizationException(message)
+class PermissionDenied(message: String) : AuthorizationException(message)
 
 open class RequestException(message: String) : BpException(message)
-class ClientSideException : RequestException("")
-class ServerSideException : RequestException("")
+class ClientSideException(message: String) : RequestException(message)
+class ServerSideException(message: String) : RequestException(message)
 open class InvalidCredentialsException(message: String) : RequestException(message)
-class UserNotFoundException(val errorMessage: String) : RequestException(errorMessage)
-class InvalidUserNameException(val errorMessage: String) : InvalidCredentialsException(errorMessage)
-class InvalidPasswordException(val errorMessage: String) : InvalidCredentialsException(errorMessage)
-class UnknownErrorException : RequestException("Unknown error")
+class UserNotFoundException(message: String) : InvalidCredentialsException(message)
+class UserAlreadyExistException(message: String) : InvalidCredentialsException(message)
+class InvalidUserNameException(message: String) : InvalidCredentialsException(message)
+class InvalidPasswordException(message: String) : InvalidCredentialsException(message)
+class UnknownErrorException(message: String) : RequestException(message)
