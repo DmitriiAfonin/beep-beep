@@ -1,19 +1,19 @@
 package domain.usecase
 
 import domain.entity.Restaurant
-import domain.gateway.IFakeRemoteGateway
+import domain.gateway.remote.IRemoteRestaurantGateway
 
 interface IGetOwnerRestaurantsUseCase {
     suspend fun getOwnerRestaurants(): List<Restaurant>
 }
 
-class GetOwnerRestaurantsUseCase(private val remoteGateWay: IFakeRemoteGateway) :
+class GetOwnerRestaurantsUseCase(private val remoteRestaurantGateway: IRemoteRestaurantGateway) :
     IGetOwnerRestaurantsUseCase {
 
+    // todo: need to know where the id or the token will do in that case
     override suspend fun getOwnerRestaurants(): List<Restaurant> {
-        val ownerId = "f5c8b31e-5c4d-4c8a-babc-0e9463daad20"
-        //TODO: need to get owner id from local storage
-        return remoteGateWay.getRestaurantsByOwnerId(ownerId).sortedByDescending { it.isRestaurantOpen() }
+        return remoteRestaurantGateway.getRestaurantsByOwnerId("", "")
+            .sortedByDescending { it.isRestaurantOpen() }
     }
 
 }
