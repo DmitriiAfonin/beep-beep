@@ -71,6 +71,8 @@ kotlin {
                 api(libs.androidx.core.ktx)
                 api(libs.koin.android)
                 implementation("io.ktor:ktor-client-okhttp:$ktorVersion")
+                implementation("androidx.paging:paging-compose:1.0.0-alpha10")
+
             }
         }
         val iosX64Main by getting
