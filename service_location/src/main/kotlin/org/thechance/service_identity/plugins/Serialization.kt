@@ -1,4 +1,4 @@
-package org.thechance.service_location.plugins
+package org.thechance.service_identity.plugins
 
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.plugins.contentnegotiation.*

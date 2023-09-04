@@ -1,4 +1,4 @@
-package org.thechance.service_location.plugins
+package org.thechance.service_identity.plugins
 
 import io.ktor.server.plugins.callloging.*
 import org.slf4j.event.*
