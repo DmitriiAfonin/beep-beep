@@ -4,8 +4,8 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class TripDto(
-    val tripId: String,
-    val location: LocationDto
+    var startPoint: LocationDto? = null,
+    var endPoint: LocationDto? = null,
 )
 
 
