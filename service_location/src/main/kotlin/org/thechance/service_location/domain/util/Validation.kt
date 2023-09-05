@@ -1,8 +1,5 @@
 package org.thechance.service_location.domain.util
 
-import org.thechance.service_location.domain.util.exciptions.INVALID_ID
-import org.thechance.service_location.domain.util.exciptions.MultiErrorException
-
 
 interface IValidation {
     fun isValidName(name: String?): Boolean
@@ -10,7 +7,6 @@ interface IValidation {
     fun isValidLatitude(latitude: Double): Boolean
     fun isValidLongitude(longitude: Double): Boolean
     fun isValidLocation(latitude: Double, longitude: Double): Boolean
-    fun checkIsValidIds(id: String, listIds: List<String>)
     fun isValidAddress(address: String): Boolean
 
 }

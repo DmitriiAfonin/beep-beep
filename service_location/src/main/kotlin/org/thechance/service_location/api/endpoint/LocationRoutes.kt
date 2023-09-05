@@ -7,7 +7,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import io.ktor.server.websocket.*
 import org.koin.ktor.ext.inject
-import org.thechance.service_location.api.models.LocationDto
+import org.thechance.service_identity.endpoints.model.LocationDto
 import org.thechance.service_location.api.models.WebSocketTrip
 import org.thechance.service_location.api.utils.SocketHandler
 
