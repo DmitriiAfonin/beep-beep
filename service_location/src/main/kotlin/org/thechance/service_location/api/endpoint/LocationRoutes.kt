@@ -20,8 +20,7 @@ fun Route.locationRoutes() {
         post("/{tripId}") {
             val tripId = call.parameters["tripId"]?.trim().orEmpty()
             val location = call.receive<LocationDto>()
-            println("location: ${socketHandler.trip[tripId]}")
-            socketHandler.trip[tripId]?.locations?.emit(location)
+            socketHandler.trip[tripId]?.location?.emit(location)
             call.respond(HttpStatusCode.Created, location)
         }
 
@@ -29,10 +28,6 @@ fun Route.locationRoutes() {
             val tripId = call.parameters["tripId"]?.trim().orEmpty()
             socketHandler.trip[tripId] = WebSocketTrip(this)
             socketHandler.broadcastLocation(tripId)
-
         }
-
     }
-
 }
-

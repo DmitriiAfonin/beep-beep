@@ -16,7 +16,7 @@ class SocketHandler {
     suspend fun broadcastLocation(locationId: String) {
 
         val ownerSession = trip[locationId]?.ownerSession
-        val locations = trip[locationId]?.locations
+        val locations = trip[locationId]?.location
 
         try {
             locations
