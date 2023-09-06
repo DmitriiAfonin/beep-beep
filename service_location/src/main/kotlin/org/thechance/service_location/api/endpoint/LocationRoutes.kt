@@ -11,21 +11,21 @@ import org.thechance.service_identity.endpoints.model.LocationDto
 import org.thechance.service_location.api.models.WebSocketTrip
 import org.thechance.service_location.api.utils.SocketHandler
 
-fun Route.orderRoutes() {
+fun Route.locationRoutes() {
 
     val socketHandler: SocketHandler by inject()
 
     route("/location") {
 
-        post("/start/{tripId}") {
+        post("/{tripId}") {
             val tripId = call.parameters["tripId"]?.trim().orEmpty()
             val location = call.receive<LocationDto>()
             println("location: ${socketHandler.trip[tripId]}")
-            socketHandler.trip[tripId]?.locations?.emit(location) // emit location to all clients
+            socketHandler.trip[tripId]?.locations?.emit(location)
             call.respond(HttpStatusCode.Created, location)
         }
 
-        webSocket("/trip/{tripId}") {
+        webSocket("/{tripId}") {
             val tripId = call.parameters["tripId"]?.trim().orEmpty()
             socketHandler.trip[tripId] = WebSocketTrip(this)
             socketHandler.broadcastLocation(tripId)
