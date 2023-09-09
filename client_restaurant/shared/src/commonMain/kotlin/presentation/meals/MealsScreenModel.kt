@@ -1,14 +1,18 @@
 package presentation.meals
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import cafe.adriel.voyager.core.model.coroutineScope
 import domain.entity.Cuisine
 import domain.entity.Meal
-import domain.usecase.IManageMealUseCase
 import domain.usecase.IManageCuisineUseCase
-
+import domain.usecase.IManageMealUseCase
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 import presentation.base.BaseScreenModel
 import presentation.base.ErrorState
+import util.DefaultPaginator
 
 class MealsScreenModel(
     private val restaurantId: String,
@@ -19,11 +23,44 @@ class MealsScreenModel(
     MealScreenInteractionListener {
     override val viewModelScope: CoroutineScope = coroutineScope
 
+   // var uiState by mutableStateOf(MealsScreenUIState())
 
+    private val paginator = DefaultPaginator(
+        initialKey = _state.value.page,
+        onLoadUpdated = {
+            _state.value = _state.value.copy(isLoading = it)
+        },
+        onRequest = { nextPage ->
+            mangeMeal.getAllMeals(restaurantId, nextPage, 10)
+        },
+        getNextKey = {
+            _state.value.page + 1
+        },
+        onError = {
+            _state.value = _state.value.copy(error = ErrorState.NoInternet)
+        },
+        onSuccess = { items, newKey ->
+            _state.value = _state.value.copy(
+                meals = _state.value.meals + items.toMealUIState(),
+                page = newKey,
+                endReached = items.isEmpty()
+            )
+
+        }
+    )
     init {
         getCuisine()
-        getMeals("64f372095fecc11e6d917656")
+        loadNextItems()
+        //getMeals("64f372095fecc11e6d917656")
     }
+    override fun loadNextItems() {
+        viewModelScope.launch {
+            paginator.loadNextItems()
+
+        }
+    }
+
+
 
     private fun getCuisine() {
         tryToExecute(

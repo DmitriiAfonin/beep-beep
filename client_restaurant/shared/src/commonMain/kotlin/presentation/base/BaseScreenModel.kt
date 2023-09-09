@@ -21,7 +21,7 @@ import org.koin.core.component.KoinComponent
 abstract class BaseScreenModel<S, E>(initialState: S) : ScreenModel, KoinComponent {
 
     abstract val viewModelScope: CoroutineScope
-    private val _state = MutableStateFlow(initialState)
+    protected val _state = MutableStateFlow(initialState)
     val state = _state.asStateFlow()
 
     private val _effect = MutableSharedFlow<E?>()

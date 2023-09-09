@@ -4,7 +4,9 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -114,10 +116,19 @@ class MealsScreen(private val restaurantId: String) :
 
                     ) {
                     items(state.meals.size) { index ->
+                         val item = state.meals[index]
+                        println("List:${state.meals}")
+                        if (index>= state.meals.size - 1 && !state.endReached && !state.isLoading) {
+                            listener.loadNextItems()
+                            println("Entered")
+                        }
                         MealCard(onClick = {
-                            listener.onClickMeal(state.meals[index].id)
-                        }, meal = state.meals[index])
+                            listener.onClickMeal(item.id)
+                        }, meal = item
+                        )
+
                     }
+//                    
                 }
             }
         }

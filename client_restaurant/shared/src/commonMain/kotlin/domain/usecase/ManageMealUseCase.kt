@@ -41,6 +41,7 @@ class ManageMealUseCase(
         limit: Int
     ): List<Meal> {
         //TODO fetch restaurant id from local.
+        println("Res:${mealRemoteGateway.getAllMealsByRestaurantId(restaurantId, page, limit)}")
         return mealRemoteGateway.getAllMealsByRestaurantId(restaurantId, page, limit)
     }
 

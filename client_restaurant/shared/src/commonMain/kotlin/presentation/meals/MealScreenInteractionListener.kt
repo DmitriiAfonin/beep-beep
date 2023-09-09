@@ -10,4 +10,6 @@ interface MealScreenInteractionListener : BaseInteractionListener {
     fun onClickCuisineType(type: CuisineUIState)
 
     fun onAddMeaClick()
+
+    fun loadNextItems()
 }

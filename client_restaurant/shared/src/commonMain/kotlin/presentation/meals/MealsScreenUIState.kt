@@ -10,6 +10,8 @@ data class MealsScreenUIState(
     val selectedCuisine: CuisineUIState = CuisineUIState(),
     val isLoading: Boolean = false,
     val error: ErrorState? = null,
+    val endReached: Boolean = false,
+    val page: Int = 0
 )
 
 data class CuisineUIState(
