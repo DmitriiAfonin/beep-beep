@@ -4,5 +4,5 @@ import presentation.base.BaseInteractionListener
 
 interface MapInteractionListener : BaseInteractionListener {
 
-    fun onClickStart()
+    fun onClickClose()
 }

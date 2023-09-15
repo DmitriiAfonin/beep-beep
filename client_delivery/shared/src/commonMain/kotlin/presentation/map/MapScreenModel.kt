@@ -9,7 +9,7 @@ class MapScreenModel : BaseScreenModel<MapUiState, MapScreenUiEffect>(MapUiState
 
     override val viewModelScope: CoroutineScope = coroutineScope
 
-    override fun onClickStart() {
+    override fun onClickClose() {
         sendNewEffect(MapScreenUiEffect.Close)
     }
 
