@@ -49,15 +49,16 @@ class UsersGateway(private val client: HttpClient) : BaseGateway(), IUsersGatewa
                 url("/login")
                 header("Accept-Language", "ar")
                 header("Country-Code", "EG")
+                header("Application-Id", "3000")
             }
         }.value
 
         return Pair(result?.accessToken ?: "", result?.refreshToken ?: "")
     }
 
-    override suspend fun deleteUser(userId: String): Boolean {
+    override suspend fun deleteUser(id: String): Boolean {
         return tryToExecute<ServerResponse<Boolean>>(client) {
-            delete(urlString = "/user") { url { appendPathSegments(userId) } }
+            delete(urlString = "/user") { url { appendPathSegments(id) } }
         }.value ?: false
     }
 
