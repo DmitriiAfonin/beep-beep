@@ -31,7 +31,7 @@ class MapScreen :
             modifier = Modifier.fillMaxSize().background(Theme.colors.background),
             contentAlignment = Alignment.Center
         ) {
-
+            BpMapView()
         }
     }
 }
