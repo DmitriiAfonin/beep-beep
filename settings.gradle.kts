@@ -14,6 +14,7 @@ include(":client_delivery:shared")
 
 include(":client_dashboard")
 include(":client_dashboard:desktop")
+include(":client_dashboard:web")
 include(":client_dashboard:common")
 
 include(":client_support")

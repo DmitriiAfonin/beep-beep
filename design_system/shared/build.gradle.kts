@@ -10,6 +10,10 @@ kotlin {
     jvm("desktop") {
         jvmToolchain(libs.versions.jvmToolchain.get().toInt())
     }
+
+    js(IR) {
+        browser()
+    }
     androidTarget()
 
     iosX64()
@@ -59,6 +63,12 @@ kotlin {
         val desktopMain by getting {
             dependencies {
                 api(libs.compose.preview)
+            }
+        }
+        val jsMain by getting {
+            dependsOn(commonMain)
+            dependencies {
+                //js dependencies
             }
         }
     }

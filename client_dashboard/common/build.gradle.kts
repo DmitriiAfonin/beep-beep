@@ -17,6 +17,9 @@ kotlin {
         withJava()
         jvmToolchain(libs.versions.jvmToolchain.get().toInt())
     }
+    js(IR) {
+        browser()
+    }
 
     sourceSets {
         val commonMain by getting {
@@ -32,34 +35,39 @@ kotlin {
                 implementation(libs.voyager.koin)
                 implementation(libs.kotlinx.datetime)
 
-                api(libs.kotlin.realm)
+//                api(libs.kotlin.realm)
                 implementation(libs.kotlin.coroutines)
                 implementation("io.github.thechance101:chart:Beta-0.0.5")
 
                 api(libs.ktor.client.core)
-                api(libs.ktor.client.cio)
+//                api(libs.ktor.client.cio)
                 api(libs.ktor.json.serialization)
                 api(libs.kotlin.serialization)
                 api(libs.ktor.content.negotiation)
                 api(libs.ktor.logging)
-                api(libs.ktor.gson)
+//                api(libs.ktor.gson)
 
-                api(libs.ktor.client.cio)
-
+//                api(libs.ktor.client.cio)
+//
                 api(libs.koin.core)
-                implementation(libs.koin.annotations)
-                implementation(libs.koin.ksp)
+//                implementation(libs.koin.annotations)
+//                implementation(libs.koin.ksp)
                 implementation("org.apache.pdfbox:pdfbox:2.0.26")
 
                 implementation(project(":design_system:shared"))
-                implementation(compose.desktop.currentOs)
-                implementation("com.google.accompanist:accompanist-webview:0.30.1")
-                implementation("org.openjfx:javafx-web:17")
+//                implementation(compose.desktop.currentOs)
+//                implementation("com.google.accompanist:accompanist-webview:0.30.1")
+//                implementation("org.openjfx:javafx-web:17")
             }
         }
         val desktopMain by getting {
             dependencies {
                 api(libs.compose.preview)
+            }
+        }
+        val jsMain by getting {
+            dependencies {
+                //js dependencies
             }
         }
     }
