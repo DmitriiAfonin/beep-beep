@@ -19,15 +19,11 @@ kotlin {
             dependencies {
 //                implementation(project(":client_dashboard:common"))
 //                implementation(project(":design_system:shared"))
+                implementation("io.github.thechance101:chart:Beta-0.0.5")
                 implementation(libs.compose.runtime)
                 implementation(compose.ui)
                 implementation(libs.compose.foundation)
                 implementation(libs.compose.material3)
-                @OptIn(org.jetbrains.compose.ExperimentalComposeLibrary::class)
-                implementation(compose.components.resources)
-
-                implementation("io.ktor:ktor-client-core:2.3.3")
-                implementation("io.ktor:ktor-client-js:2.3.3")
             }
         }
     }

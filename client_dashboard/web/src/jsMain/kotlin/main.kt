@@ -1,4 +1,3 @@
-import androidx.compose.material3.TextButton
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.CanvasBasedWindow
 import org.jetbrains.skiko.wasm.onWasmReady
@@ -7,7 +6,6 @@ import org.jetbrains.skiko.wasm.onWasmReady
 fun main() {
     onWasmReady {
         CanvasBasedWindow("dashboard") {
-            TextButton({}){}
         }
     }
 }
