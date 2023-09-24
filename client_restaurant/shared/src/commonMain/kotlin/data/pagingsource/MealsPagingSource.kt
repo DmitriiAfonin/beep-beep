@@ -1,5 +1,8 @@
-package util.pagingsource
+package data.pagingsource
 
+import app.cash.paging.PagingSourceLoadParams
+import app.cash.paging.PagingSourceLoadResult
+import app.cash.paging.PagingState
 import domain.entity.Meal
 import domain.gateway.remote.IMealRemoteGateway
 
@@ -13,6 +16,14 @@ class MealsPagingSource(
 ) : BasePagingSource<Meal>() {
     override suspend fun fetchData(page: Int, limit: Int): List<Meal> {
         return remoteGateway.getAllMealsByRestaurantId(restaurantId, page, limit)
+    }
+
+    override suspend fun load(params: PagingSourceLoadParams<Int>): PagingSourceLoadResult<Int, Meal> {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRefreshKey(state: PagingState<Int, Meal>): Int? {
+        TODO("Not yet implemented")
     }
 
 }

@@ -61,7 +61,8 @@ kotlin {
                 implementation(libs.ktor.client.cio)
                 implementation("io.ktor:ktor-client-serialization:$ktorVersion")
                 //implementation("io.ktor:ktor-serialization-gson:ktorVersion")
-
+                //pagination
+                implementation("app.cash.paging:paging-common:3.1.1-0.3.1")
             }
         }
         val androidMain by getting {
