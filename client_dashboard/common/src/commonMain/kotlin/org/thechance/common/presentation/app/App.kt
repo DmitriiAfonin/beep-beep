@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.transitions.SlideTransition
 import com.beepbeep.designSystem.ui.theme.BpTheme
-import org.koin.java.KoinJavaComponent.inject
+//import org.koin.java.KoinJavaComponent.inject
 import org.thechance.common.presentation.login.LoginScreen
 import org.thechance.common.presentation.resources.ProvideResources
 
@@ -15,10 +15,10 @@ import org.thechance.common.presentation.resources.ProvideResources
 @Composable
 fun App() {
 
-    val appScreenModel by inject<AppScreenModel>(AppScreenModel::class.java)
-    val themeMode by appScreenModel.state.collectAsState()
-    BpTheme(useDarkTheme = themeMode) {
-        ProvideResources(isSystemInDarkTheme = themeMode) {
+//    val appScreenModel by inject<AppScreenModel>(AppScreenModel::class.java)
+//    val themeMode by appScreenModel.state.collectAsState()
+    BpTheme() {
+        ProvideResources() {
             Navigator(LoginScreen()) {
                 SlideTransition(it)
             }

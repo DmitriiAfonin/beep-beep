@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import com.beepbeep.designSystem.ui.composable.BpChip
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.thechance.common.presentation.users.UserScreenUiState
@@ -27,13 +27,13 @@ fun PermissionsFlowRow(
             .padding(8.kms)
     ) {
         allPermissions.forEach { permission ->
-            BpChip(
-                label = permission.name.lowercase().capitalizeWords(),
-                modifier = Modifier.padding(8.kms),
-                onClick = { onUserPermissionClicked(permission) },
-                painter = painterResource(permission.iconPath),
-                isSelected = selectedPermissions.contains(permission)
-            )
+//            BpChip(
+//                label = permission.name.lowercase().capitalizeWords(),
+//                modifier = Modifier.padding(8.kms),
+//                onClick = { onUserPermissionClicked(permission) },
+//                painter = painterResource(permission.iconPath),
+//                isSelected = selectedPermissions.contains(permission)
+//            )
         }
     }
 }

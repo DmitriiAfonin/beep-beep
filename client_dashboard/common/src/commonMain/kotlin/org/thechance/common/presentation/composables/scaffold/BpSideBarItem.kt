@@ -20,10 +20,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import com.beepbeep.designSystem.ui.theme.Theme
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.util.kms
 
 @OptIn(ExperimentalFoundationApi::class)
@@ -44,16 +43,15 @@ fun ColumnScope.BpSideBarItem(
             .spacedBy(32.kms + iconSize),
         verticalAlignment = Alignment.CenterVertically,
         modifier = modifier.weight(1f).fillMaxWidth().onClick(onClick = onClick)
-            .cursorHoverIconHand()
     ) {
-        Icon(
-            painterResource(if (isSelected) selectedIconResource else unSelectedIconResource),
-            contentDescription = null,
-            tint = if (isSelected) Theme.colors.primary else Theme.colors.contentSecondary,
-            modifier = Modifier.size(iconSize).graphicsLayer {
-                translationX = (sideBarUnexpandedWidthInKms.toPx() - iconSize.toPx()) / 2
-            }
-        )
+//        Icon(
+//            painterResource(if (isSelected) selectedIconResource else unSelectedIconResource),
+//            contentDescription = null,
+//            tint = if (isSelected) Theme.colors.primary else Theme.colors.contentSecondary,
+//            modifier = Modifier.size(iconSize).graphicsLayer {
+//                translationX = (sideBarUnexpandedWidthInKms.toPx() - iconSize.toPx()) / 2
+//            }
+//        )
         AnimatedVisibility(
             visible = mainMenuIsExpanded,
             enter = fadeIn(tween(500)),

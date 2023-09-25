@@ -8,12 +8,14 @@ import org.thechance.common.data.remote.mapper.toEntity
 import org.thechance.common.data.remote.model.PaginationResponse
 import org.thechance.common.data.remote.model.ServerResponse
 import org.thechance.common.data.remote.model.TaxiDto
+import org.thechance.common.domain.entity.CarColor
 import org.thechance.common.domain.entity.DataWrapper
 import org.thechance.common.domain.entity.NewTaxiInfo
 import org.thechance.common.domain.entity.Taxi
 import org.thechance.common.domain.entity.TaxiFiltration
 import org.thechance.common.domain.getway.ITaxisGateway
 import org.thechance.common.domain.util.NotFoundException
+import org.thechance.common.domain.util.TaxiStatus
 
 class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGateway {
 
@@ -33,7 +35,7 @@ class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGatewa
         return DataWrapper(
             totalPages = result?.total?.div(limit) ?: 0,
             numberOfResult = result?.total ?: 0,
-            result = result?.items?.toEntity() ?: throw UnknownError()
+            result = result?.items?.toEntity() ?: emptyList()
         )
     }
 
@@ -44,7 +46,7 @@ class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGatewa
                 setBody(taxi.toDto())
             }
         }.value
-        return result?.toEntity() ?: throw UnknownError()
+        return result?.toEntity() ?: Taxi("","",CarColor.BLACK,"",1,"",TaxiStatus.OFFLINE,"")
     }
 
     override suspend fun updateTaxi(taxi: NewTaxiInfo): Taxi {

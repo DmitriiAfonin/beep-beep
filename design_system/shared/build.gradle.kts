@@ -13,6 +13,11 @@ kotlin {
 
     js(IR) {
         browser()
+        sourceSets{
+            named("jsMain"){
+                resources.srcDir("src/commonMain/resources")
+            }
+        }
     }
     androidTarget()
 

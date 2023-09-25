@@ -25,7 +25,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
@@ -122,11 +122,11 @@ object OverviewScreen :
                                             verticalAlignment = Alignment.CenterVertically,
                                             horizontalArrangement = Arrangement.SpaceBetween
                                     ) {
-                                        Image(
-                                                modifier = Modifier.size(40.kms),
-                                                painter = painterResource(user.image),
-                                                contentDescription = null
-                                        )
+//                                        Image(
+//                                                modifier = Modifier.size(40.kms),
+//                                                painter = painterResource(user.image),
+//                                                contentDescription = null
+//                                        )
                                         Text(
                                                 text = user.name,
                                                 style = Theme.typography.body.copy(color = Theme.colors.contentPrimary),

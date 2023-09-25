@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import cafe.adriel.voyager.navigator.Navigator
 import com.beepbeep.designSystem.ui.composable.BpButton
@@ -59,18 +59,18 @@ class LoginScreen :
             horizontalArrangement = Arrangement.Center
         ) {
             Box(Modifier.weight(1f)) {
-                Image(
-                    painter = painterResource(Resources.Drawable.login),
-                    contentDescription = null,
-                    alignment = Alignment.CenterStart,
-                    contentScale = ContentScale.Crop,
-                    modifier = Modifier.fillMaxSize()
-                        .border(
-                            BorderStroke(width = 1.kms, color = Theme.colors.divider),
-                            shape = RoundedCornerShape(Theme.radius.large)
-                        )
-                        .clip(RoundedCornerShape(Theme.radius.large))
-                )
+//                Image(
+//                    painter = painterResource(Resources.Drawable.login),
+//                    contentDescription = null,
+//                    alignment = Alignment.CenterStart,
+//                    contentScale = ContentScale.Crop,
+//                    modifier = Modifier.fillMaxSize()
+//                        .border(
+//                            BorderStroke(width = 1.kms, color = Theme.colors.divider),
+//                            shape = RoundedCornerShape(Theme.radius.large)
+//                        )
+//                        .clip(RoundedCornerShape(Theme.radius.large))
+//                )
                 BpLogo(
                     expanded = true,
                     modifier = Modifier.align(Alignment.TopStart).padding(32.kms)
@@ -121,7 +121,7 @@ class LoginScreen :
                         title = Resources.Strings.loginButton,
                         onClick = { listener.onLoginClicked() },
                         modifier = Modifier.padding(top = 24.kms).fillMaxWidth(),
-                        enabled = state.isAbleToLogin
+                        enabled = true
                     )
                 }
             }

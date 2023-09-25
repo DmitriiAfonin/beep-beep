@@ -5,7 +5,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 
@@ -26,11 +26,11 @@ fun BpPager(
         horizontalArrangement = Arrangement.spacedBy(8.kms),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        ArrowIcon(
-            painter = painterResource(Resources.Drawable.arrowLeft),
-            onClick = { onPageClicked(currentPage - 1) },
-            enable = currentPage != 1
-        )
+//        ArrowIcon(
+//            painter = painterResource(Resources.Drawable.arrowLeft),
+//            onClick = { onPageClicked(currentPage - 1) },
+//            enable = currentPage != 1
+//        )
 
         showPages.forEachIndexed { index, position ->
             BpToggleableTextButton(
@@ -55,12 +55,12 @@ fun BpPager(
                 }
             }
         }
-
-        ArrowIcon(
-            painter = painterResource(Resources.Drawable.arrowRight),
-            onClick = { onPageClicked(currentPage + 1) },
-            enable = currentPage != maxPages
-        )
+//
+//        ArrowIcon(
+//            painter = painterResource(Resources.Drawable.arrowRight),
+//            onClick = { onPageClicked(currentPage + 1) },
+//            enable = currentPage != maxPages
+//        )
     }
 }
 

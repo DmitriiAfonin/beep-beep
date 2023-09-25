@@ -66,7 +66,7 @@ class MainScreenModel(
     }
 
     override fun onSwitchTheme() {
-        coroutineScope.launch(Dispatchers.IO) {
+        coroutineScope.launch{
             mutableState.update { it.copy(isDarkMode = !it.isDarkMode) }
             themeManagement.switchTheme(mutableState.value.isDarkMode)
         }

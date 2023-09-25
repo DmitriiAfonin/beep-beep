@@ -17,13 +17,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.thechance.common.presentation.composables.BpDropdownMenu
 import org.thechance.common.presentation.composables.modifier.circleLayout
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
+//import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 
@@ -57,7 +57,7 @@ fun DashboardAppbar(
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.spacedBy(8.kms),
-                    modifier = Modifier.onClick(onClick = onClickDropDownMenu).cursorHoverIconHand()
+                    modifier = Modifier.onClick(onClick = onClickDropDownMenu)
                 ) {
                     Text(
                         modifier = Modifier.circleLayout().padding(8.kms),
@@ -70,14 +70,14 @@ fun DashboardAppbar(
                         style = Theme.typography.titleMedium,
                         color = Theme.colors.contentPrimary
                     )
-                    Image(
-                        painter = painterResource(Resources.Drawable.dropDownArrow),
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(Theme.colors.contentPrimary),
-                        modifier = Modifier.graphicsLayer {
-                            rotationZ = dropMenuArrowRotateDirection.value
-                        }
-                    )
+//                    Image(
+//                        painter = painterResource(Resources.Drawable.dropDownArrow),
+//                        contentDescription = null,
+//                        colorFilter = ColorFilter.tint(Theme.colors.contentPrimary),
+//                        modifier = Modifier.graphicsLayer {
+//                            rotationZ = dropMenuArrowRotateDirection.value
+//                        }
+//                    )
                 }
                 Box(contentAlignment = Alignment.BottomEnd) {
                     BpDropdownMenu(
@@ -92,7 +92,7 @@ fun DashboardAppbar(
                                 onDismissDropDownMenu()
                                 onLogOut()
                             },
-                            modifier = Modifier.cursorHoverIconHand(),
+
                             enabled = true,
                             text = {
                                 Row(
@@ -100,10 +100,10 @@ fun DashboardAppbar(
                                     horizontalArrangement = Arrangement.spacedBy(8.kms),
                                     verticalAlignment = Alignment.CenterVertically
                                 ) {
-                                    Image(
-                                        painterResource(Resources.Drawable.logout),
-                                        contentDescription = null
-                                    )
+//                                    Image(
+//                                        painterResource(Resources.Drawable.logout),
+//                                        contentDescription = null
+//                                    )
                                     Text(
                                         text = Resources.Strings.logout,
                                         textAlign = TextAlign.Center,

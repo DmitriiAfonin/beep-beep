@@ -17,7 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
@@ -30,7 +30,7 @@ import org.thechance.common.domain.entity.CarColor
 import org.thechance.common.domain.util.TaxiStatus
 import org.thechance.common.presentation.base.BaseScreen
 import org.thechance.common.presentation.composables.*
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
+//import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.composables.modifier.noRipple
 import org.thechance.common.presentation.composables.table.BpPager
 import org.thechance.common.presentation.composables.table.BpTable
@@ -83,20 +83,19 @@ class TaxiScreen :
                         onValueChange = listener::onSearchInputChange,
                         text = state.searchQuery,
                         keyboardType = KeyboardType.Text,
-                        trailingPainter = painterResource(Resources.Drawable.search),
                     )
 
                     Column {
-                        BpIconButton(
-                            onClick = listener::onFilterMenuClicked,
-                            painter = painterResource(Resources.Drawable.filter),
-                            modifier = Modifier.cursorHoverIconHand()
-                        ) {
-                            Text(
-                                text = Resources.Strings.filter,
-                                style = Theme.typography.titleMedium.copy(color = Theme.colors.contentTertiary),
-                            )
-                        }
+//                        BpIconButton(
+//                            onClick = listener::onFilterMenuClicked,
+//                            painter = painterResource(Resources.Drawable.filter),
+//                            modifier = Modifier.cursorHoverIconHand()
+//                        ) {
+//                            Text(
+//                                text = Resources.Strings.filter,
+//                                style = Theme.typography.titleMedium.copy(color = Theme.colors.contentTertiary),
+//                            )
+//                        }
                         TaxiFilterDropdownMenu(
                             onFilterMenuDismiss = listener::onFilterMenuDismiss,
                             isFilterDropdownMenuExpanded = state.isFilterDropdownMenuExpanded,
@@ -114,13 +113,11 @@ class TaxiScreen :
                         title = Resources.Strings.export,
                         onClick = listener::onExportReportClicked,
                         textPadding = PaddingValues(horizontal = 24.kms),
-                        modifier = Modifier.cursorHoverIconHand()
                     )
                     BpButton(
                         title = Resources.Strings.newTaxi,
                         onClick = listener::onAddNewTaxiClicked,
                         textPadding = PaddingValues(horizontal = 24.kms),
-                        modifier = Modifier.cursorHoverIconHand()
                     )
                 }
                 BpTable(
@@ -159,12 +156,12 @@ class TaxiScreen :
                     modifier = Modifier.zIndex(3f).align(Alignment.BottomCenter),
                     onDismiss = listener::onDismissExportReportSnackBar
                 ) {
-                    Image(
-                        painter = painterResource(Resources.Drawable.downloadMark),
-                        contentDescription = null,
-                        colorFilter = ColorFilter.tint(color = Theme.colors.success),
-                        modifier = Modifier.padding(16.kms)
-                    )
+//                    Image(
+//                        painter = painterResource(Resources.Drawable.downloadMark),
+//                        contentDescription = null,
+//                        colorFilter = ColorFilter.tint(color = Theme.colors.success),
+//                        modifier = Modifier.padding(16.kms)
+//                    )
                     Text(
                         text = Resources.Strings.downloadSuccessMessage,
                         style = Theme.typography.titleMedium,
@@ -245,19 +242,19 @@ class TaxiScreen :
                         color = Theme.colors.contentPrimary,
                         modifier = Modifier.padding(horizontal = 24.kms, vertical = 16.kms)
                     )
-                    SeatsBar(
-                        selectedSeatsCount = taxi.seats,
-                        count = 6,
-                        selectedIcon = painterResource(Resources.Drawable.seatFilled),
-                        notSelectedIcon = painterResource(Resources.Drawable.seatOutlined),
-                        iconsSize = 24.kms,
-                        iconsPadding = PaddingValues(horizontal = 8.kms),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .background(color = Theme.colors.background)
-                            .padding(horizontal = 24.kms, vertical = 16.kms),
-                        onClick = onSeatsSelected
-                    )
+//                    SeatsBar(
+//                        selectedSeatsCount = taxi.seats,
+//                        count = 6,
+//                        selectedIcon = painterResource(Resources.Drawable.seatFilled),
+//                        notSelectedIcon = painterResource(Resources.Drawable.seatOutlined),
+//                        iconsSize = 24.kms,
+//                        iconsPadding = PaddingValues(horizontal = 8.kms),
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                            .background(color = Theme.colors.background)
+//                            .padding(horizontal = 24.kms, vertical = 16.kms),
+//                        onClick = onSeatsSelected
+//                    )
                 }
             }
         }
@@ -324,23 +321,23 @@ class TaxiScreen :
         ) {
             repeat(taxi.seats) {
                 Box(modifier = Modifier.padding(top = 8.kms)) {
-                    Icon(
-                        painter = painterResource(Resources.Drawable.seatOutlined),
-                        contentDescription = null,
-                        tint = Theme.colors.contentPrimary.copy(alpha = 0.87f),
-                        modifier = Modifier.size(24.kms)
-                    )
+//                    Icon(
+//                        painter = painterResource(Resources.Drawable.seatOutlined),
+//                        contentDescription = null,
+//                        tint = Theme.colors.contentPrimary.copy(alpha = 0.87f),
+//                        modifier = Modifier.size(24.kms)
+//                    )
                 }
             }
         }
         TitleField(text = taxi.trips)
         Box(modifier = Modifier.weight(firstColumnWeight)) {
-            Image(
-                painter = painterResource(Resources.Drawable.dots),
-                contentDescription = null,
-                modifier = Modifier.noRipple { onDropdownMenuClicked(taxi.id) },
-                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
-            )
+//            Image(
+//                painter = painterResource(Resources.Drawable.dots),
+//                contentDescription = null,
+//                modifier = Modifier.noRipple { onDropdownMenuClicked(taxi.id) },
+//                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
+//            )
             EditTaxiDropdownMenu(
                 taxi = taxi,
                 editTaxiMenu = editTaxiMenu,

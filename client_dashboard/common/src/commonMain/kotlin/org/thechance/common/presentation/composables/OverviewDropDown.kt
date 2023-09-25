@@ -16,11 +16,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import com.beepbeep.designSystem.ui.theme.Theme
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
+//import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 
@@ -44,7 +44,7 @@ fun OverviewDropDown(
         Row(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(8.kms),
-            modifier = Modifier.onClick(onClick = onDropDownMenuClicked).cursorHoverIconHand()
+            modifier = Modifier.onClick(onClick = onDropDownMenuClicked)
         ) {
             Text(
                 text = items[selectedIndex],
@@ -52,13 +52,13 @@ fun OverviewDropDown(
                 color = Theme.colors.contentSecondary,
                 modifier = Modifier
             )
-            Image(painter = painterResource(Resources.Drawable.dropDownArrow),
-                contentDescription = null,
-                colorFilter = ColorFilter.tint(Theme.colors.contentPrimary),
-                modifier = Modifier.graphicsLayer {
-                    rotationZ = dropMenuArrowRotateDirection.value
-                }
-            )
+//            Image(painter = painterResource(Resources.Drawable.dropDownArrow),
+//                contentDescription = null,
+//                colorFilter = ColorFilter.tint(Theme.colors.contentPrimary),
+//                modifier = Modifier.graphicsLayer {
+//                    rotationZ = dropMenuArrowRotateDirection.value
+//                }
+//            )
         }
 
         Box {
@@ -71,7 +71,7 @@ fun OverviewDropDown(
                 items.forEachIndexed { index, text ->
                     DropdownMenuItem(
                         onClick = { onMenuItemClicked(index) },
-                        modifier = Modifier.cursorHoverIconHand(),
+                        modifier = Modifier,
                         enabled = true,
                         text = {
                             Text(

@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
@@ -23,7 +23,7 @@ import com.beepbeep.designSystem.ui.composable.BpSimpleTextField
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.thechance.common.presentation.base.BaseScreen
 import org.thechance.common.presentation.composables.*
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
+//import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.composables.modifier.noRipple
 import org.thechance.common.presentation.composables.table.BpPager
 import org.thechance.common.presentation.composables.table.BpTable
@@ -214,7 +214,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
             modifier = Modifier.weight(otherColumnsWeight),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Image(painter = painterResource(Resources.Drawable.dummyImg), contentDescription = null)
+//            Image(painter = painterResource(Resources.Drawable.dummyImg), contentDescription = null)
             Text(
                 text = user.fullName,
                 style = Theme.typography.titleMedium.copy(color = Theme.colors.contentPrimary),
@@ -253,24 +253,24 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
             horizontalArrangement = Arrangement.spacedBy(8.kms)
         ) {
             user.permissions.forEach {
-                Icon(
-                    painter = painterResource(it.iconPath),
-                    contentDescription = null,
-                    tint = Theme.colors.contentPrimary.copy(alpha = 0.87f),
-                    modifier = Modifier.size(24.kms)
-                )
+//                Icon(
+//                    painter = painterResource(it.iconPath),
+//                    contentDescription = null,
+//                    tint = Theme.colors.contentPrimary.copy(alpha = 0.87f),
+//                    modifier = Modifier.size(24.kms)
+//                )
             }
         }
 
         Box(
             modifier = Modifier.weight(firstColumnWeight),
         ) {
-            Image(
-                painter = painterResource(Resources.Drawable.dots),
-                contentDescription = null,
-                modifier = Modifier.noRipple { onUserMenuClicked(user.username) },
-                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
-            )
+//            Image(
+//                painter = painterResource(Resources.Drawable.dots),
+//                contentDescription = null,
+//                modifier = Modifier.noRipple { onUserMenuClicked(user.username) },
+//                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
+//            )
             EditUserDropdownMenu(
                 user = user,
                 editUserMenu = editUserMenu,
@@ -334,17 +334,17 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
         onFilterClearAllClicked: () -> Unit,
     ) {
         Row {
-            BpIconButton(
-                content = {
-                    Text(
-                        text = Resources.Strings.filter,
-                        style = Theme.typography.titleMedium.copy(color = Theme.colors.contentTertiary),
-                    )
-                },
-                onClick = onFilterMenuClicked,
-                painter = painterResource(Resources.Drawable.filter),
-                modifier = Modifier.cursorHoverIconHand()
-            )
+//            BpIconButton(
+//                content = {
+//                    Text(
+//                        text = Resources.Strings.filter,
+//                        style = Theme.typography.titleMedium.copy(color = Theme.colors.contentTertiary),
+//                    )
+//                },
+//                onClick = onFilterMenuClicked,
+//                painter = painterResource(Resources.Drawable.filter),
+//                modifier = Modifier.cursorHoverIconHand()
+//            )
             BpDropdownMenu(
                 expanded = isFilterDropdownMenuExpanded,
                 onDismissRequest = onFilterMenuDismiss,
@@ -423,7 +423,6 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
                 onValueChange = onSearchInputChanged,
                 text = searchText,
                 keyboardType = KeyboardType.Text,
-                trailingPainter = painterResource(Resources.Drawable.search)
             )
 
             UsersFilterDropdownMenu(

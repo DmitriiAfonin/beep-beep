@@ -17,7 +17,7 @@ import org.thechance.common.presentation.restaurant.NewRestaurantInfoUiState
 import org.thechance.common.presentation.restaurant.RestaurantInteractionListener
 import org.thechance.common.presentation.restaurant.RestaurantUiState
 import org.thechance.common.presentation.util.kms
-import java.awt.Dimension
+//import java.awt.Dimension
 
 @Composable
 fun NewRestaurantInfoDialog(
@@ -56,117 +56,117 @@ private fun RestaurantDialog(
     onWorkingEndHourChange: (String) -> Unit,
     onLocationChange: (String) -> Unit,
 ) {
-    Dialog(
-        visible = isVisible,
-        undecorated = true,
-        onCloseRequest = onCancelClicked,
-        resizable = false,
-    ) {
-        window.minimumSize = Dimension(1176, 664)
-        Column(
-            modifier
-                .background(Theme.colors.surface)
-                .fillMaxSize()
-                .padding(24.kms)
-        ) {
-            Text(
-                text = Resources.Strings.newRestaurant,
-                style = Theme.typography.headlineLarge,
-                color = Theme.colors.contentPrimary
-            )
-            Row(
-                modifier = Modifier.fillMaxSize().padding(top = Theme.dimens.space40),
-                horizontalArrangement = Arrangement.spacedBy(16.kms)
-            ) {
-                Column(modifier = Modifier.fillMaxHeight().width(350.kms)) {
-                    BpTextField(
-                        onValueChange = onRestaurantNameChange,
-                        text = state.name,
-                        label = Resources.Strings.restaurantName,
-                        modifier = Modifier.padding(top = Theme.dimens.space16),
-                        hint = "",
-                        errorMessage = state.nameError.errorMessage,
-                        isError = state.nameError.isError
-                    )
-
-                    BpTextField(
-                        onValueChange = onOwnerUserNameChange,
-                        text = state.ownerUsername,
-                        label = Resources.Strings.ownerUsername,
-                        modifier = Modifier.padding(top = Theme.dimens.space16),
-                        hint = "",
-                        errorMessage = state.userNameError.errorMessage,
-                        isError = state.userNameError.isError
-                    )
-
-                    BpTextField(
-                        onValueChange = onPhoneNumberChange,
-                        text = state.phoneNumber,
-                        label = Resources.Strings.phoneNumber,
-                        modifier = Modifier.padding(top = Theme.dimens.space16),
-                        hint = "",
-                        errorMessage = state.phoneNumberError.errorMessage,
-                        isError = state.phoneNumberError.isError
-                    )
-                    Row(
-                        modifier = Modifier.fillMaxWidth().padding(top = Theme.dimens.space16),
-                        horizontalArrangement = Arrangement.spacedBy(Theme.dimens.space8),
-                    ) {
-                        BpTextField(
-                            onValueChange = onWorkingStartHourChange,
-                            text = state.startTime,
-                            modifier = Modifier.weight(1f),
-                            label = Resources.Strings.workingHours,
-                            hint = Resources.Strings.workStartHourHint,
-                            errorMessage = state.startTimeError.errorMessage,
-                            isError = state.startTimeError.isError
-                        )
-                        BpTextField(
-                            onValueChange = onWorkingEndHourChange,
-                            text = state.endTime,
-                            modifier = Modifier.weight(1f),
-                            label = "",
-                            hint = Resources.Strings.workEndHourHint,
-                            errorMessage = state.endTimeError.errorMessage,
-                            isError = state.endTimeError.isError
-                        )
-                    }
-                    BpTextField(
-                        onValueChange = onLocationChange,
-                        text = state.location,
-                        label = Resources.Strings.location,
-                        modifier = Modifier.padding(top = Theme.dimens.space16),
-                        hint = "",
-                        errorMessage = state.locationError.errorMessage,
-                        isError = state.locationError.isError
-                    )
-                }
-                Column(
-                    modifier = Modifier.fillMaxSize(),
-                    horizontalAlignment = Alignment.End,
-                ) {
-                    GoogleMap(lat = state.lat, lng = state.lng,) { address ->
-                        onLocationChange(address)
-                    }
-                    Row(
-                        modifier = Modifier.fillMaxWidth(0.5f).padding(top = Theme.dimens.space24),
-                        horizontalArrangement = Arrangement.spacedBy(Theme.dimens.space16),
-                    ) {
-                        BpOutlinedButton(
-                            title = Resources.Strings.cancel,
-                            onClick =  onCancelClicked,
-                            modifier = Modifier.width(120.kms)
-                        )
-                        BpButton(
-                            title = Resources.Strings.create,
-                            onClick =  onCreateClicked,
-                            modifier = Modifier.width(240.kms),
-                            enabled = state.buttonEnabled
-                        )
-                    }
-                }
-            }
-        }
-    }
+//    Dialog(
+//        visible = isVisible,
+//        undecorated = true,
+//        onCloseRequest = onCancelClicked,
+//        resizable = false,
+//    ) {
+//        window.minimumSize = Dimension(1176, 664)
+//        Column(
+//            modifier
+//                .background(Theme.colors.surface)
+//                .fillMaxSize()
+//                .padding(24.kms)
+//        ) {
+//            Text(
+//                text = Resources.Strings.newRestaurant,
+//                style = Theme.typography.headlineLarge,
+//                color = Theme.colors.contentPrimary
+//            )
+//            Row(
+//                modifier = Modifier.fillMaxSize().padding(top = Theme.dimens.space40),
+//                horizontalArrangement = Arrangement.spacedBy(16.kms)
+//            ) {
+//                Column(modifier = Modifier.fillMaxHeight().width(350.kms)) {
+//                    BpTextField(
+//                        onValueChange = onRestaurantNameChange,
+//                        text = state.name,
+//                        label = Resources.Strings.restaurantName,
+//                        modifier = Modifier.padding(top = Theme.dimens.space16),
+//                        hint = "",
+//                        errorMessage = state.nameError.errorMessage,
+//                        isError = state.nameError.isError
+//                    )
+//
+//                    BpTextField(
+//                        onValueChange = onOwnerUserNameChange,
+//                        text = state.ownerUsername,
+//                        label = Resources.Strings.ownerUsername,
+//                        modifier = Modifier.padding(top = Theme.dimens.space16),
+//                        hint = "",
+//                        errorMessage = state.userNameError.errorMessage,
+//                        isError = state.userNameError.isError
+//                    )
+//
+//                    BpTextField(
+//                        onValueChange = onPhoneNumberChange,
+//                        text = state.phoneNumber,
+//                        label = Resources.Strings.phoneNumber,
+//                        modifier = Modifier.padding(top = Theme.dimens.space16),
+//                        hint = "",
+//                        errorMessage = state.phoneNumberError.errorMessage,
+//                        isError = state.phoneNumberError.isError
+//                    )
+//                    Row(
+//                        modifier = Modifier.fillMaxWidth().padding(top = Theme.dimens.space16),
+//                        horizontalArrangement = Arrangement.spacedBy(Theme.dimens.space8),
+//                    ) {
+//                        BpTextField(
+//                            onValueChange = onWorkingStartHourChange,
+//                            text = state.startTime,
+//                            modifier = Modifier.weight(1f),
+//                            label = Resources.Strings.workingHours,
+//                            hint = Resources.Strings.workStartHourHint,
+//                            errorMessage = state.startTimeError.errorMessage,
+//                            isError = state.startTimeError.isError
+//                        )
+//                        BpTextField(
+//                            onValueChange = onWorkingEndHourChange,
+//                            text = state.endTime,
+//                            modifier = Modifier.weight(1f),
+//                            label = "",
+//                            hint = Resources.Strings.workEndHourHint,
+//                            errorMessage = state.endTimeError.errorMessage,
+//                            isError = state.endTimeError.isError
+//                        )
+//                    }
+//                    BpTextField(
+//                        onValueChange = onLocationChange,
+//                        text = state.location,
+//                        label = Resources.Strings.location,
+//                        modifier = Modifier.padding(top = Theme.dimens.space16),
+//                        hint = "",
+//                        errorMessage = state.locationError.errorMessage,
+//                        isError = state.locationError.isError
+//                    )
+//                }
+//                Column(
+//                    modifier = Modifier.fillMaxSize(),
+//                    horizontalAlignment = Alignment.End,
+//                ) {
+//                    GoogleMap(lat = state.lat, lng = state.lng,) { address ->
+//                        onLocationChange(address)
+//                    }
+//                    Row(
+//                        modifier = Modifier.fillMaxWidth(0.5f).padding(top = Theme.dimens.space24),
+//                        horizontalArrangement = Arrangement.spacedBy(Theme.dimens.space16),
+//                    ) {
+//                        BpOutlinedButton(
+//                            title = Resources.Strings.cancel,
+//                            onClick =  onCancelClicked,
+//                            modifier = Modifier.width(120.kms)
+//                        )
+//                        BpButton(
+//                            title = Resources.Strings.create,
+//                            onClick =  onCreateClicked,
+//                            modifier = Modifier.width(240.kms),
+//                            enabled = state.buttonEnabled
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    }
 }
 

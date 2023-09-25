@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.DpOffset
@@ -27,14 +27,14 @@ import com.beepbeep.designSystem.ui.composable.*
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.thechance.common.presentation.base.BaseScreen
 import org.thechance.common.presentation.composables.*
-import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
+//import org.thechance.common.presentation.composables.modifier.cursorHoverIconHand
 import org.thechance.common.presentation.composables.modifier.noRipple
 import org.thechance.common.presentation.composables.table.BpPager
 import org.thechance.common.presentation.composables.table.BpTable
 import org.thechance.common.presentation.composables.table.TotalItemsIndicator
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
-import java.awt.Dimension
+//import java.awt.Dimension
 
 class RestaurantScreen :
     BaseScreen<RestaurantScreenModel, RestaurantUIEffect, RestaurantUiState, RestaurantInteractionListener>() {
@@ -97,7 +97,6 @@ class RestaurantScreen :
                 onValueChange = listener::onSearchChange,
                 text = state.searchQuery,
                 keyboardType = KeyboardType.Text,
-                trailingPainter = painterResource(Resources.Drawable.search)
             )
 
             RestaurantFilterRow(state, listener)
@@ -108,19 +107,16 @@ class RestaurantScreen :
                 title = Resources.Strings.export,
                 onClick = { /* TODO: Export */ },
                 textPadding = PaddingValues(horizontal = 24.kms),
-                modifier = Modifier.cursorHoverIconHand()
             )
             BpOutlinedButton(
                 title = Resources.Strings.addCuisine,
                 onClick = listener::onClickAddCuisine,
                 textPadding = PaddingValues(horizontal = 24.kms),
-                modifier = Modifier.cursorHoverIconHand()
             )
             BpButton(
                 title = Resources.Strings.newRestaurant,
                 onClick = listener::onAddNewRestaurantClicked,
                 textPadding = PaddingValues(horizontal = 24.kms),
-                modifier = Modifier.cursorHoverIconHand()
             )
         }
     }
@@ -215,20 +211,20 @@ class RestaurantScreen :
             modifier = Modifier.weight(otherColumnsWeight),
             maxLines = 1,
         )
-        RatingBar(
-            rating = restaurant.rating,
-            selectedIcon = painterResource(Resources.Drawable.starFilled),
-            halfSelectedIcon = painterResource(Resources.Drawable.starHalfFilled),
-            modifier = Modifier.weight(otherColumnsWeight),
-            iconsSize = 16.kms
-        )
-        PriceBar(
-            priceLevel = restaurant.priceLevel,
-            icon = painterResource(Resources.Drawable.dollarSign),
-            iconColor = Theme.colors.success,
-            modifier = Modifier.weight(otherColumnsWeight),
-            iconsSize = 16.kms
-        )
+//        RatingBar(
+//            rating = restaurant.rating,
+//            selectedIcon = painterResource(Resources.Drawable.starFilled),
+//            halfSelectedIcon = painterResource(Resources.Drawable.starHalfFilled),
+//            modifier = Modifier.weight(otherColumnsWeight),
+//            iconsSize = 16.kms
+//        )
+//        PriceBar(
+//            priceLevel = restaurant.priceLevel,
+//            icon = painterResource(Resources.Drawable.dollarSign),
+//            iconColor = Theme.colors.success,
+//            modifier = Modifier.weight(otherColumnsWeight),
+//            iconsSize = 16.kms
+//        )
 
         Text(
             restaurant.workingHours,
@@ -238,12 +234,12 @@ class RestaurantScreen :
             maxLines = 1,
         )
         Box(modifier = Modifier.weight(firstAndLastColumnWeight)) {
-            Image(
-                painter = painterResource(Resources.Drawable.dots),
-                contentDescription = null,
-                modifier = Modifier.noRipple { onClickEditRestaurant(restaurant.name) },
-                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
-            )
+//            Image(
+//                painter = painterResource(Resources.Drawable.dots),
+//                contentDescription = null,
+//                modifier = Modifier.noRipple { onClickEditRestaurant(restaurant.name) },
+//                colorFilter = ColorFilter.tint(color = Theme.colors.contentPrimary)
+//            )
             EditRestaurantDropdownMenu(
                 restaurant = restaurant,
                 onClickEdit = onClickEditRestaurantMenuItem,
@@ -257,18 +253,18 @@ class RestaurantScreen :
     @Composable
     fun RestaurantFilterRow(state: RestaurantUiState, listener: RestaurantInteractionListener) {
         Column {
-            BpIconButton(
-                content = {
-                    Text(
-                        text = Resources.Strings.filter,
-                        style = Theme.typography.titleMedium
-                            .copy(color = Theme.colors.contentTertiary),
-                    )
-                },
-                onClick = listener::onClickDropDownMenu,
-                painter = painterResource(Resources.Drawable.filter),
-                modifier = Modifier.cursorHoverIconHand()
-            )
+//            BpIconButton(
+//                content = {
+//                    Text(
+//                        text = Resources.Strings.filter,
+//                        style = Theme.typography.titleMedium
+//                            .copy(color = Theme.colors.contentTertiary),
+//                    )
+//                },
+//                onClick = listener::onClickDropDownMenu,
+//                painter = painterResource(Resources.Drawable.filter),
+//                modifier = Modifier.cursorHoverIconHand()
+//            )
             RestaurantFilterDropdownMenu(
                 onClickRating = listener::onClickFilterRatingBar,
                 onClickPrice = listener::onClickFilterPriceBar,
@@ -319,40 +315,40 @@ class RestaurantScreen :
                         color = Theme.colors.contentPrimary,
                         modifier = Modifier.padding(start = 24.kms, top = 16.kms)
                     )
-                    EditableRatingBar(
-                        rating = rating,
-                        count = 5,
-                        selectedIcon = painterResource(Resources.Drawable.starFilled),
-                        halfSelectedIcon = painterResource(Resources.Drawable.starHalfFilled),
-                        notSelectedIcon = painterResource(Resources.Drawable.starOutlined),
-                        iconsSize = 24.kms,
-                        iconsPadding = PaddingValues(horizontal = 8.kms),
-                        modifier = Modifier.fillMaxWidth()
-                            .padding(top = 16.kms)
-                            .background(color = Theme.colors.background)
-                            .padding(horizontal = 24.kms, vertical = 16.kms),
-                        onClick = { onClickRating(it) }
-                    )
+//                    EditableRatingBar(
+//                        rating = rating,
+//                        count = 5,
+//                        selectedIcon = painterResource(Resources.Drawable.starFilled),
+//                        halfSelectedIcon = painterResource(Resources.Drawable.starHalfFilled),
+//                        notSelectedIcon = painterResource(Resources.Drawable.starOutlined),
+//                        iconsSize = 24.kms,
+//                        iconsPadding = PaddingValues(horizontal = 8.kms),
+//                        modifier = Modifier.fillMaxWidth()
+//                            .padding(top = 16.kms)
+//                            .background(color = Theme.colors.background)
+//                            .padding(horizontal = 24.kms, vertical = 16.kms),
+//                        onClick = { onClickRating(it) }
+//                    )
                     Text(
                         text = Resources.Strings.priceLevel,
                         style = Theme.typography.title,
                         color = Theme.colors.contentPrimary,
                         modifier = Modifier.padding(start = 24.kms, top = 32.kms)
                     )
-                    EditablePriceBar(
-                        priceLevel = priceLevel,
-                        count = 3,
-                        icon = painterResource(Resources.Drawable.dollarSign),
-                        enabledIconsColor = Theme.colors.success,
-                        disabledIconsColor = Theme.colors.disable,
-                        iconsPadding = PaddingValues(horizontal = 8.kms),
-                        iconsSize = 16.kms,
-                        modifier = Modifier.fillMaxWidth()
-                            .padding(top = 16.kms)
-                            .background(color = Theme.colors.background)
-                            .padding(horizontal = 24.kms, vertical = 16.kms),
-                        onClick = { onClickPrice(it) }
-                    )
+//                    EditablePriceBar(
+//                        priceLevel = priceLevel,
+//                        count = 3,
+//                        icon = painterResource(Resources.Drawable.dollarSign),
+//                        enabledIconsColor = Theme.colors.success,
+//                        disabledIconsColor = Theme.colors.disable,
+//                        iconsPadding = PaddingValues(horizontal = 8.kms),
+//                        iconsSize = 16.kms,
+//                        modifier = Modifier.fillMaxWidth()
+//                            .padding(top = 16.kms)
+//                            .background(color = Theme.colors.background)
+//                            .padding(horizontal = 24.kms, vertical = 16.kms),
+//                        onClick = { onClickPrice(it) }
+//                    )
                 }
             }
         }
@@ -365,79 +361,79 @@ class RestaurantScreen :
         cuisineName: String,
         cuisines: List<String>,
     ) {
-        Dialog(
-            visible = isVisible,
-            transparent = true,
-            undecorated = true,
-            resizable = false,
-            onCloseRequest = listener::onCloseAddCuisineDialog,
-        ) {
-            window.minimumSize = Dimension(400, 405)
-            Column(
-                modifier = Modifier
-                    .padding(top = 16.kms, start = 16.kms, end = 16.kms)
-                    .shadow(elevation = 5.kms)
-                    .background(Theme.colors.surface, RoundedCornerShape(8.kms))
-            ) {
-                Text(
-                    text = Resources.Strings.cuisines,
-                    style = Theme.typography.headline,
-                    color = Theme.colors.contentPrimary,
-                    modifier = Modifier.padding(top = 24.kms, start = 24.kms)
-                )
-                BpSimpleTextField(
-                    text = cuisineName,
-                    hint = Resources.Strings.cuisines,
-                    onValueChange = listener::onChangeCuisineName,
-                    modifier = Modifier.padding(top = 24.kms, start = 24.kms, end = 24.kms)
-                )
-                LazyColumn(
-                    modifier = Modifier.padding(top = 16.kms).background(Theme.colors.background)
-                        .fillMaxWidth().heightIn(min = 64.kms, max = 256.kms)
-                ) {
-                    items(cuisines) { cuisineName ->
-                        Row(
-                            modifier = Modifier.padding(horizontal = 24.kms, vertical = 16.kms),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            Text(
-                                cuisineName,
-                                style = Theme.typography.caption,
-                                color = Theme.colors.contentPrimary,
-                            )
-                            Spacer(modifier = Modifier.weight(1f))
-
-                            Icon(
-                                painter = painterResource(Resources.Drawable.trashBin),
-                                contentDescription = null,
-                                tint = Theme.colors.primary,
-                                modifier = Modifier
-                                    .noRipple { listener.onClickDeleteCuisine(cuisineName) }
-                            )
-                        }
-                    }
-                }
-                Row(
-                    Modifier.fillMaxWidth().padding(24.kms),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-
-                    BpTransparentButton(
-                        title = Resources.Strings.cancel,
-                        onClick = listener::onCloseAddCuisineDialog,
-                        modifier = Modifier.padding(end = 16.kms)
-                            .height(32.dp)
-                            .weight(1f)
-                    )
-                    BpOutlinedButton(
-                        title = Resources.Strings.add,
-                        onClick = listener::onClickCreateCuisine,
-                        modifier = Modifier.height(32.dp).weight(3f),
-                        textPadding = PaddingValues(0.dp)
-                    )
-                }
-            }
-        }
+//        Dialog(
+//            visible = isVisible,
+//            transparent = true,
+//            undecorated = true,
+//            resizable = false,
+//            onCloseRequest = listener::onCloseAddCuisineDialog,
+//        ) {
+//            window.minimumSize = Dimension(400, 405)
+//            Column(
+//                modifier = Modifier
+//                    .padding(top = 16.kms, start = 16.kms, end = 16.kms)
+//                    .shadow(elevation = 5.kms)
+//                    .background(Theme.colors.surface, RoundedCornerShape(8.kms))
+//            ) {
+//                Text(
+//                    text = Resources.Strings.cuisines,
+//                    style = Theme.typography.headline,
+//                    color = Theme.colors.contentPrimary,
+//                    modifier = Modifier.padding(top = 24.kms, start = 24.kms)
+//                )
+//                BpSimpleTextField(
+//                    text = cuisineName,
+//                    hint = Resources.Strings.cuisines,
+//                    onValueChange = listener::onChangeCuisineName,
+//                    modifier = Modifier.padding(top = 24.kms, start = 24.kms, end = 24.kms)
+//                )
+//                LazyColumn(
+//                    modifier = Modifier.padding(top = 16.kms).background(Theme.colors.background)
+//                        .fillMaxWidth().heightIn(min = 64.kms, max = 256.kms)
+//                ) {
+//                    items(cuisines) { cuisineName ->
+//                        Row(
+//                            modifier = Modifier.padding(horizontal = 24.kms, vertical = 16.kms),
+//                            verticalAlignment = Alignment.CenterVertically
+//                        ) {
+//                            Text(
+//                                cuisineName,
+//                                style = Theme.typography.caption,
+//                                color = Theme.colors.contentPrimary,
+//                            )
+//                            Spacer(modifier = Modifier.weight(1f))
+//
+//                           Icon(
+//                               painter = painterResource(Resources.Drawable.trashBin),
+//                               contentDescription = null,
+//                               tint = Theme.colors.primary,
+//                              modifier = Modifier
+//                                    .noRipple { listener.onClickDeleteCuisine(cuisineName) }
+//                         )
+//                        }
+//                    }
+//                }
+//                Row(
+//                    Modifier.fillMaxWidth().padding(24.kms),
+//                    horizontalArrangement = Arrangement.Center
+//                ) {
+//
+//                    BpTransparentButton(
+//                        title = Resources.Strings.cancel,
+//                        onClick = listener::onCloseAddCuisineDialog,
+//                        modifier = Modifier.padding(end = 16.kms)
+//                            .height(32.dp)
+//                            .weight(1f)
+//                    )
+//                    BpOutlinedButton(
+//                        title = Resources.Strings.add,
+//                        onClick = listener::onClickCreateCuisine,
+//                        modifier = Modifier.height(32.dp).weight(3f),
+//                        textPadding = PaddingValues(0.dp)
+//                    )
+//                }
+//            }
+//        }
     }
 
     @Composable

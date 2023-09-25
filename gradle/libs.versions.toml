@@ -1,6 +1,6 @@
 [versions]
 androidGradlePlugin = "7.4.2"
-kotlin = "1.9.0"
+kotlin = "1.9.10"
 
 compileSdk = "34"
 minSdk = "24"

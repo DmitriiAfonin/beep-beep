@@ -5,8 +5,35 @@ import io.ktor.client.call.body
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.statement.HttpResponse
 import org.thechance.common.data.remote.model.ServerResponse
-import org.thechance.common.domain.util.*
-import java.net.ConnectException
+import org.thechance.common.domain.util.CuisineNameAlreadyExistedException
+import org.thechance.common.domain.util.InvalidCarTypeException
+import org.thechance.common.domain.util.InvalidPasswordException
+import org.thechance.common.domain.util.InvalidTaxiColorException
+import org.thechance.common.domain.util.InvalidTaxiIdException
+import org.thechance.common.domain.util.InvalidTaxiPlateException
+import org.thechance.common.domain.util.InvalidTaxiRequestParameterException
+import org.thechance.common.domain.util.InvalidUserNameException
+import org.thechance.common.domain.util.InvalidUserRequestParameterException
+import org.thechance.common.domain.util.PasswordCannotBeBlankException
+import org.thechance.common.domain.util.RestaurantClosedException
+import org.thechance.common.domain.util.RestaurantErrorAddException
+import org.thechance.common.domain.util.RestaurantInvalidAddressException
+import org.thechance.common.domain.util.RestaurantInvalidDescriptionException
+import org.thechance.common.domain.util.RestaurantInvalidIdException
+import org.thechance.common.domain.util.RestaurantInvalidLocationException
+import org.thechance.common.domain.util.RestaurantInvalidNameException
+import org.thechance.common.domain.util.RestaurantInvalidPageException
+import org.thechance.common.domain.util.RestaurantInvalidPageLimitException
+import org.thechance.common.domain.util.RestaurantInvalidPhoneException
+import org.thechance.common.domain.util.RestaurantInvalidRequestParameterException
+import org.thechance.common.domain.util.RestaurantInvalidTimeException
+import org.thechance.common.domain.util.RestaurantInvalidUpdateParameterException
+import org.thechance.common.domain.util.RestaurantNotFoundException
+import org.thechance.common.domain.util.SeatOutOfRangeException
+import org.thechance.common.domain.util.TaxiAlreadyExistsException
+import org.thechance.common.domain.util.TaxiNotFoundException
+import org.thechance.common.domain.util.UnknownErrorException
+import org.thechance.common.domain.util.UsernameCannotBeBlankException
 
 abstract class BaseGateway {
 
@@ -20,10 +47,10 @@ abstract class BaseGateway {
             val errorMessages = e.response.body<ServerResponse<String>>().status?.errorMessages
             errorMessages?.let(::throwMatchingException)
             throw UnknownErrorException(e.message)
-        } catch (e: ConnectException) {
-            throw NoInternetException()
-        }catch(e: ConnectException){
-            throw NoInternetException()
+//        } catch (e: ConnectException) {
+//            throw NoInternetException()
+//        }catch(e: ConnectException){
+//            throw NoInternetException()
         } catch (e: Exception) {
             throw UnknownErrorException(e.message.toString())
         }
@@ -34,7 +61,7 @@ abstract class BaseGateway {
             errorMessages.containsErrors(WRONG_PASSWORD) ->
                 throw InvalidPasswordException(errorMessages.getOrEmpty(WRONG_PASSWORD))
 
-            errorMessages.containsErrors(INVALID_USERNAME)->
+            errorMessages.containsErrors(INVALID_USERNAME) ->
                 throw InvalidUserNameException(errorMessages.getOrEmpty(INVALID_USERNAME))
 
             errorMessages.containsErrors(USER_NOT_EXIST) ->
@@ -59,7 +86,11 @@ abstract class BaseGateway {
                 throw TaxiAlreadyExistsException(errorMessages.getOrEmpty(ALREADY_TAXI_EXIST))
 
             errorMessages.containsErrors(INVALID_TAXI_REQUEST_PARAMETER) ->
-                throw InvalidTaxiRequestParameterException(errorMessages.getOrEmpty(INVALID_TAXI_REQUEST_PARAMETER))
+                throw InvalidTaxiRequestParameterException(
+                    errorMessages.getOrEmpty(
+                        INVALID_TAXI_REQUEST_PARAMETER
+                    )
+                )
 
             errorMessages.containsErrors(TAXI_NOT_FOUND) ->
                 throw TaxiNotFoundException(errorMessages.getOrEmpty(TAXI_NOT_FOUND))
@@ -68,34 +99,74 @@ abstract class BaseGateway {
                 throw RestaurantInvalidIdException(errorMessages.getOrEmpty(RESTAURANT_INVALID_ID))
 
             errorMessages.containsErrors(RESTAURANT_INVALID_NAME) ->
-                throw RestaurantInvalidNameException(errorMessages.getOrEmpty(RESTAURANT_INVALID_NAME))
+                throw RestaurantInvalidNameException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_NAME
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_LOCATION) ->
-                throw RestaurantInvalidLocationException(errorMessages.getOrEmpty(RESTAURANT_INVALID_LOCATION))
+                throw RestaurantInvalidLocationException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_LOCATION
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_DESCRIPTION) ->
-                throw RestaurantInvalidDescriptionException(errorMessages.getOrEmpty(RESTAURANT_INVALID_DESCRIPTION))
+                throw RestaurantInvalidDescriptionException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_DESCRIPTION
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_PHONE) ->
-                throw RestaurantInvalidPhoneException(errorMessages.getOrEmpty(RESTAURANT_INVALID_PHONE))
+                throw RestaurantInvalidPhoneException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_PHONE
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_TIME) ->
-                throw RestaurantInvalidTimeException(errorMessages.getOrEmpty(RESTAURANT_INVALID_TIME))
+                throw RestaurantInvalidTimeException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_TIME
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_PAGE) ->
-                throw RestaurantInvalidPageException(errorMessages.getOrEmpty(RESTAURANT_INVALID_PAGE))
+                throw RestaurantInvalidPageException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_PAGE
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_PAGE_LIMIT) ->
-                throw RestaurantInvalidPageLimitException(errorMessages.getOrEmpty(RESTAURANT_INVALID_PAGE_LIMIT))
+                throw RestaurantInvalidPageLimitException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_PAGE_LIMIT
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_UPDATE_PARAMETER) ->
-                throw RestaurantInvalidUpdateParameterException(errorMessages.getOrEmpty(RESTAURANT_INVALID_UPDATE_PARAMETER))
+                throw RestaurantInvalidUpdateParameterException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_UPDATE_PARAMETER
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_ADDRESS) ->
-                throw RestaurantInvalidAddressException(errorMessages.getOrEmpty(RESTAURANT_INVALID_ADDRESS))
+                throw RestaurantInvalidAddressException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_ADDRESS
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_INVALID_REQUEST_PARAMETER) ->
-                throw RestaurantInvalidRequestParameterException(errorMessages.getOrEmpty(RESTAURANT_INVALID_REQUEST_PARAMETER))
+                throw RestaurantInvalidRequestParameterException(
+                    errorMessages.getOrEmpty(
+                        RESTAURANT_INVALID_REQUEST_PARAMETER
+                    )
+                )
 
             errorMessages.containsErrors(RESTAURANT_NOT_FOUND) ->
                 throw RestaurantNotFoundException(errorMessages.getOrEmpty(RESTAURANT_NOT_FOUND))
@@ -107,16 +178,32 @@ abstract class BaseGateway {
                 throw RestaurantClosedException(errorMessages.getOrEmpty(RESTAURANT_CLOSED))
 
             errorMessages.containsErrors(CUISINE_NAME_ALREADY_EXISTED) ->
-                throw CuisineNameAlreadyExistedException(errorMessages.getOrEmpty(CUISINE_NAME_ALREADY_EXISTED))
+                throw CuisineNameAlreadyExistedException(
+                    errorMessages.getOrEmpty(
+                        CUISINE_NAME_ALREADY_EXISTED
+                    )
+                )
 
-            errorMessages.containsErrors(USERNAME_CANNOT_BE_BLANK)->
-                throw UsernameCannotBeBlankException(errorMessages.getOrEmpty(USERNAME_CANNOT_BE_BLANK))
+            errorMessages.containsErrors(USERNAME_CANNOT_BE_BLANK) ->
+                throw UsernameCannotBeBlankException(
+                    errorMessages.getOrEmpty(
+                        USERNAME_CANNOT_BE_BLANK
+                    )
+                )
 
-            errorMessages.containsErrors(PASSWORD_CANNOT_BE_BLANK)->
-                throw PasswordCannotBeBlankException(errorMessages.getOrEmpty(PASSWORD_CANNOT_BE_BLANK))
+            errorMessages.containsErrors(PASSWORD_CANNOT_BE_BLANK) ->
+                throw PasswordCannotBeBlankException(
+                    errorMessages.getOrEmpty(
+                        PASSWORD_CANNOT_BE_BLANK
+                    )
+                )
 
-            errorMessages.containsErrors(INVALID_USER_REQUEST_PARAMETER)->
-                throw InvalidUserRequestParameterException(errorMessages.getOrEmpty(INVALID_USER_REQUEST_PARAMETER))
+            errorMessages.containsErrors(INVALID_USER_REQUEST_PARAMETER) ->
+                throw InvalidUserRequestParameterException(
+                    errorMessages.getOrEmpty(
+                        INVALID_USER_REQUEST_PARAMETER
+                    )
+                )
         }
     }
 

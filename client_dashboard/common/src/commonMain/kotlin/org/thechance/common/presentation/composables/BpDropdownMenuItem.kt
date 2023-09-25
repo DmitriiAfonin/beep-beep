@@ -15,7 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.beepbeep.designSystem.ui.theme.Theme
@@ -37,16 +37,16 @@ fun BpDropdownMenuItem(
             text = {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     if (leadingIconPath != null)
-                        Image(
-                            painter = painterResource(leadingIconPath),
-                            contentDescription = null,
-                            alignment = Alignment.CenterEnd,
-                            colorFilter = ColorFilter.tint(
-                                if (isSecondary) Theme.colors.contentSecondary
-                                else Theme.colors.contentPrimary
-                            ),
-                            modifier = Modifier.size(16.dp)
-                        )
+//                        Image(
+//                            painter = painterResource(leadingIconPath),
+//                            contentDescription = null,
+//                            alignment = Alignment.CenterEnd,
+//                            colorFilter = ColorFilter.tint(
+//                                if (isSecondary) Theme.colors.contentSecondary
+//                                else Theme.colors.contentPrimary
+//                            ),
+//                            modifier = Modifier.size(16.dp)
+//                        )
                     Spacer(Modifier.width(8.kms))
                     Text(
                         text = text,

@@ -1,8 +1,8 @@
 package org.thechance.common.data.remote.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
 
 data class PaginationResponse<T>(
-    @SerializedName("items") val items: List<T>,
-    @SerializedName("total") val total: Int,
+    @SerialName("items") val items: List<T>,
+    @SerialName("total") val total: Int,
 )

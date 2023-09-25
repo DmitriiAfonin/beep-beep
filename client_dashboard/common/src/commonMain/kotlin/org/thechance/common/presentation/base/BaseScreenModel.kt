@@ -51,7 +51,7 @@ abstract class BaseScreenModel<S, E>(initialState: S) : StateScreenModel<S>(init
         onError: (ErrorState) -> Unit,
         callee: suspend () -> T,
     ): Job {
-        return inScope.launch(Dispatchers.IO) {
+        return inScope.launch {
             try {
                 callee()
             } catch (exception: TaxiException) {
@@ -171,7 +171,7 @@ abstract class BaseScreenModel<S, E>(initialState: S) : StateScreenModel<S>(init
     }
 
     protected fun sendNewEffect(newEffect: E) {
-        coroutineScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             _effect.emit(newEffect)
         }
     }
@@ -191,7 +191,7 @@ abstract class BaseScreenModel<S, E>(initialState: S) : StateScreenModel<S>(init
     }
 
     protected fun launchDelayed(duration: Long, block: suspend CoroutineScope.() -> Unit): Job {
-        return coroutineScope.launch(Dispatchers.IO) {
+        return coroutineScope.launch {
             delay(duration)
             block()
         }

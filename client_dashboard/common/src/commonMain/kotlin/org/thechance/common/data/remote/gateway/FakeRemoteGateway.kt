@@ -1,12 +1,6 @@
 package org.thechance.common.data.remote.gateway
 
 
-import org.apache.pdfbox.pdmodel.PDDocument
-import org.apache.pdfbox.pdmodel.PDPage
-import org.apache.pdfbox.pdmodel.PDPageContentStream
-import org.apache.pdfbox.pdmodel.common.PDRectangle
-import org.apache.pdfbox.pdmodel.font.PDType1Font
-import org.thechance.common.data.local.gateway.LocalGateway
 import org.thechance.common.data.remote.mapper.toEntity
 import org.thechance.common.data.remote.model.OrdersRevenueDto
 import org.thechance.common.data.remote.model.RestaurantDto
@@ -17,12 +11,12 @@ import org.thechance.common.domain.entity.RevenueShare
 import org.thechance.common.domain.entity.TotalRevenueShare
 import org.thechance.common.domain.getway.IRemoteGateway
 import org.thechance.common.domain.util.RevenueShareDate
-import java.io.File
-import java.text.SimpleDateFormat
-import java.util.Date
+//import java.io.File
+//import java.text.SimpleDateFormat
+//import java.util.Date
 
 class FakeRemoteGateway(
-    private val localGateway: LocalGateway,
+//    private val localGateway: LocalGateway,
 ) : IRemoteGateway {
 
     private val restaurants = mutableListOf<RestaurantDto>()
@@ -245,100 +239,100 @@ class FakeRemoteGateway(
 //            )
 //        )
         restaurants.addAll(
-                listOf(
-                        RestaurantDto(
-                                id = "8c90c4c6-1e69-47f3-aa59-2edcd6f0057b",
-                                name = "Mujtaba Restaurant",
-                                username = "mujtaba",
-                                phone = "0532465722",
-                                rating = 0.4,
-                                priceLevel = 1,
-                                openingTime = "06:30",
-                                closingTime = "22:30",
-                        ),
-                        RestaurantDto(
-                                id = "6e21s4f-aw32-fs3e-fe43-aw56g4yr324",
-                                name = "Karrar Restaurant",
-                                username = "karrar",
-                                phone = "0535232154",
-                                rating = 3.5,
-                                priceLevel = 1,
-                                openingTime = "12:00",
-                                closingTime = "23:00",
-                        ),
-                        RestaurantDto(
-                                id = "7a33sax-aw32-fs3e-12df-42ad6x352zse",
-                                name = "Saif Restaurant",
-                                username = "saif",
-                                phone = "0554627893",
-                                rating = 4.0,
-                                priceLevel = 3,
-                                openingTime = "12:00",
-                                closingTime = "23:00",
-                        ),
-                        RestaurantDto(
-                                id = "7y1z47c-s2df-76de-dwe2-42ad6x352zse",
-                                name = "Nada Restaurant",
-                                username = "nada",
-                                phone = "0524242766",
-                                rating = 3.4,
-                                priceLevel = 2,
-                                openingTime = "12:00",
-                                closingTime = "23:00",
-                        ),
-                        RestaurantDto(
-                                id = "3e1f5d4a-8317-4f13-aa89-2c094652e6a3",
-                                name = "Asia Restaurant",
-                                username = "asia",
-                                phone = "0528242165",
-                                rating = 2.9,
-                                priceLevel = 1,
-                                openingTime = "12:00",
-                                closingTime = "23:00",
-                        ),
-                        RestaurantDto(
-                                id = "7a1bfe39-4b2c-4f76-bde0-82da2eaf9e99",
-                                name = "Kamel Restaurant",
-                                username = "kamel",
-                                phone = "0528242235",
-                                rating = 4.9,
-                                priceLevel = 3,
-                                openingTime = "12:00",
-                                closingTime = "23:00",
-                        ),
-                )
+            listOf(
+                RestaurantDto(
+                    id = "8c90c4c6-1e69-47f3-aa59-2edcd6f0057b",
+                    name = "Mujtaba Restaurant",
+                    username = "mujtaba",
+                    phone = "0532465722",
+                    rating = 0.4,
+                    priceLevel = 1,
+                    openingTime = "06:30",
+                    closingTime = "22:30",
+                ),
+                RestaurantDto(
+                    id = "6e21s4f-aw32-fs3e-fe43-aw56g4yr324",
+                    name = "Karrar Restaurant",
+                    username = "karrar",
+                    phone = "0535232154",
+                    rating = 3.5,
+                    priceLevel = 1,
+                    openingTime = "12:00",
+                    closingTime = "23:00",
+                ),
+                RestaurantDto(
+                    id = "7a33sax-aw32-fs3e-12df-42ad6x352zse",
+                    name = "Saif Restaurant",
+                    username = "saif",
+                    phone = "0554627893",
+                    rating = 4.0,
+                    priceLevel = 3,
+                    openingTime = "12:00",
+                    closingTime = "23:00",
+                ),
+                RestaurantDto(
+                    id = "7y1z47c-s2df-76de-dwe2-42ad6x352zse",
+                    name = "Nada Restaurant",
+                    username = "nada",
+                    phone = "0524242766",
+                    rating = 3.4,
+                    priceLevel = 2,
+                    openingTime = "12:00",
+                    closingTime = "23:00",
+                ),
+                RestaurantDto(
+                    id = "3e1f5d4a-8317-4f13-aa89-2c094652e6a3",
+                    name = "Asia Restaurant",
+                    username = "asia",
+                    phone = "0528242165",
+                    rating = 2.9,
+                    priceLevel = 1,
+                    openingTime = "12:00",
+                    closingTime = "23:00",
+                ),
+                RestaurantDto(
+                    id = "7a1bfe39-4b2c-4f76-bde0-82da2eaf9e99",
+                    name = "Kamel Restaurant",
+                    username = "kamel",
+                    phone = "0528242235",
+                    rating = 4.9,
+                    priceLevel = 3,
+                    openingTime = "12:00",
+                    closingTime = "23:00",
+                ),
+            )
         )
         cuisines.addAll(
-                listOf(
-                        "Angolan cuisine",
-                        "Cameroonian cuisine",
-                        "Chadian cuisine",
-                        "Congolese cuisine",
-                        "Centrafrican cuisine",
-                        "Equatorial Guinea cuisine",
-                        "Gabonese cuisine",
-                        "Santomean cuisine",
-                        "Burundian cuisine",
-                        "Djiboutian cuisine",
-                        "Eritrean cuisine",
-                        "Ethiopian cuisine",
-                        "Kenyan cuisine",
-                        "Maasai cuisine",
-                        "Rwandan cuisine",
-                        "Somali cuisine",
-                        "South Sudanese cuisine",
-                        "Tanzanian cuisine",
-                        "Zanzibari cuisine",
-                        "Ugandan cuisine",
-                )
+            listOf(
+                "Angolan cuisine",
+                "Cameroonian cuisine",
+                "Chadian cuisine",
+                "Congolese cuisine",
+                "Centrafrican cuisine",
+                "Equatorial Guinea cuisine",
+                "Gabonese cuisine",
+                "Santomean cuisine",
+                "Burundian cuisine",
+                "Djiboutian cuisine",
+                "Eritrean cuisine",
+                "Ethiopian cuisine",
+                "Kenyan cuisine",
+                "Maasai cuisine",
+                "Rwandan cuisine",
+                "Somali cuisine",
+                "South Sudanese cuisine",
+                "Tanzanian cuisine",
+                "Zanzibari cuisine",
+                "Ugandan cuisine",
+            )
         )
     }
 
     override suspend fun getUserData() = "asia"
 
     override suspend fun getPdfTaxiReport() {
-        val taxiReportFile = createTaxiPDFReport()
-        localGateway.saveTaxiReport(taxiReportFile)
+//        val taxiReportFile = createTaxiPDFReport()
+//        localGateway.saveTaxiReport(taxiReportFile)
     }
 
     override suspend fun loginUser(username: String, password: String): Pair<String, String> {
@@ -348,161 +342,163 @@ class FakeRemoteGateway(
     override suspend fun getRevenueShare(revenueShareDate: RevenueShareDate): TotalRevenueShare {
         return when (revenueShareDate.value) {
             0 -> TotalRevenueShare(
-                    revenueData = listOf(
-                            50.0,
-                            30.6,
-                            77.0,
-                            69.6,
-                            50.0,
-                            30.6,
-                            80.0,
-                            50.6,
-                            44.0,
-                            100.6,
-                            10.0,
-                            50.0
-                    ),
-                    earningData = listOf(
-                            0.6,
-                            10.6,
-                            80.0,
-                            50.6,
-                            44.0,
-                            100.6,
-                            10.0,
-                            50.0,
-                            30.6,
-                            77.0,
-                            69.6,
-                            50.0
-                    ),
-                    revenueShare = listOf(
-                            "Jan",
-                            "Feb",
-                            "Mar",
-                            "Apr",
-                            "May",
-                            "Jun",
-                            "Jul",
-                            "Aug",
-                            "Sep",
-                            "Oct",
-                            "Nov",
-                            "Dec"
-                    )
+                revenueData = listOf(
+                    50.0,
+                    30.6,
+                    77.0,
+                    69.6,
+                    50.0,
+                    30.6,
+                    80.0,
+                    50.6,
+                    44.0,
+                    100.6,
+                    10.0,
+                    50.0
+                ),
+                earningData = listOf(
+                    0.6,
+                    10.6,
+                    80.0,
+                    50.6,
+                    44.0,
+                    100.6,
+                    10.0,
+                    50.0,
+                    30.6,
+                    77.0,
+                    69.6,
+                    50.0
+                ),
+                revenueShare = listOf(
+                    "Jan",
+                    "Feb",
+                    "Mar",
+                    "Apr",
+                    "May",
+                    "Jun",
+                    "Jul",
+                    "Aug",
+                    "Sep",
+                    "Oct",
+                    "Nov",
+                    "Dec"
+                )
             )
 
             1 -> TotalRevenueShare(
-                    revenueData = listOf(
-                            99.6,
-                            15.0,
-                            30.6,
-                            14.0,
-                            100.6,
-                            10.0,
-                            50.0,
-                            63.3,
-                            12.3,
-                            22.2,
-                            12.4
-                    ),
-                    earningData = listOf(
-                            10.0,
-                            50.0,
-                            0.6,
-                            10.6,
-                            80.0,
-                            77.0,
-                            69.6,
-                            0.0,
-                            1.3,
-                            22.2,
-                            12.4
-                    ),
-                    revenueShare = listOf(
-                            "13 Wed",
-                            "14 Thu",
-                            "15 Fri",
-                            "16 Sat",
-                            "17 Sun",
-                            "18 Mon",
-                            "19 Tue",
-                            "20 Wed",
-                            "21 Thu",
-                            "22 Fri",
-                            "23 Sat"
-                    )
+                revenueData = listOf(
+                    99.6,
+                    15.0,
+                    30.6,
+                    14.0,
+                    100.6,
+                    10.0,
+                    50.0,
+                    63.3,
+                    12.3,
+                    22.2,
+                    12.4
+                ),
+                earningData = listOf(
+                    10.0,
+                    50.0,
+                    0.6,
+                    10.6,
+                    80.0,
+                    77.0,
+                    69.6,
+                    0.0,
+                    1.3,
+                    22.2,
+                    12.4
+                ),
+                revenueShare = listOf(
+                    "13 Wed",
+                    "14 Thu",
+                    "15 Fri",
+                    "16 Sat",
+                    "17 Sun",
+                    "18 Mon",
+                    "19 Tue",
+                    "20 Wed",
+                    "21 Thu",
+                    "22 Fri",
+                    "23 Sat"
+                )
             )
 
             2 -> TotalRevenueShare(
-                    revenueData = listOf(
-                            100.0,
-                            50.6,
-                            24.0,
-                            91.6,
-                            50.0,
-                            30.6,
-                            80.0,
-                            50.6,
-                            44.0,
-                            100.6,
-                            10.0,
-                            50.0,
-                            21.2,
-                            43.2
-                    ),
-                    earningData = listOf(
-                            0.6,
-                            10.6,
-                            80.0,
-                            50.6,
-                            44.0,
-                            100.6,
-                            10.0,
-                            50.0,
-                            30.6,
-                            77.0,
-                            69.6,
-                            50.0,
-                            21.2,
-                            43.2
-                    ),
-                    revenueShare = listOf(
-                            "Week 1",
-                            "Week 2",
-                            "Week 3",
-                            "Week 4",
-                            "Week 5",
-                            "Week 6",
-                            "Week 7",
-                            "Week 8",
-                            "Week 9",
-                            "Week 10",
-                            "Week 11",
-                            "Week 12",
-                            "Week 13",
-                            "Week 14"
-                    )
+                revenueData = listOf(
+                    100.0,
+                    50.6,
+                    24.0,
+                    91.6,
+                    50.0,
+                    30.6,
+                    80.0,
+                    50.6,
+                    44.0,
+                    100.6,
+                    10.0,
+                    50.0,
+                    21.2,
+                    43.2
+                ),
+                earningData = listOf(
+                    0.6,
+                    10.6,
+                    80.0,
+                    50.6,
+                    44.0,
+                    100.6,
+                    10.0,
+                    50.0,
+                    30.6,
+                    77.0,
+                    69.6,
+                    50.0,
+                    21.2,
+                    43.2
+                ),
+                revenueShare = listOf(
+                    "Week 1",
+                    "Week 2",
+                    "Week 3",
+                    "Week 4",
+                    "Week 5",
+                    "Week 6",
+                    "Week 7",
+                    "Week 8",
+                    "Week 9",
+                    "Week 10",
+                    "Week 11",
+                    "Week 12",
+                    "Week 13",
+                    "Week 14"
+                )
             )
 
-            else -> throw UnknownError()
+            else -> {
+                TotalRevenueShare(emptyList(), emptyList(), emptyList())
+            } // throw UnknownError()
         }
 
     }
 
     override suspend fun getDashboardRevenueShare(): RevenueShare {
         return RevenueShareDto(
-                ordersRevenueShare = OrdersRevenueDto(
-                        completedOrders = 100.0,
-                        canceledOrders = 50.3,
-                        inTheWayOrders = 30.0,
-                ),
-                tripsRevenueShare = TripsRevenueDto(
-                        acceptedTrips = 100.0,
-                        pendingTrips = 50.3,
-                        rejectedTrips = 10.0,
-                        canceledTrips = 30.0,
-                )
+            ordersRevenueShare = OrdersRevenueDto(
+                completedOrders = 100.0,
+                canceledOrders = 50.3,
+                inTheWayOrders = 30.0,
+            ),
+            tripsRevenueShare = TripsRevenueDto(
+                acceptedTrips = 100.0,
+                pendingTrips = 50.3,
+                rejectedTrips = 10.0,
+                canceledTrips = 30.0,
+            )
         ).toEntity()
     }
 
@@ -510,183 +506,183 @@ class FakeRemoteGateway(
         return "30.044420,31.235712"
     }
 
-    private fun createTaxiPDFReport(): File {
-        val title = "Taxi Details Report"
-        val columnNames = listOf(
-                "Taxi ID",
-                "Username",
-                "Plate Number",
-                "Model",
-                "Color",
-                "Seats",
-                "Status",
-                "Trips"
-        )
-        val columnWidth = listOf(50f, 80f, 80f, 80f, 80f, 80f, 80f, 50f)
+//    private fun createTaxiPDFReport(): File {
+//        val title = "Taxi Details Report"
+//        val columnNames = listOf(
+//            "Taxi ID",
+//            "Username",
+//            "Plate Number",
+//            "Model",
+//            "Color",
+//            "Seats",
+//            "Status",
+//            "Trips"
+//        )
+//        val columnWidth = listOf(50f, 80f, 80f, 80f, 80f, 80f, 80f, 50f)
+//
+//        val file = createPDFReport(title, taxis, columnNames, columnWidth) { taxi ->
+//            listOf(
+//                taxi.id.toString(), taxi.username, taxi.plateNumber, taxi.type, taxi.color,
+//                taxi.seats, taxi.isAvailable.toString(), taxi.trips.toString()
+//            ).map { it ?: "" }
+//        }
+//        return file
+//    }
 
-        val file = createPDFReport(title, taxis, columnNames, columnWidth) { taxi ->
-            listOf(
-                    taxi.id.toString(), taxi.username, taxi.plateNumber, taxi.type, taxi.color,
-                    taxi.seats, taxi.isAvailable.toString(), taxi.trips.toString()
-            ).map { it ?: "" }
-        }
-        return file
-    }
+//    private fun <T> createPDFReport(
+//        title: String,
+//        dataList: List<T>,
+//        columnNames: List<String>,
+//        colWidths: List<Float>,
+//        dataExtractor: (T) -> List<Any>,
+//    ): File {
+//        try {
+//            //region Create PDF document
+//            val document = PDDocument()
+//            val page = PDPage(PDRectangle.A4)
+//            document.addPage(page)
+//            val contentStream = PDPageContentStream(document, page)
+//
+//            val pageWidth = page.trimBox.width
+//            val pageHeight = page.trimBox.height
+//
+//            val startX = 10f
+//            val cellHeight = 30f
+//            //endregion
+//            val titleY = titleContent(contentStream, title, pageWidth, pageHeight)
+//            val dateTimeY = dateContent(contentStream, pageWidth, titleY)
+//            val (currentX, currentY) = headerContent(
+//                contentStream,
+//                startX,
+//                dateTimeY,
+//                cellHeight,
+//                columnNames,
+//                colWidths
+//            )
+//            tableContent(
+//                currentY,
+//                contentStream,
+//                dataList,
+//                cellHeight,
+//                currentX,
+//                startX,
+//                colWidths,
+//                dataExtractor
+//            )
+//            contentStream.close()
+//            val pdfFilePath = "${System.getProperty("user.home")}/Downloads/$title.pdf"
+//            val pdfFile = File(pdfFilePath)
+//            document.save(pdfFile)
+//            document.close()
+//            return pdfFile
+//        } catch (e: Exception) {
+//            e.printStackTrace()
+//            return File("")
+//        }
+//    }
 
-    private fun <T> createPDFReport(
-        title: String,
-        dataList: List<T>,
-        columnNames: List<String>,
-        colWidths: List<Float>,
-        dataExtractor: (T) -> List<Any>,
-    ): File {
-        try {
-            //region Create PDF document
-            val document = PDDocument()
-            val page = PDPage(PDRectangle.A4)
-            document.addPage(page)
-            val contentStream = PDPageContentStream(document, page)
+//    private fun <T> tableContent(
+//        currentY: Float,
+//        contentStream: PDPageContentStream,
+//        dataList: List<T>,
+//        cellHeight: Float,
+//        currentX: Float,
+//        startX: Float,
+//        colWidths: List<Float>,
+//        dataExtractor: (T) -> List<Any>,
+//    ) {
+//        // Draw table content
+//        // Add space between header and table content
+//        var currentY = currentY
+//        var currentX = currentX
+//        val contentTopMargin = 30f // Add the desired space
+//        currentY -= contentTopMargin
+//        contentStream.setFont(PDType1Font.HELVETICA, 12f)
+//        for ((rowIndex, item) in dataList.withIndex()) {
+//            currentY -= cellHeight // Move down for the next row
+//            currentX = startX
+//
+//            val rowData = dataExtractor(item)
+//
+//            for ((index, cellData) in rowData.withIndex()) {
+//                contentStream.beginText()
+//                val textWidth =
+//                    PDType1Font.HELVETICA.getStringWidth(cellData.toString()) / 1000 * 12f
+//                val textX = currentX + (colWidths[index] - textWidth) / 2
+//                val textY = currentY + 20f
+//                contentStream.newLineAtOffset(textX, textY)
+//                contentStream.showText(cellData.toString())
+//                contentStream.endText()
+//
+//                currentX += colWidths[index]
+//            }
+//        }
+//    }
 
-            val pageWidth = page.trimBox.width
-            val pageHeight = page.trimBox.height
-
-            val startX = 10f
-            val cellHeight = 30f
-            //endregion
-            val titleY = titleContent(contentStream, title, pageWidth, pageHeight)
-            val dateTimeY = dateContent(contentStream, pageWidth, titleY)
-            val (currentX, currentY) = headerContent(
-                    contentStream,
-                    startX,
-                    dateTimeY,
-                    cellHeight,
-                    columnNames,
-                    colWidths
-            )
-            tableContent(
-                    currentY,
-                    contentStream,
-                    dataList,
-                    cellHeight,
-                    currentX,
-                    startX,
-                    colWidths,
-                    dataExtractor
-            )
-            contentStream.close()
-            val pdfFilePath = "${System.getProperty("user.home")}/Downloads/$title.pdf"
-            val pdfFile = File(pdfFilePath)
-            document.save(pdfFile)
-            document.close()
-            return pdfFile
-        } catch (e: Exception) {
-            e.printStackTrace()
-            return File("")
-        }
-    }
-
-    private fun <T> tableContent(
-        currentY: Float,
-        contentStream: PDPageContentStream,
-        dataList: List<T>,
-        cellHeight: Float,
-        currentX: Float,
-        startX: Float,
-        colWidths: List<Float>,
-        dataExtractor: (T) -> List<Any>,
-    ) {
-        // Draw table content
-        // Add space between header and table content
-        var currentY = currentY
-        var currentX = currentX
-        val contentTopMargin = 30f // Add the desired space
-        currentY -= contentTopMargin
-        contentStream.setFont(PDType1Font.HELVETICA, 12f)
-        for ((rowIndex, item) in dataList.withIndex()) {
-            currentY -= cellHeight // Move down for the next row
-            currentX = startX
-
-            val rowData = dataExtractor(item)
-
-            for ((index, cellData) in rowData.withIndex()) {
-                contentStream.beginText()
-                val textWidth =
-                    PDType1Font.HELVETICA.getStringWidth(cellData.toString()) / 1000 * 12f
-                val textX = currentX + (colWidths[index] - textWidth) / 2
-                val textY = currentY + 20f
-                contentStream.newLineAtOffset(textX, textY)
-                contentStream.showText(cellData.toString())
-                contentStream.endText()
-
-                currentX += colWidths[index]
-            }
-        }
-    }
-
-    private fun titleContent(
-        contentStream: PDPageContentStream,
-        title: String,
-        pageWidth: Float,
-        pageHeight: Float,
-    ): Float {
-        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16f)
-        contentStream.beginText()
-        val titleWidth = PDType1Font.HELVETICA_BOLD.getStringWidth(title) / 1000 * 16f
-        val titleX = pageWidth / 2 - titleWidth / 2
-        val titleY = pageHeight - 30f
-        contentStream.newLineAtOffset(titleX, titleY)
-        contentStream.showText(title)
-        contentStream.endText()
-        return titleY
-    }
-
-    private fun dateContent(
-        contentStream: PDPageContentStream,
-        pageWidth: Float,
-        titleY: Float,
-    ): Float {
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-        val dateTime = dateFormat.format(Date())
-        contentStream.setFont(PDType1Font.HELVETICA, 11f)
-
-        contentStream.beginText()
-        val dateTimeWidth = PDType1Font.HELVETICA.getStringWidth(dateTime) / 1000 * 12f
-        val pageMidX = pageWidth / 2 // Place the text in the center of the page
-        val dateTimeX = pageMidX - dateTimeWidth / 2 // Place the text in the center horizontally
-        val dateTimeTopMargin = 10f // Add space between date/time and title
-        val dateTimeY = titleY - 20f - dateTimeTopMargin // Adjust the value to add more space
-        contentStream.newLineAtOffset(dateTimeX, dateTimeY)
-        contentStream.showText(dateTime)
-        contentStream.endText()
-        return dateTimeY
-    }
-
-    private fun headerContent(
-        contentStream: PDPageContentStream,
-        startX: Float,
-        dateTimeY: Float,
-        cellHeight: Float,
-        columnNames: List<String>,
-        colWidths: List<Float>,
-    ): Pair<Float, Float> {
-        // region Draw header row
-        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 11f)
-        var currentX = startX
-        val headerTopMargin = 20f // Add space between title/date
-        val headerY = dateTimeY - headerTopMargin - cellHeight
-        var currentY = headerY
-        val columnWidth = columnNames.size
-        for ((index, columnName) in columnNames.withIndex()) {
-            contentStream.beginText()
-            val textWidth = PDType1Font.HELVETICA_BOLD.getStringWidth(columnName) / 1000 * 12f
-            val textX = currentX + (colWidths[index] - textWidth) / 2
-            val textY = currentY - cellHeight + 20f
-            contentStream.newLineAtOffset(textX, textY)
-            contentStream.showText(columnName)
-            contentStream.endText()
-            currentX += colWidths[index]
-        }
-        return Pair(currentX, currentY)
-    }
+//    private fun titleContent(
+//        contentStream: PDPageContentStream,
+//        title: String,
+//        pageWidth: Float,
+//        pageHeight: Float,
+//    ): Float {
+//        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 16f)
+//        contentStream.beginText()
+//        val titleWidth = PDType1Font.HELVETICA_BOLD.getStringWidth(title) / 1000 * 16f
+//        val titleX = pageWidth / 2 - titleWidth / 2
+//        val titleY = pageHeight - 30f
+//        contentStream.newLineAtOffset(titleX, titleY)
+//        contentStream.showText(title)
+//        contentStream.endText()
+//        return titleY
+//    }
+//
+//    private fun dateContent(
+//        contentStream: PDPageContentStream,
+//        pageWidth: Float,
+//        titleY: Float,
+//    ): Float {
+//        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+//        val dateTime = dateFormat.format(Date())
+//        contentStream.setFont(PDType1Font.HELVETICA, 11f)
+//
+//        contentStream.beginText()
+//        val dateTimeWidth = PDType1Font.HELVETICA.getStringWidth(dateTime) / 1000 * 12f
+//        val pageMidX = pageWidth / 2 // Place the text in the center of the page
+//        val dateTimeX = pageMidX - dateTimeWidth / 2 // Place the text in the center horizontally
+//        val dateTimeTopMargin = 10f // Add space between date/time and title
+//        val dateTimeY = titleY - 20f - dateTimeTopMargin // Adjust the value to add more space
+//        contentStream.newLineAtOffset(dateTimeX, dateTimeY)
+//        contentStream.showText(dateTime)
+//        contentStream.endText()
+//        return dateTimeY
+//    }
+//
+//    private fun headerContent(
+//        contentStream: PDPageContentStream,
+//        startX: Float,
+//        dateTimeY: Float,
+//        cellHeight: Float,
+//        columnNames: List<String>,
+//        colWidths: List<Float>,
+//    ): Pair<Float, Float> {
+//        // region Draw header row
+//        contentStream.setFont(PDType1Font.HELVETICA_BOLD, 11f)
+//        var currentX = startX
+//        val headerTopMargin = 20f // Add space between title/date
+//        val headerY = dateTimeY - headerTopMargin - cellHeight
+//        var currentY = headerY
+//        val columnWidth = columnNames.size
+//        for ((index, columnName) in columnNames.withIndex()) {
+//            contentStream.beginText()
+//            val textWidth = PDType1Font.HELVETICA_BOLD.getStringWidth(columnName) / 1000 * 12f
+//            val textX = currentX + (colWidths[index] - textWidth) / 2
+//            val textY = currentY - cellHeight + 20f
+//            contentStream.newLineAtOffset(textX, textY)
+//            contentStream.showText(columnName)
+//            contentStream.endText()
+//            currentX += colWidths[index]
+//        }
+//        return Pair(currentX, currentY)
+//    }
 
 }
