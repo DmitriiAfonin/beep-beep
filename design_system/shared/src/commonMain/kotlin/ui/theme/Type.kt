@@ -12,7 +12,7 @@ fun headlineLarge(): TextStyle {
     return TextStyle(
         fontSize = 24.sp,
         lineHeight = 32.4.sp,
-        fontFamily = FontFamily(fontResources("roboto_medium")),
+//        fontFamily = FontFamily(fontResources("roboto_medium")),
         fontWeight = FontWeight.W600,
     )
 }
@@ -20,7 +20,7 @@ fun headlineLarge(): TextStyle {
 fun headline(): TextStyle {
     return TextStyle(
         fontSize = 20.sp,
-        fontFamily = FontFamily(fontResources("roboto_medium")),
+//        fontFamily = FontFamily(fontResources("roboto_medium")),
         fontWeight = FontWeight.W600,
     )
 }
@@ -29,7 +29,7 @@ fun titleLarge(): TextStyle {
     return TextStyle(
         fontSize = 16.sp,
         lineHeight = 20.sp,
-        fontFamily = FontFamily(fontResources("roboto_medium")),
+//        fontFamily = FontFamily(fontResources("roboto_medium")),
         fontWeight = FontWeight.W600,
     )
 }
@@ -37,7 +37,7 @@ fun titleLarge(): TextStyle {
 fun title(): TextStyle {
     return TextStyle(
         fontSize = 14.sp,
-        fontFamily = FontFamily(fontResources("roboto_medium")),
+//        fontFamily = FontFamily(fontResources("roboto_medium")),
         fontWeight = FontWeight.W600,
     )
 }
@@ -45,7 +45,7 @@ fun title(): TextStyle {
 fun titleMedium(): TextStyle {
     return TextStyle(
         fontSize = 16.sp,
-        fontFamily = FontFamily(fontResources("roboto_medium")),
+//        fontFamily = FontFamily(fontResources("roboto_medium")),
         fontWeight = FontWeight.W400,
     )
 }
@@ -54,14 +54,14 @@ fun body(): TextStyle {
     return TextStyle(
         fontSize = 14.sp,
         lineHeight = 19.6.sp,
-        fontFamily = FontFamily(fontResources("roboto_regular")),
+//        fontFamily = FontFamily(fontResources("roboto_regular")),
         fontWeight = FontWeight.W400,
     )
 }
 @Composable
 fun caption(): TextStyle {
     return TextStyle(
-        fontFamily = FontFamily(fontResources("roboto_regular")),
+//        fontFamily = FontFamily(fontResources("roboto_regular")),
         fontWeight = FontWeight.W400,
         fontSize = 12.sp,
     )

@@ -66,8 +66,9 @@ kotlin {
             }
         }
         val jsMain by getting {
+            dependsOn(commonMain)
             dependencies {
-                //js dependencies
+                implementation(compose.html.core)
             }
         }
     }
