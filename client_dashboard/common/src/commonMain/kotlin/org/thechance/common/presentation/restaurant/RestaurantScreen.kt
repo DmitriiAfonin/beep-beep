@@ -4,12 +4,12 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
@@ -39,6 +38,7 @@ import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 import java.awt.Dimension
 import kotlin.reflect.KFunction1
+
 
 class RestaurantScreen :
     BaseScreen<RestaurantScreenModel, RestaurantUIEffect, RestaurantUiState, RestaurantInteractionListener>() {
@@ -145,7 +145,7 @@ class RestaurantScreen :
                 data = state.restaurants,
                 key = { it.id },
                 headers = state.tableHeader,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier.fillMaxWidth().weight(1f),
                 rowContent = { restaurant ->
                     RestaurantRow(
                         onClickEditRestaurant = listener::showEditRestaurantMenu,
@@ -162,6 +162,7 @@ class RestaurantScreen :
         BpNoInternetConnection(!state.hasConnection){
             listener.onRetry()
         }
+        BpLoadingIndicator(state.isLoading)
     }
 
     @Composable
