@@ -104,6 +104,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
 
                 UsersTable(
                     hasConnection = state.hasConnection,
+                    isLoading = state.isLoading,
                     onRetry = {onRetry()},
                     users = state.pageInfo.data,
                     headers = state.tableHeader,
@@ -127,6 +128,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
     @Composable
     private fun ColumnScope.UsersTable(
         hasConnection: Boolean,
+        isLoading: Boolean,
         onRetry: () -> Unit,
         users: List<UserScreenUiState.UserUiState>,
         headers: List<Header>,
@@ -145,6 +147,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
         BpNoInternetConnection(hasConnection = !hasConnection){
             onRetry()
         }
+        BpLoadingIndicator(isLoading)
 
         AnimatedVisibility(visible = hasConnection){
             BpTable(
