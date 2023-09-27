@@ -70,14 +70,15 @@ class RestaurantScreen :
         )
 
         Column(
-            Modifier.background(Theme.colors.surface).fillMaxSize(),
+            Modifier.background(Theme.colors.surface).padding(40.kms).fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(16.kms),
         ) {
             RestaurantScreenTopRow(state = state, listener = listener)
-
             RestaurantTable(state = state, listener = listener)
-
+            BpNoInternetConnection(!state.hasConnection){
+                listener.onRetry()
+            }
             RestaurantPagingRow(state = state, listener = listener)
         }
     }
@@ -145,7 +146,8 @@ class RestaurantScreen :
                 data = state.restaurants,
                 key = { it.id },
                 headers = state.tableHeader,
-                modifier = Modifier.fillMaxWidth().weight(1f),
+                modifier = Modifier.fillMaxWidth(),
+                isVisible = state.hasConnection,
                 rowContent = { restaurant ->
                     RestaurantRow(
                         onClickEditRestaurant = listener::showEditRestaurantMenu,

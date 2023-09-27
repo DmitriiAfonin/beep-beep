@@ -83,7 +83,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
             onCancelUserPermissionsDialog = editMenuListener::onCancelUserPermissionsDialog,
         )
         Box(
-            modifier = Modifier.background(Theme.colors.surface).fillMaxSize(),
+            modifier = Modifier.background(Theme.colors.surface).padding(40.kms).fillMaxSize(),
             contentAlignment = Alignment.BottomCenter
         ) {
             Column(modifier = Modifier.fillMaxSize().align(Alignment.TopCenter)) {
@@ -101,7 +101,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
                     onFilterSaved = filterMenuListener::onFilterMenuSaveButtonClicked,
                     onFilterClearAllClicked = filterMenuListener::onFilterClearAllClicked,
                 )
-
+                BpNoInternetConnection(hasConnection = !state.hasConnection,onRetry=onRetry)
                 UsersTable(
                     hasConnection = state.hasConnection,
                     isLoading = state.isLoading,
@@ -154,6 +154,7 @@ class UserScreen : BaseScreen<UserScreenModel, UserUiEffect, UserScreenUiState, 
                 data = users,
                 key = UserScreenUiState.UserUiState::username,
                 headers = headers,
+                isVisible = hasConnection,
                 modifier = Modifier.fillMaxWidth(),
             ) { user ->
                 UserRow(
