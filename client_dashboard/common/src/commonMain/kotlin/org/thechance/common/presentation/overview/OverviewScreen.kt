@@ -28,6 +28,7 @@ import com.beepbeep.designSystem.ui.composable.BPSnackBar
 import com.beepbeep.designSystem.ui.composable.BpOutlinedButton
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.thechance.common.presentation.base.BaseScreen
+import org.thechance.common.presentation.composables.BpLoadingIndicator
 import org.thechance.common.presentation.composables.BpNoInternetConnection
 import org.thechance.common.presentation.composables.OverviewDropDown
 import org.thechance.common.presentation.main.RestaurantsTab
@@ -51,6 +52,7 @@ object OverviewScreen :
         BpNoInternetConnection(hasConnection = !state.hasInternetConnection){
             listener.onRetry()
         }
+        BpLoadingIndicator(state.isLoading)
         AnimatedVisibility(state.hasInternetConnection){
             Column(
                 modifier = Modifier
