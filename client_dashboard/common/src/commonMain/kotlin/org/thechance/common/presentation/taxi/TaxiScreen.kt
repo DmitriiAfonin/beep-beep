@@ -154,6 +154,7 @@ class TaxiScreen :
                 BpNoInternetConnection(!state.hasConnection){
                     listener.onRetry()
                 }
+                BpLoadingIndicator(state.isLoading)
                 TaxisTableFooter(
                     selectedPage = state.currentPage,
                     numberItemInPage = state.specifiedTaxis,
