@@ -16,7 +16,7 @@ class AppScreenModel(
     }
 
     private fun getThemeMode() {
-        coroutineScope.launch(Dispatchers.IO) {
+        coroutineScope.launch {
             themeManagement.getThemeMode().collect { isDarkTheme ->
                 mutableState.update { isDarkTheme }
             }

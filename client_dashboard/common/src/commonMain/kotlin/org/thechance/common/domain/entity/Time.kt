@@ -6,7 +6,7 @@ data class Time(val hour: Int, val minute: Int) {
         require(minute in 0..59) { "Minutes must be between 0 and 59" }
     }
 
-    override fun toString(): String = String.format("%02d:%02d", hour, minute)
+//    override fun toString(): String = String.format("%02d:%02d", hour, minute)
 
     companion object{
         fun parseToCustomTime(time: String): Time {

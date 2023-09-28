@@ -4,8 +4,14 @@ import androidx.compose.runtime.Stable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.pointer.PointerIcon
 import androidx.compose.ui.input.pointer.pointerHoverIcon
-import java.awt.Cursor
+import org.jetbrains.skiko.Cursor
 
 @Stable
-fun Modifier.cursorHoverIconHand() =
-    then(pointerHoverIcon(PointerIcon(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR))))
+fun Modifier.cursorHoverIconHand() = then(Modifier)
+//    then(pointerHoverIcon(
+//        androidx.compose.ui.input.pointer.PointerIcon(
+//            Cursor.getPredefinedCursor(
+//                Cursor.HAND_CURSOR
+//            )
+//        )
+//    ))

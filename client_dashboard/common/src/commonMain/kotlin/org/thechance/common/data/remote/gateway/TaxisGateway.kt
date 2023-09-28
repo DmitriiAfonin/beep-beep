@@ -14,6 +14,7 @@ import org.thechance.common.domain.entity.Taxi
 import org.thechance.common.domain.entity.TaxiFiltration
 import org.thechance.common.domain.getway.ITaxisGateway
 import org.thechance.common.domain.util.NotFoundException
+import org.thechance.common.domain.util.UnknownErrorException
 
 class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGateway {
 
@@ -33,7 +34,7 @@ class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGatewa
         return DataWrapper(
             totalPages = result?.total?.div(limit) ?: 0,
             numberOfResult = result?.total ?: 0,
-            result = result?.items?.toEntity() ?: throw UnknownError()
+            result = result?.items?.toEntity() ?: throw UnknownErrorException("")
         )
     }
 
@@ -44,7 +45,7 @@ class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGatewa
                 setBody(taxi.toDto())
             }
         }.value
-        return result?.toEntity() ?: throw UnknownError()
+        return result?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun updateTaxi(taxi: NewTaxiInfo): Taxi {

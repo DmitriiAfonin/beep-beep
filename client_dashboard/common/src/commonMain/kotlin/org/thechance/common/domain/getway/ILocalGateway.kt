@@ -1,10 +1,10 @@
 package org.thechance.common.domain.getway
 
-import java.io.File
+//import java.io.File
 
 
 interface ILocalGateway {
 
-     suspend fun saveTaxiReport(file: File)
+//     suspend fun saveTaxiReport(file: File)
 
 }

@@ -27,6 +27,7 @@ kotlin {
                 api(libs.compose.runtime)
                 api(libs.compose.foundation)
                 api(libs.compose.material3)
+                api(libs.compose.components.resources)
 
                 implementation(libs.voyager.navigator)
                 implementation(libs.voyager.bottomsheet.navigator)

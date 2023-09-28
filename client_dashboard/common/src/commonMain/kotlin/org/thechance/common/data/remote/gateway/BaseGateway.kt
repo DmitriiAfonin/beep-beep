@@ -6,7 +6,7 @@ import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.statement.HttpResponse
 import org.thechance.common.data.remote.model.ServerResponse
 import org.thechance.common.domain.util.*
-import java.net.ConnectException
+//import java.net.ConnectException
 
 abstract class BaseGateway {
 
@@ -20,10 +20,10 @@ abstract class BaseGateway {
             val errorMessages = e.response.body<ServerResponse<String>>().status?.errorMessages
             errorMessages?.let(::throwMatchingException)
             throw UnknownErrorException(e.message)
-        } catch (e: ConnectException) {
-            throw NoInternetException()
-        }catch(e: ConnectException){
-            throw NoInternetException()
+//        } catch (e: ConnectException) {
+//            throw NoInternetException()
+//        }catch(e: ConnectException){
+//            throw NoInternetException()
         } catch (e: Exception) {
             throw UnknownErrorException(e.message.toString())
         }

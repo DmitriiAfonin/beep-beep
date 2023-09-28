@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
@@ -38,6 +37,8 @@ import com.aay.compose.donutChart.DonutChart
 import com.aay.compose.donutChart.model.PieChartData
 import com.beepbeep.designSystem.ui.composable.BpOutlinedButton
 import com.beepbeep.designSystem.ui.theme.Theme
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.thechance.common.presentation.base.BaseScreen
 import org.thechance.common.presentation.composables.OverviewDropDown
 import org.thechance.common.presentation.main.RestaurantsTab
@@ -53,6 +54,7 @@ object OverviewScreen :
 
     }
 
+    @OptIn(ExperimentalResourceApi::class)
     @Composable
     override fun OnRender(state: OverviewUiState, listener: OverviewInteractionListener) {
 

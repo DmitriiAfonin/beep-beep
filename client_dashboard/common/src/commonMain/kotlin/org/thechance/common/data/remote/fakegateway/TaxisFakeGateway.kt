@@ -10,8 +10,9 @@ import org.thechance.common.domain.entity.NewTaxiInfo
 import org.thechance.common.domain.entity.Taxi
 import org.thechance.common.domain.entity.TaxiFiltration
 import org.thechance.common.domain.getway.ITaxisGateway
-import java.util.*
+//import java.util.*
 import kotlin.math.ceil
+import kotlin.random.Random
 
 class TaxisFakeGateway : ITaxisGateway {
 
@@ -61,7 +62,7 @@ class TaxisFakeGateway : ITaxisGateway {
         val taxiDto = taxi.toDto()
         taxis.add(
             TaxiDto(
-                id = UUID.randomUUID().toString(),
+                id = "${taxis.size + 1}" ,
                 plateNumber = taxiDto.plateNumber,
                 color = taxiDto.color.toLong(),
                 seats = taxiDto.seats,
@@ -81,7 +82,7 @@ class TaxisFakeGateway : ITaxisGateway {
         return if (indexToUpdate != -1) {
             val oldTaxi = taxis[indexToUpdate]
             val updatedTaxi = TaxiDto(
-                id = UUID.randomUUID().toString(),
+                id = "${taxis.size + 1}",
                 plateNumber = newTaxi.plateNumber,
                 color = newTaxi.color.toLong(),
                 type = newTaxi.type,

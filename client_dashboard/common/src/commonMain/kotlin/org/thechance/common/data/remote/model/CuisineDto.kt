@@ -1,10 +1,11 @@
 package org.thechance.common.data.remote.model
 
-import com.google.gson.annotations.SerializedName
+import kotlinx.serialization.SerialName
+
 
 data class CuisineDto(
-    @SerializedName("id")
+    @SerialName("id")
     val id: String,
-    @SerializedName("name")
+    @SerialName("name")
     val name: String
 )

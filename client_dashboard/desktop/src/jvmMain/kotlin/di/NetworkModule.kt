@@ -1,12 +1,12 @@
 package di
 
 import io.ktor.client.*
-import io.ktor.client.engine.cio.*
+//import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.plugins.logging.*
 import io.ktor.client.request.*
-import io.ktor.serialization.gson.*
+//import io.ktor.serialization.gson.*
 import org.koin.core.scope.Scope
 import org.koin.dsl.module
 import org.thechance.common.domain.getway.IIdentityGateway
@@ -14,7 +14,7 @@ import org.thechance.common.domain.getway.IIdentityGateway
 
 val NetworkModule = module {
     single {
-        val client = HttpClient(CIO) {
+        val client = HttpClient() {
 
             expectSuccess = true
 
@@ -31,7 +31,7 @@ val NetworkModule = module {
             }
 
             install(ContentNegotiation) {
-                gson()
+//                gson()
             }
         }
         intercept(client)

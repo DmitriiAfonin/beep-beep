@@ -5,10 +5,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun BpPager(
     modifier: Modifier = Modifier,

@@ -1,6 +1,6 @@
 package org.thechance.common.domain.usecase
 
-import java.util.regex.Pattern
+//import java.util.regex.Pattern
 
 interface IValidateRestaurantUseCase {
     fun validateRestaurantName(name: String): Boolean
@@ -33,26 +33,26 @@ class ValidateRestaurantUseCase():IValidateRestaurantUseCase{
         val syria = "^\\+963[0-9]{10}$"
 
         val result = when {
-            Pattern.compile(egypt).matcher(number).matches() -> true
-            Pattern.compile(iraq).matcher(number).matches() -> true
-            Pattern.compile(jordan).matcher(number).matches() -> true
-            Pattern.compile(palestine).matcher(number).matches() -> true
-            Pattern.compile(syria).matcher(number).matches() -> true
+//            Pattern.compile(egypt).matcher(number).matches() -> true
+//            Pattern.compile(iraq).matcher(number).matches() -> true
+//            Pattern.compile(jordan).matcher(number).matches() -> true
+//            Pattern.compile(palestine).matcher(number).matches() -> true
+//            Pattern.compile(syria).matcher(number).matches() -> true
             else -> false
         }
         return result
     }
 
     override fun validateStartTime(hour: String): Boolean {
-        return Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\$").matcher(hour).matches() && hour.isNotBlank()
+        return hour.isNotBlank() //&& Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\$").matcher(hour).matches()
     }
 
     override fun validateEndTime(hour: String): Boolean {
-        return Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\$").matcher(hour).matches() && hour.isNotBlank()
+        return  hour.isNotBlank() //&& Pattern.compile("^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]\$").matcher(hour).matches()
     }
 
     override fun validateLocation(location: String): Boolean {
-        val loc = Pattern.compile("^((-?|\\+?)?\\d+(\\.\\d+)?),\\s*((-?|\\+?)?\\d+(\\.\\d+)?)\$")
-        return location.isNotBlank() && loc.matcher(location).matches()
+//        val loc = Pattern.compile("^((-?|\\+?)?\\d+(\\.\\d+)?),\\s*((-?|\\+?)?\\d+(\\.\\d+)?)\$")
+        return location.isNotBlank() //&& loc.matcher(location).matches()
     }
 }
