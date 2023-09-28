@@ -24,6 +24,7 @@ interface RestaurantInteractionListener : BaseInteractionListener, AddCuisineInt
     fun onClickDeleteRestaurantMenuItem(id: String)
 
     fun onAddNewRestaurantClicked()
+    fun onRetry()
 }
 
 
@@ -31,7 +32,7 @@ interface AddCuisineInteractionListener {
   
     fun onClickAddCuisine()
 
-    fun onClickDeleteCuisine(cuisineName: String)
+    fun onClickDeleteCuisine(cuisineId: String)
 
     fun onCloseAddCuisineDialog()
 
@@ -65,7 +66,7 @@ interface FilterRestaurantsInteractionListener {
 
     fun onClickFilterPriceBar(priceLevel: Int)
 
-    fun onSaveFilterRestaurantsClicked(rating: Double, priceLevel: Int)
+    fun onSaveFilterRestaurantsClicked(rating: Double, priceLevel: String)
 
     fun onCancelFilterRestaurantsClicked()
 

@@ -6,6 +6,7 @@ import org.thechance.common.domain.entity.TotalRevenueShare
 import org.thechance.common.domain.entity.User
 import org.thechance.common.domain.usecase.IManageRevenueShareUseCase
 import org.thechance.common.domain.usecase.IUsersManagementUseCase
+import org.thechance.common.domain.util.NoInternetException
 import org.thechance.common.domain.util.RevenueShareDate
 import org.thechance.common.presentation.base.BaseScreenModel
 import org.thechance.common.presentation.util.ErrorState
@@ -17,33 +18,40 @@ class OverviewScreenModel(
     OverviewInteractionListener {
 
     init {
+        initOverviewScreenData()
+    }
+
+    override fun onRetry() {
+        initOverviewScreenData()
+    }
+
+    private fun initOverviewScreenData() {
         getLatestRegisteredUsers()
         getRevenueShare(RevenueShareDate.MONTHLY)
         getDashboardRevenueShare()
-
     }
 
     private fun getRevenueShare(revenueShareDate: RevenueShareDate) {
         tryToExecute(
-                { manageRevenueShare.getRevenueShare(revenueShareDate) },
-                ::onGetRevenueShareSuccessfully,
-                ::onError
+            { manageRevenueShare.getRevenueShare(revenueShareDate) },
+            ::onGetRevenueShareSuccessfully,
+            ::onError
         )
     }
 
     private fun getDashboardRevenueShare() {
         tryToExecute(
-                { manageRevenueShare.getDashboardRevenueShare() },
-                ::onGetDashboardRevenueSuccessfully,
-                ::onError
+            { manageRevenueShare.getDashboardRevenueShare() },
+            ::onGetDashboardRevenueSuccessfully,
+            ::onError
         )
     }
 
     private fun onGetDashboardRevenueSuccessfully(revenueShare: RevenueShare) {
         updateState {
             it.copy(
-                    tripsRevenueShare = revenueShare.tripsRevenueShare.toUiState(),
-                    ordersRevenueShare = revenueShare.ordersRevenueShare.toUiState()
+                tripsRevenueShare = revenueShare.tripsRevenueShare.toUiState(),
+                ordersRevenueShare = revenueShare.ordersRevenueShare.toUiState()
             )
         }
     }
@@ -51,9 +59,9 @@ class OverviewScreenModel(
     private fun onGetRevenueShareSuccessfully(revenueShare: TotalRevenueShare) {
         updateState {
             it.copy(
-                    revenueData = revenueShare.revenueData,
-                    earningData = revenueShare.earningData,
-                    revenueShare = revenueShare.revenueShare
+                revenueData = revenueShare.revenueData,
+                earningData = revenueShare.earningData,
+                revenueShare = revenueShare.revenueShare
             )
         }
     }
@@ -62,17 +70,19 @@ class OverviewScreenModel(
     override fun onMenuItemDropDownClicked() {
         updateState { state ->
             state.copy(
-                    dropdownMenuState = state.dropdownMenuState.copy(
-                            isExpanded = !state.dropdownMenuState.isExpanded
-                    )
+                dropdownMenuState = state.dropdownMenuState.copy(
+                    isExpanded = !state.dropdownMenuState.isExpanded
+                )
             )
         }
     }
 
     override fun onMenuItemClicked(index: Int) {
-        updateState { state -> state.copy(dropdownMenuState = state.dropdownMenuState.copy(
-                isExpanded = false, selectedIndex = index,
-                    )
+        updateState { state ->
+            state.copy(
+                dropdownMenuState = state.dropdownMenuState.copy(
+                    isExpanded = false, selectedIndex = index,
+                )
             )
         }
         when (index) {
@@ -85,9 +95,9 @@ class OverviewScreenModel(
     override fun onDismissDropDownMenu() {
         updateState { state ->
             state.copy(
-                    dropdownMenuState = state.dropdownMenuState.copy(
-                            isExpanded = false
-                    )
+                dropdownMenuState = state.dropdownMenuState.copy(
+                    isExpanded = false
+                )
             )
         }
     }
@@ -106,28 +116,28 @@ class OverviewScreenModel(
 
     private fun getLatestRegisteredUsers() {
         tryToExecute(
-                {
-                    getUsers.getUsers(
-                            byPermissions = listOf(),
-                            byCountries = listOf(),
-                            page = 1,
-                            numberOfUsers = 4
-                    )
-                },
-                ::onGetUsersSuccessfully,
-                ::onError
+            { getUsers.getLastRegisteredUsers(4) },
+            ::onGetUsersSuccessfully,
+            ::onError
         )
     }
 
-    private fun onGetUsersSuccessfully(users: DataWrapper<User>) {
-        val latestRegisteredUsers = users.result.toUiState()
+    private fun onGetUsersSuccessfully(users: List<User>) {
+        val latestRegisteredUsers = users.toLatestUsersUiState()
         updateState {
-            it.copy(users = latestRegisteredUsers, isLoading = false)
+            it.copy(users = latestRegisteredUsers, isLoading = false, hasInternetConnection = true)
         }
     }
 
     private fun onError(error: ErrorState) {
-        updateState { it.copy(error = error, isLoading = false) }
+        when (error) {
+            is ErrorState.NoConnection -> {
+                updateState { it.copy(hasInternetConnection = false) }
+            }
+            else -> {
+                updateState { it.copy(error = error, isLoading = false) }
+            }
+        }
     }
 
 }
