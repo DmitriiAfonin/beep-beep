@@ -20,7 +20,7 @@ fun App() {
 //    val themeMode by appScreenModel.state.collectAsState()
     BpTheme{
         ProvideResources {
-            Navigator(MainContainer) {
+            Navigator(LoginScreen()) {
                 SlideTransition(it)
             }
         }
