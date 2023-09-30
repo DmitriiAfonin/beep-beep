@@ -1,13 +1,12 @@
 package org.thechance.common.data.gateway.remote.model
 
-import com.google.gson.annotations.SerializedName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 data class RestaurantResponse(
-    @SerializedName("items")
+    @SerialName("items")
     val restaurants: List<RestaurantDto>,
-    @SerializedName("total")
+    @SerialName("total")
     val total: Int,
 )
 
@@ -39,9 +38,9 @@ data class RestaurantDto(
 
 @Serializable
 data class LocationDto(
-    @SerializedName("lat")
+    @SerialName("lat")
     val latitude: Double,
-    @SerializedName("lng")
+    @SerialName("lng")
     val longitude: Double,
 )
 

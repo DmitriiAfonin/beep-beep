@@ -36,7 +36,7 @@ import org.thechance.common.presentation.composables.table.BpTable
 import org.thechance.common.presentation.composables.table.TotalItemsIndicator
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
-import java.awt.Dimension
+//import java.awt.Dimension
 import kotlin.reflect.KFunction1
 
 class RestaurantScreen :

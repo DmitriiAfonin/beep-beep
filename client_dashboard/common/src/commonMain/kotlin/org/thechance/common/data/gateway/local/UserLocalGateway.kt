@@ -5,10 +5,10 @@ package org.thechance.common.data.gateway.local
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
-import org.thechance.common.data.gateway.local.model.ConfigurationCollection
+//import org.thechance.common.data.gateway.local.model.ConfigurationCollection
 import org.thechance.common.domain.getway.IUserLocalGateway
 
-class UserLocalGateway(private val realm: Realm) : IUserLocalGateway {
+class UserLocalGateway() : IUserLocalGateway {
 
     override suspend fun createUserConfiguration() {
 //        realm.write { copyToRealm(ConfigurationCollection().apply { id = CONFIGURATION_ID }) }
@@ -24,24 +24,26 @@ class UserLocalGateway(private val realm: Realm) : IUserLocalGateway {
 //        }
     }
     override suspend fun saveUserName(username: String) {
-        realm.write {
-            query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.username = username
-        }
+//        realm.write {
+//            query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.username = username
+//        }
     }
 
     override suspend fun saveCountryCode(languageCode: String) {
-        realm.write {
-            query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.languageCode = languageCode
-        }
+//        realm.write {
+//            query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.languageCode = languageCode
+//        }
     }
 
     override suspend fun getCountryCode(): String {
-        return realm.query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.languageCode ?: ""
+//        return realm.query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.languageCode ?: ""
+        return ""
     }
 
 
     override suspend fun getUserName(): String {
-        return realm.query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.username ?: ""
+//        return realm.query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.username ?: ""
+        return ""
     }
 
 
@@ -63,19 +65,6 @@ class UserLocalGateway(private val realm: Realm) : IUserLocalGateway {
 
     override suspend fun clearConfiguration() {
 //        realm.write { delete(query<ConfigurationCollection>()) }
-    }
-
-    override suspend fun shouldUserKeptLoggedIn(keepLoggedIn: Boolean) {
-//        realm.write {
-//            query<ConfigurationCollection>("$ID == $CONFIGURATION_ID").first().find()?.keepLoggedIn = keepLoggedIn
-//        }
-    }
-
-    override suspend fun isUserKeptLoggedIn(): Boolean {
-//        return realm.query<ConfigurationCollection>(
-//            "$ID == $CONFIGURATION_ID"
-//        ).first().find()?.keepLoggedIn ?: false
-        return true
     }
 
     override suspend fun getThemeMode(): Flow<Boolean> {

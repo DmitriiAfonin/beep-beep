@@ -13,7 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.res.painterResource
+//import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import cafe.adriel.voyager.navigator.Navigator
@@ -60,13 +60,15 @@ object OverviewScreen :
             listener.onRetry()
         }
 
-        AnimatedContent(targetState = state.isLoading) { isLoading ->
-            if (isLoading) OverviewScreenLoading()
-            else if (state.hasInternetConnection) OverviewScreenContent(state, listener)
-        }
+//        AnimatedContent(targetState = state.isLoading) { isLoading ->
+//            if (isLoading) OverviewScreenLoading()
+//            else if (state.hasInternetConnection) OverviewScreenContent(state, listener)
+//        }
     }
 
-    @OptIn(ExperimentalLayoutApi::class)
+    @OptIn(ExperimentalLayoutApi::class, ExperimentalResourceApi::class,
+        ExperimentalResourceApi::class
+    )
     @Composable
     private fun OverviewScreenContent(
         state: OverviewUiState,

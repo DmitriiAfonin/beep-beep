@@ -14,6 +14,7 @@ import org.thechance.common.data.gateway.remote.mapper.toDto
 import org.thechance.common.data.gateway.remote.mapper.toEntity
 import org.thechance.common.domain.entity.*
 import org.thechance.common.domain.getway.IRestaurantGateway
+import org.thechance.common.domain.util.UnknownErrorException
 
 class RestaurantGateway(private val client: HttpClient) : BaseGateway(), IRestaurantGateway {
 
@@ -22,7 +23,7 @@ class RestaurantGateway(private val client: HttpClient) : BaseGateway(), IRestau
             post(urlString = "/restaurant") {
                 setBody(restaurant.toDto())
             }
-        }.value?.toEntity() ?: throw UnknownError()
+        }.value?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun deleteRestaurant(id: String): Boolean {
@@ -34,7 +35,7 @@ class RestaurantGateway(private val client: HttpClient) : BaseGateway(), IRestau
     override suspend fun getCuisines(): List<Cuisine> {
         return tryToExecute<ServerResponse<List<CuisineDto>>>(client) {
             get(urlString = "/cuisines")
-        }.value?.toEntity() ?: throw UnknownError()
+        }.value?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun createCuisine(cuisineName: String): Cuisine {
@@ -45,7 +46,7 @@ class RestaurantGateway(private val client: HttpClient) : BaseGateway(), IRestau
                     append("name", cuisineName)
                 },
             )
-        }.value?.toEntity() ?: throw UnknownError()
+        }.value?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun deleteCuisine(cuisineId: String) {

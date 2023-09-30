@@ -2,31 +2,33 @@ package org.thechance.common.data.gateway.remote
 
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
+import io.ktor.client.network.sockets.ConnectTimeoutException
 import io.ktor.client.plugins.ClientRequestException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.util.network.UnresolvedAddressException
 import org.thechance.common.data.gateway.remote.model.ServerResponse
 import org.thechance.common.domain.entity.DataWrapper
 import org.thechance.common.domain.util.*
-import java.net.ConnectException
-import java.net.UnknownHostException
-import java.nio.channels.UnresolvedAddressException
+//import java.net.ConnectException
+//import java.net.UnknownHostException
+//import java.nio.channels.UnresolvedAddressException
 
 abstract class BaseGateway {
 
     suspend inline fun <reified T> tryToExecute(
-        client: HttpClient,
+        client: HttpClient?,
         method: HttpClient.() -> HttpResponse,
     ): T {
         try {
-            return client.method().body()
+            return client!!.method().body()
         } catch (e: ClientRequestException) {
             val errorMessages = e.response.body<ServerResponse<String>>().status?.errorMessages
             errorMessages?.let(::throwMatchingException)
         } catch (e: Exception) {
             when (e) {
-                is UnresolvedAddressException,
-                is ConnectException,
-                is UnknownHostException -> throw NoInternetException(e.message.toString())
+//                is UnresolvedAddressException,
+//                is ConnectTimeoutException,
+//                is UnknownErrorException -> throw NoInternetException(e.message.toString())
                 else -> throw UnknownErrorException(e.message.toString())
             }
         }

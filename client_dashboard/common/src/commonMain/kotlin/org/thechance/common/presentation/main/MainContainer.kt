@@ -41,7 +41,7 @@ object MainContainer :
     @Composable
     override fun OnRender(state: MainUiState, listener: MainInteractionListener) {
 
-        TabNavigator(TaxisTab) {
+        TabNavigator(OverviewTab) {
             val tabNavigator = LocalTabNavigator.current
             DashBoardScaffold(
                     appbar = {

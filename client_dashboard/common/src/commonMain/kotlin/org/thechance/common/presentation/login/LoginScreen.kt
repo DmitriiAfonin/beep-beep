@@ -33,6 +33,9 @@ import org.thechance.common.presentation.login.LoginScreenModel
 import org.thechance.common.presentation.login.LoginUIEffect
 import org.thechance.common.presentation.login.LoginUIState
 import org.thechance.common.presentation.main.MainContainer
+import org.thechance.common.presentation.main.RestaurantsTab
+import org.thechance.common.presentation.main.TaxisTab
+import org.thechance.common.presentation.main.UsersTab
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 

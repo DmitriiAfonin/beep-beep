@@ -9,6 +9,7 @@ import org.thechance.common.domain.entity.RevenueShare
 import org.thechance.common.domain.entity.TotalRevenueShare
 import org.thechance.common.domain.getway.IRemoteGateway
 import org.thechance.common.domain.util.RevenueShareDate
+import org.thechance.common.domain.util.UnknownErrorException
 
 class FakeRemoteGateway() : IRemoteGateway {
 
@@ -152,7 +153,7 @@ class FakeRemoteGateway() : IRemoteGateway {
                     )
             )
 
-            else -> throw UnknownError()
+            else -> throw UnknownErrorException("")
         }
 
     }

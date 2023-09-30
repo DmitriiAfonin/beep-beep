@@ -9,7 +9,7 @@ import org.thechance.common.domain.entity.DataWrapper
 import org.thechance.common.domain.entity.NewRestaurantInfo
 import org.thechance.common.domain.entity.Restaurant
 import org.thechance.common.domain.getway.IRestaurantGateway
-import java.util.UUID
+//import java.util.UUID
 import kotlin.math.ceil
 
 class RestaurantFakeGateway : IRestaurantGateway {
@@ -87,7 +87,7 @@ class RestaurantFakeGateway : IRestaurantGateway {
 
 
     override suspend fun createCuisine(cuisineName: String): Cuisine {
-        val newCuisine = Cuisine(UUID.randomUUID().toString(), cuisineName)
+        val newCuisine = Cuisine("${cuisines.size + 1}", cuisineName)
         cuisines.add(newCuisine)
         return newCuisine
     }

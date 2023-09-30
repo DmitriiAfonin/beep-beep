@@ -37,14 +37,14 @@ val NetworkModule = module {
     }
 
     single(named("locationClient")) {
-        val client = HttpClient(CIO) {
+        val client = HttpClient() {
             expectSuccess = true
             install(Logging) {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL
             }
             install(ContentNegotiation) {
-                gson()
+//                gson()
             }
         }
         client

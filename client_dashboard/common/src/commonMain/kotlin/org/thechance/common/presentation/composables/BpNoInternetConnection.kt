@@ -8,10 +8,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
+import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.painterResource
 import org.thechance.common.presentation.resources.Resources
 import org.thechance.common.presentation.util.kms
 
+@OptIn(ExperimentalResourceApi::class)
 @Composable
 fun BpNoInternetConnection(hasConnection: Boolean,onRetry: () -> Unit) {
     AnimatedVisibility(visible = hasConnection) {

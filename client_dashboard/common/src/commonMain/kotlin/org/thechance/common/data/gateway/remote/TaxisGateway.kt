@@ -42,7 +42,7 @@ class TaxisGateway(private val client: HttpClient) : BaseGateway(), ITaxisGatewa
                 setBody(taxi.toDto())
             }
         }.value
-        return result?.toEntity() ?: throw UnknownError()
+        return result?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun updateTaxi(taxi: NewTaxiInfo,taxiId:String): Taxi {

@@ -18,6 +18,7 @@ import org.thechance.common.domain.entity.DataWrapper
 import org.thechance.common.domain.entity.Permission
 import org.thechance.common.domain.entity.User
 import org.thechance.common.domain.getway.IUsersGateway
+import org.thechance.common.domain.util.UnknownErrorException
 
 class UsersGateway(private val client: HttpClient) : BaseGateway(), IUsersGateway {
 
@@ -64,7 +65,7 @@ class UsersGateway(private val client: HttpClient) : BaseGateway(), IUsersGatewa
             get(urlString = "/user/last-register?limit=4") {
                 parameter("limit", limit)
             }
-        }.value?.toEntity() ?: throw UnknownError()
+        }.value?.toEntity() ?: throw UnknownErrorException("")
     }
 
     override suspend fun updateUserPermissions(
@@ -80,7 +81,7 @@ class UsersGateway(private val client: HttpClient) : BaseGateway(), IUsersGatewa
                     )
                 )
             }
-        }.value?.toEntity() ?: throw UnknownError()
+        }.value?.toEntity() ?: throw UnknownErrorException("")
     }
 
 }
