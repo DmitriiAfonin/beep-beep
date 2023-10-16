@@ -1,12 +1,12 @@
-@file:Suppress("DSL_SCOPE_VIOLATION")
+import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.jetbrains.compose)
-    alias(libs.plugins.kotlinKsp)
     id("org.openjfx.javafxplugin") version "0.0.14"
     id("io.realm.kotlin") version "1.10.2"
     kotlin("plugin.serialization") version "1.8.10"
+    alias(libs.plugins.kotlin.multiplatform)
+    alias(libs.plugins.jetbrains.compose)
+    alias(libs.plugins.kotlinKsp)
 }
 
 group = "org.thechance"
@@ -43,9 +43,7 @@ kotlin {
                 api(libs.ktor.content.negotiation)
                 api(libs.ktor.logging)
                 api(libs.ktor.gson)
-
-                api(libs.ktor.client.cio)
-
+                api("io.ktor:ktor-client-apache5:2.3.3")
                 api(libs.koin.core)
                 implementation(libs.koin.annotations)
                 implementation(libs.koin.ksp)
