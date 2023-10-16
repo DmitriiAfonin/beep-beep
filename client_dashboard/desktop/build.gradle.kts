@@ -1,5 +1,4 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
-
 plugins {
     kotlin("multiplatform")
     id("org.jetbrains.compose")
@@ -33,9 +32,12 @@ compose.desktop {
     application {
         mainClass = "MainKt"
         nativeDistributions {
-            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb)
-            packageName = "client_dashboard"
+            targetFormats(TargetFormat.Dmg, TargetFormat.Msi, TargetFormat.Deb, TargetFormat.Exe)
+            packageName = "Dashboard App"
             packageVersion = "1.0.0"
+            windows{
+                iconFile.set(project.file("bp.ico"))
+            }
         }
     }
 }
