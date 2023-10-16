@@ -13,6 +13,8 @@ import domain.usecase.IManageUserUseCase
 import domain.usecase.ManageUserUseCase
 import domain.usecase.IMangeRestaurantUseCase
 import domain.usecase.IMangeUserPreferenceUseCase
+import domain.usecase.IPaginationTestUseCase
+import domain.usecase.PaginationTestUseCase
 import domain.usecase.ISearchUseCase
 import domain.usecase.SearchUseCase
 import domain.usecase.InProgressTrackerUseCase
@@ -44,4 +46,5 @@ val useCaseModule = module {
     singleOf(::ManageChatUseCase) { bind<IManageChatUseCase>() }
     singleOf(::ManageFavouriteUseCase) { bind<IManageFavouriteUseCase>() }
     singleOf(::SearchUseCase) { bind<ISearchUseCase>() }
+    singleOf(::PaginationTestUseCase) { bind<IPaginationTestUseCase>() }
 }

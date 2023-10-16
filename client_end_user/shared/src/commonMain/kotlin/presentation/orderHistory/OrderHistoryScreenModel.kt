@@ -1,15 +1,22 @@
 package presentation.orderHistory
 
+import androidx.paging.PagingData
+import androidx.paging.map
+import app.cash.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.core.model.coroutineScope
+import domain.entity.Order
 import domain.usecase.GetOrderHistoryUseCase
 import domain.usecase.IManageAuthenticationUseCase
+import domain.usecase.IPaginationTestUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import presentation.base.BaseScreenModel
 import presentation.base.ErrorState
 
 class OrderHistoryScreenModel(
+    private val paginationOrder: IPaginationTestUseCase,
     private val orderHistoryUseCase: GetOrderHistoryUseCase,
     private val manageAuthentication: IManageAuthenticationUseCase
 ) : BaseScreenModel<OrderScreenUiState, OrderHistoryScreenUiEffect>(OrderScreenUiState()),
@@ -49,7 +56,7 @@ class OrderHistoryScreenModel(
 
     private fun getOrdersHistory() {
         tryToExecute(
-            { orderHistoryUseCase.getOrdersHistory().map { it.toOrderHistoryUiState() } },
+            { paginationOrder.getPaginationTest() },
             ::onGetOrdersHistorySuccess,
             ::onError
         )
@@ -67,8 +74,14 @@ class OrderHistoryScreenModel(
         updateState { it.copy(tripsHistory = tripsHistory) }
     }
 
-    private fun onGetOrdersHistorySuccess(ordersHistory: List<OrderHistoryUiState>) {
-        updateState { it.copy(ordersHistory = ordersHistory) }
+    private fun onGetOrdersHistorySuccess(result :Flow<PagingData<Order>>) {
+        val mappedResult = result.map { pagingData ->
+            pagingData.map { it.toOrderHistoryUiState()
+            }
+        }
+
+
+        updateState { it.copy(ordersHistory = mappedResult) }
     }
 
     private fun onError(errorState: ErrorState) {

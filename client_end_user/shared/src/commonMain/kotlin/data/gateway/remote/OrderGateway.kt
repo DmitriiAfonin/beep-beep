@@ -14,6 +14,10 @@ class OrderGateway : IOrderGateway {
         TODO("Not yet implemented")
     }
 
+    override suspend fun getOrderHistory(page: Int): List<Order> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun getAllCartMeals(): Cart {
         TODO("Not yet implemented")
     }

@@ -39,4 +39,8 @@ android {
 }
 dependencies{
     implementation("androidx.core:core-splashscreen:1.0.1")
+    implementation("androidx.paging:paging-runtime:3.3.0-alpha02")
+    implementation("androidx.paging:paging-compose:3.3.0-alpha02")
+    implementation("androidx.paging:paging-rxjava3:3.3.0-alpha02")
+// etc.
 }

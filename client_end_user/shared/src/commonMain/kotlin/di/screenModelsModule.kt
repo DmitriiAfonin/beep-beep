@@ -20,7 +20,7 @@ import presentation.resturantDetails.RestaurantScreenModel
 import presentation.search.SearchScreenModel
 import presentation.app.AppScreenModel
 import presentation.meals.MealsScreenModel
-
+import  domain.usecase.MyPagingSource
 
 val screenModelsModule = module {
     factoryOf(::LoginScreenModel)
@@ -49,4 +49,5 @@ val screenModelsModule = module {
             manageOffers = get()
         )
     }
+    factoryOf(::MyPagingSource)
 }

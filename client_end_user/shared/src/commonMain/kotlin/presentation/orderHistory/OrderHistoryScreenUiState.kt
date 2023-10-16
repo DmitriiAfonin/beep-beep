@@ -1,12 +1,14 @@
 package presentation.orderHistory
 
+import androidx.paging.PagingData
 import domain.entity.Location
 import domain.entity.Order
 import domain.entity.Trip
+import kotlinx.coroutines.flow.Flow
 
 data class OrderScreenUiState(
     val selectedType: OrderSelectType = OrderSelectType.MEALS,
-    val ordersHistory: List<OrderHistoryUiState> = emptyList(),
+    val ordersHistory: Flow<PagingData<OrderHistoryUiState>>? = null,
     val tripsHistory: List<TripHistoryUiState> = emptyList(),
     val isLoggedIn : Boolean = false
 ) {

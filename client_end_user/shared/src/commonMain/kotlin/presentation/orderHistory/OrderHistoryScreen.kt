@@ -10,15 +10,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import app.cash.paging.compose.collectAsLazyPagingItems
 import cafe.adriel.voyager.core.lifecycle.LifecycleEffect
 import cafe.adriel.voyager.navigator.Navigator
 import com.beepbeep.designSystem.ui.composable.BpAnimatedTabLayout
 import com.beepbeep.designSystem.ui.theme.Theme
 import org.jetbrains.compose.resources.ExperimentalResourceApi
+import org.jetbrains.compose.resources.LoadState
 import org.jetbrains.compose.resources.painterResource
 import presentation.auth.login.LoginScreen
 import presentation.base.BaseScreen
@@ -61,7 +64,7 @@ class OrderHistoryScreen : BaseScreen<
             onClickLogin = listener::onClickLogin
         )
 
-        ContentVisibility(state.isLoggedIn) {
+        ContentVisibility(true) {
             Column(modifier = Modifier.fillMaxSize().background(Theme.colors.background)) {
                 Text(
                     modifier = Modifier.padding(top = 56.dp, bottom = 16.dp, start = 16.dp),
@@ -86,25 +89,55 @@ class OrderHistoryScreen : BaseScreen<
                         modifier = Modifier.padding(4.dp)
                     )
                 }
+               val orders= state.ordersHistory?.collectAsLazyPagingItems()
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(vertical = 24.dp)
                 ) {
-                    when (state.selectedType) {
-                        OrderScreenUiState.OrderSelectType.MEALS -> {
-                            items(state.ordersHistory) {
-                                MealOrderItem(orders = it)
-                                HorizontalDivider()
-                            }
-                        }
+                    items(orders!!.itemCount) { item ->
+                        if (item == null) {
+                            // Loading state, you can show a placeholder here.
+                            Text("Item Loading...")
+                        } else {
+                            // Item is loaded. Render the actual item content.
+                            Text(orders[item]!!.restaurantName)
+//
 
-                        OrderScreenUiState.OrderSelectType.TRIPS -> {
-                            items(state.tripsHistory) {
-                                TripHistoryItem(it)
-                                HorizontalDivider()
+                        }
+                    }
+                    orders.apply {
+                        when {
+                            loadState.refresh is LoadState.Loading<*> -> {
+                                item { CircularProgressIndicator() }
+                            }
+                            loadState.append is LoadState.Loading<*> -> {
+                                item { CircularProgressIndicator() }
+                            }
+                            loadState.refresh is LoadState.Error<*> -> {
+                                val e = orders.loadState.refresh as LoadState.Error<*>
+                                item { Text("Error: ${e.exception.message}") }
+                            }
+                            loadState.append is LoadState.Error<*> -> {
+                                val e = orders.loadState.append as LoadState.Error<*>
+                                item { Text("Error: ${e.exception.message}") }
                             }
                         }
                     }
+//                    when (state.selectedType) {
+//                        OrderScreenUiState.OrderSelectType.MEALS -> {
+//                            items(state.ordersHistory) {
+//                                MealOrderItem(orders = it)
+//                                HorizontalDivider()
+//                            }
+//                        }
+//
+//                        OrderScreenUiState.OrderSelectType.TRIPS -> {
+//                            items(state.tripsHistory) {
+//                                TripHistoryItem(it)
+//                                HorizontalDivider()
+//                            }
+//                        }
+//                    }
                 }
             }
         }
